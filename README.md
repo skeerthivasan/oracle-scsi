@@ -40,12 +40,12 @@ How to Contribute
 This section covers the steps for onboarding a new solution under this framework. This includes creating a Terraform module and Ansible playbook/roles for the solution. 
 To create a new Terraform module for the solution, follow these steps in order:
 - Clone the repository.
-- Create a new directory (this can be the name of the solution) for the solution under the modules directory. If you are using the same platform as an existing solution, copy the existing folder and rename the directory accordingly. E.g. `cp -pr Solutions-Automation/modules/MySql Solutions-Automation/modules/postgresql`.
+- Create a new directory (this can be the name of the solution) for the solution under the modules directory. If you are using the same platform as an existing solution, copy the existing folder and rename the directory accordingly. E.g. `cp -pr Solutions-as-Code/modules/MySql Solutions-as-Code/modules/postgresql`.
 - Update the `Jenkinsfile` to include the new solution by updating the following line:
         `choice(choices: ['MySql','MSSQL','Oracle', 'Veem'], description: 'Select the Solution to build', name: 'solution')`
 
 Follow the steps in the specified order to add Ansible playbooks/roles::
-- Create a new role under the Ansible roles directory (Solutions-Automation/ansible/roles/) to install the application or database for the solution. 
+- Create a new role under the Ansible roles directory (Solutions-as-Code/ansible/roles/) to install the application or database for the solution. 
 - Roles should follow the naming standards; for example, if you are creating new roles for PostgreSQL, it should need two main roles:
         - `postresql-install` - this includes the tasks to install and configure Postresql. 
         - `postgresql-test` - this includes the tasks to test the solution.
