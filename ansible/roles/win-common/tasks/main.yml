@@ -1,0 +1,11 @@
+- name: Initialize data disk
+  win_initialize_disk:
+    disk_number: 1
+
+- name: Map SMB share
+  win_mapped_drive:
+    letter: Z
+    path: \\fbnorway.soln.local\packages_share
+    state: present
+    username: 'soln\dbtest'
+    password: 'Osmium76'
