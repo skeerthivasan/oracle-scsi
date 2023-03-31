@@ -87,17 +87,17 @@ resource "vsphere_virtual_machine" "vm" {
   network_interface {
     network_id   = data.vsphere_network.network.id
   }
-  disk {
-    label = "BOOT-DISK"
-    unit_number = 0 
-    size  = 2
+  # disk {
+  #   label = "BOOT-DISK"
+  #   unit_number = 0 
+  #   size  = 2
 
-    #eagerly_scrub = true
+  #   #eagerly_scrub = true
 
-  }
+  # }
   disk {
     label = "OS-DISK"
-    unit_number = 1 
+    unit_number = 0
     size  = var.os_disk_size
 
 
@@ -108,7 +108,7 @@ resource "vsphere_virtual_machine" "vm" {
 
     size        = var.data_disk_size
     datastore_id = data.vsphere_datastore.datastore_data.id
-    unit_number = 2
+    unit_number = 1
     # thin_provisioned = false
     # eagerly_scrub = true
   }
