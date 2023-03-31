@@ -6,7 +6,7 @@ pipeline {
     parameters {
         choice(choices: ['MySql','MSSQL','FS', 'Postgres', 'Veem', 'Commvault'], description: 'Select the Solution to build', name: 'solution')
         //password(name: 'vcpass', defaultValue: 'SECRET', description: 'Enter VCenter Password')
-        choice(choices: ['vc1','vc2','vc2', 'vc3'], description: 'Select the VC to use', name: 'vcenter')
+        choice(choices: ['vc1','vc2','fsvc', 'vc3'], description: 'Select the VC to use', name: 'vcenter')
         booleanParam(name: 'Build', defaultValue: false, description: 'Build Intrastructure')
         booleanParam(name: 'Install', defaultValue: false, description: 'Install and configure solution')
 	    booleanParam(name: 'Test', defaultValue: false, description: 'Run the performance test')
