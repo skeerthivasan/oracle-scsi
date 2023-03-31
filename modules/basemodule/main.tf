@@ -81,7 +81,7 @@ resource "vsphere_virtual_machine" "vm" {
   num_cores_per_socket = 2
   sync_time_with_host = true
   guest_id = var.osguest_id 
-  firmware = data.vsphere_content_library_item.my_ovf_item.firmware
+  #firmware = data.vsphere_content_library_item.my_ovf_item.firmware
 
 
   network_interface {
