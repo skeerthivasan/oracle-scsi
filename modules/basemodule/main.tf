@@ -44,9 +44,18 @@ data "vsphere_network" "network" {
   datacenter_id = data.vsphere_datacenter.datacenter.id
 }
 
-data "vsphere_virtual_machine" "template" {
-  name = var.vmware_os_template
-  datacenter_id = data.vsphere_datacenter.datacenter.id
+# data "vsphere_virtual_machine" "template" {
+#   name = var.vmware_os_template
+#   datacenter_id = data.vsphere_datacenter.datacenter.id
+# }
+data "vsphere_content_library" "my_content_library" {
+  name = var.contentlib_name
+}
+
+data "vsphere_content_library_item" "my_ovf_item" {
+  name       = var.vmware_os_template
+  type       = "ovf"
+  library_id = data.vsphere_content_library.my_content_library.id
 }
 
 resource "infoblox_ipv4_allocation" "alloc1" {
@@ -108,7 +117,8 @@ resource "vsphere_virtual_machine" "vm" {
 
   clone {
     
-    template_uuid = data.vsphere_virtual_machine.template.id
+    #template_uuid = data.vsphere_virtual_machine.template.id
+    template_uuid = data.vsphere_content_library_item.my_ovf_item.id
     customize {
       linux_options {
         

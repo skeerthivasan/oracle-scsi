@@ -60,3 +60,6 @@ variable "ansible_key" {
 variable "infoblox_pass" {
   
 }
+variable "contentlib_name" {
+  
+}

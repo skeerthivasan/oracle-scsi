@@ -20,4 +20,5 @@ module "vm" {
     datastore_data                   = var.datastore_data
     dc                               = var.dc
     ansible_key                      = var.ansible_key
+    contentlib_name                  = var.contentlib_name
 }

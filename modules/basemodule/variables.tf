@@ -28,6 +28,5 @@ variable "data_disk_size" {}
 variable "datastore_os" {}
 variable "datastore_data" {}
 variable "dc" {}
-variable "ansible_key" {
-  
-}
+variable "ansible_key" {}
+variable "contentlib_name" {}
