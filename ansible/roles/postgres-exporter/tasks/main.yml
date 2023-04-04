@@ -41,7 +41,7 @@
 - name: "Copying the postgres_exporter contents to local bin"
   copy:
     src: "/opt/postgres_exporter"
-    dest: "{{ mysql_exporter_bin }}"
+    dest: "{{ postgres_exporter_bin }}"
     owner: "{{ exporter_user }}"
     group: "{{ exporter_group }}"
     mode: 0755
@@ -49,7 +49,7 @@
 
 
 - name: Create user with password and grant priv
-  community.mysql.mysql_user:
+  community.postgresql.postgresql_user:
     state: present
     name: postgres_exporter
     password: "{{ postgrespass }}"
