@@ -15,21 +15,19 @@
     fstype: xfs
     dev: /dev/sdb1
 
-- name: Create directory for postgresdb
-  command: mkdir /var/lib/pgsql
 
-- name: Create mount point for Postgres
+- name: create mount directory
   file:
-  path: "{{ mount_point }}"
-    #state: directory
-    #owner: postgres
-    #group: postgres
-    #mode: '0700'
+    path: '/var/lib/'
+    state: directory
+    mode: '0755'
+  with_items:
+    - pgsql
 
 - name: Mount new partition
   mount:
-    path: "{{ mount_point }}"
-    src: "{{ new_partition }}"
+    path: '/var/lib/pgsql'
+    src: '/dev/sdb1'
     fstype: xfs
     state: mounted
     
