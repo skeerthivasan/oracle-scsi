@@ -5,10 +5,10 @@
 
 - name: Create disk partition on /dev/sdb for data
   parted:
-        device: /dev/sdb
-        number: 1
-        state: present
-        fs_type: xfs
+    device: /dev/sdb
+    number: 1
+    state: present
+    fs_type: xfs
           
 - name: Create a xfs filesystem on /dev/sdb1 for data
   filesystem:
@@ -31,7 +31,7 @@
     path: "{{ mount_point }}"
     src: "{{ new_partition }}"
     fstype: xfs
-        state: mounted
+    state: mounted
     
 - name: "postgres packages Installation"
   dnf: "name={{ item }} state=present"

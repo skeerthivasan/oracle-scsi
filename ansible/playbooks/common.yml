@@ -8,6 +8,6 @@
        - "../vars/common.yml"
     roles:
       - {role: common}
-    #  - {role: node-exporter}
+      - {role: node-exporter}
 
       
