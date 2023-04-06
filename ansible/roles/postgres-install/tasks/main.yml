@@ -52,14 +52,14 @@
   with_items:
     - postgresql
 
-- name: Set password for postgres user
-  postgresql_user:
-    db: postgres
-    user: postgres
-    password: "{{ postgres_password }}"
-    become_user: postgres          
+# - name: Set password for postgres user
+#   postgresql_user:
+#     db: postgres
+#     user: postgres
+#     password: "{{ postgres_password }}"
+#     become_user: postgres          
 
-- name: Change password for postgres user
-  user:
-    name: postgres
-    password: "{{ postgres_password | password_hash('sha512') }}"
+# - name: Change password for postgres user
+#   user:
+#     name: postgres
+#     password: "{{ postgres_password | password_hash('sha512') }}"
