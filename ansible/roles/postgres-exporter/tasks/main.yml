@@ -36,7 +36,7 @@
 - name: "Create environment variable"
   copy:
     dest: /opt/postgres_exporter/postgres_exporter.env
-    content: DATA_SOURCE_NAME="postgresql://postgres:postgres@0.0.0.0:5432/?sslmode=disable"
+    content: DATA_SOURCE_NAME="postgresql://postgres:postgres@0.0.0.0:9187/?sslmode=disable"
 
 - name: "Copying the postgres_exporter contents to local bin"
   copy:
