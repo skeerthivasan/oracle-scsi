@@ -28,26 +28,23 @@
  # command: mkdir /opt/postgres_exporter
 
 - name: "Download and extract postgres_exporter"
-  command: wget https://github.com/prometheus-community/postgres_exporter/releases/download/v0.12.0-rc.0/postgres_exporter-0.12.0-rc.0.linux-amd64.tar.gz -P /opt/
+  command: wget https://github.com/prometheus-community/postgres_exporter/releases/download/v0.12.0-rc.0/postgres_exporter-0.12.0-rc.0.linux-amd64.tar.gz -P /opt/postgres_exporter/
 
 - name: "Extract the postgres_exporter"
-  command: tar -xzvf /opt/postgres_exporter-0.12.0-rc.0.linux-amd64.tar.gz -C /opt/
+  command: tar -xzvf /opt/postgres_exporter/postgres_exporter-0.12.0-rc.0.linux-amd64.tar.gz
   
-- name: "Extract the postgres_exporter"
-  command: "mv /opt/postgres_exporter-0.12.0-rc.0.linux-amd64 /opt/postgres_exporter"
+#- name: "Extract the postgres_exporter"
+ # command: "cp /opt/postgres_exporter/postgres_exporter-0.12.0-rc.0.linux-amd64/postgres_exporter /usr/local/bin/"
 
 - name: "Create environment variable"
   copy:
     dest: /opt/postgres_exporter/postgres_exporter.env
-    content: DATA_SOURCE_NAME="postgresql://postgres:postgres@0.0.0.0:9187/?sslmode=disable"
+    content: DATA_SOURCE_NAME="postgresql://prometheus:postgres@0.0.0.0:5432/?sslmode=disable"
 
 - name: "Copying the postgres_exporter contents to local bin"
   copy:
-    src: "/opt/postgres_exporter/*"
+    src: "/opt/postgres_exporter/postgres_exporter-0.12.0-rc.0.linux-amd64/postgres_exporter"
     dest: "{{ postgres_exporter_bin }}"
-    remote_src: yes
-    recurse: yes
-    copy_links: no
     owner: "{{ exporter_user }}"
     group: "{{ exporter_group }}"
     mode: 0755
@@ -64,8 +61,8 @@
 - name: "prometheus user creation for DB"
   postgresql_user:
     state: present
-    name: postgresd_exporter
-    password: "{{ postgrespass }}"
+    name: "{{ exporter_user }}"
+    password: postgres
   become: yes
   become_user: postgres
 
@@ -74,7 +71,7 @@
   postgresql_privs:
     type: database
     database: "{{ postgres_db_name }}"
-    roles: postgresd_exporter
+    roles: "{{ exporter_user }}"
     grant_option: yes
     privs: all
   become: yes
