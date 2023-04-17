@@ -51,7 +51,7 @@
 - name: Create user with password and grant priv
   community.postgresql.postgresql_user:
     state: present
-    name: postgres_exporter
+    name: postgresd_exporter
     password: "{{ postgrespass }}"
     login_password: "{{ postgrespass }}"
     priv:
