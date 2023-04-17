@@ -24,14 +24,15 @@
     owner: "{{ exporter_user }}"
     group: "{{ exporter_group }}"
 
-- name: "Create directory for exporter"
-  command: mkdir /opt/postgres_exporter
+#- name: "Create directory for exporter"
+ # command: mkdir /opt/postgres_exporter
 
 - name: "Download and extract postgres_exporter"
-  command: wget https://github.com/prometheus-community/postgres_exporter/releases/download/v0.12.0-rc.0/postgres_exporter-0.12.0-rc.0.linux-amd64.tar.gz -P /opt/postgres_exporter
+  command: wget https://github.com/prometheus-community/postgres_exporter/releases/download/v0.12.0-rc.0/postgres_exporter-0.12.0-rc.0.linux-amd64.tar.gz -P /opt/
 
 - name: "Extract the postgres_exporter"
-  command: tar -xzvf /opt/postgres_exporter/postgres_exporter-0.12.0-rc.0.linux-amd64.tar.gz -C /opt/postgres_exporter/
+  command: tar -xzvf /opt/postgres_exporter-0.12.0-rc.0.linux-amd64.tar.gz 
+  command: mv /opt/postgres_exporter/postgres_exporter-0.12.0-rc.0.linux-amd64 /opt/postgres_exporter
 
 - name: "Create environment variable"
   copy:
