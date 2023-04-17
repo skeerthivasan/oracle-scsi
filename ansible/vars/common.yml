@@ -14,4 +14,4 @@ node_exporter_dir_conf: /etc/node_exporter
 mysql_exporter_dir_conf: /etc/mysql_exporter
 postgres_exporter_dir_conf: /etc/postgres_exporter
 sqlpass: ""
-postgres_password: ""
+postgrespass: ""
