@@ -43,7 +43,7 @@
 
 - name: "Copying the postgres_exporter contents to local bin"
   copy:
-    src: "/opt/postgres_exporter/postgres_exporter-0.12.0-rc.0.linux-amd64/postgres_exporter/"
+    src: "/opt/postgres_exporter/postgres_exporter-0.12.0-rc.0.linux-amd64/postgres_exporter"
     dest: "{{ postgres_exporter_bin }}"
     owner: "{{ exporter_user }}"
     group: "{{ exporter_group }}"
