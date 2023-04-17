@@ -7,7 +7,7 @@ win_node_exporter_version: "0.20.0"
 sql_exporter_version: "0.5"
 node_exporter_bin: /usr/local/bin/node_exporter
 mysql_exporter_bin: /usr/local/bin/mysqld_exporter
-postgres_exporter_bin: /usr/local/bin/postgres_exporter
+postgres_exporter_bin: /usr/local/bin/
 exporter_user: prometheus
 exporter_group: "prometheus"
 node_exporter_dir_conf: /etc/node_exporter
