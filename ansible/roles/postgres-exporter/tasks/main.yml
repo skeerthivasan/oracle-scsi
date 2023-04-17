@@ -60,6 +60,8 @@
     state: present
     name: postgresd_exporter
     password: "{{ postgrespass }}"
+  become: yes
+  become_user: postgres
 
   
 - name: "database  user access to app db"
@@ -69,6 +71,8 @@
     roles: postgresd_exporter
     grant_option: yes
     privs: all
+  become: yes
+  become_user: postgres
 
 #- name: Grant all privileges to the user on the database
 #  community.postgresql.postgresql_privs:
