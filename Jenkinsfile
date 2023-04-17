@@ -50,11 +50,13 @@ pipeline {
 	dir(path) {
 
 	    if (params.Build) {
+            println "Updating backend file"
+            sh script: "sed -i -e 's/sol_name/"+sol.trim()+"/g' backend.tf"
 			println "Executing Infrstructure build step" 
             sh script: "/bin/rm -rf .terraform"
 	        print  "sh script: ${tf_cmd} init -upgrade"
 	        sh script: "${tf_cmd} init -upgrade"
-            sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}' + " -var sol_name=" + '${sol}'	
+            sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}' 	
             sh script: "python3 ../../build-inventory.py " + sol.trim()
             sh script: "cat hosts.ini"
         }
@@ -77,7 +79,7 @@ pipeline {
             } else {
                 println "Executing Infrstructure destroy step" 
                 sh script: "${tf_cmd} init -reconfigure"
-			    sh script: "${tf_cmd} destroy -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	+ " -var ansible_key=" + '${SSH_KEY}'	 +	 " -var infoblox_pass=" + '${INFOBLOX_PASS}' + " -var sol_name=" + '${sol}'			
+			    sh script: "${tf_cmd} destroy -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	+ " -var ansible_key=" + '${SSH_KEY}'	 +	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'		
             }
 			
         }
