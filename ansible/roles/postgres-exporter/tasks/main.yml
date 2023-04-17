@@ -55,8 +55,7 @@
     name: postgresd_exporter
     password: "{{ postgrespass }}"
     login_password: "{{ postgrespass }}"
-    priv:
-      '*.*' : 'ALL,GRANT'
+    priv: '*.*:ALL,GRANT'
 
 
 
