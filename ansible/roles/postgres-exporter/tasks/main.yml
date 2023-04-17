@@ -50,12 +50,13 @@
 
 - name: Create user with password and grant priv
   community.postgresql.postgresql_user:
+    db: "{{ postgres_db_name }}"
     name: postgresd_exporter
     password: "{{ postgrespass }}"
     login_password: "{{ postgrespass }}"
     
 - name: Grant all privileges to the user on the database
-  postgresql_privs:
+  community.postgresql.postgresql_privs:
     database: "{{ postgres_db_name }}"
     role_name: postgresd_exporter
     priv: ALL
