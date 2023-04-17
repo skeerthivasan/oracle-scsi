@@ -20,7 +20,8 @@ pipeline {
                 SSH_KEY = credentials('ansible')
                 VC_PASS = credentials("${params.vcenter}")
                 INFOBLOX_PASS = credentials('infoblox')
-                // VC_PASS = credentials('vcpass')
+                AWS_ACCESS_KEY_ID = 'PSFBSAZRAECJNHNFJEKCPOHOOPMGMKMJLIJLKBCMLB'
+                AWS_SECRET_ACCESS_KEY = credentials('s3token')
                 ANSIBLE_HOST_KEY_CHECKING = "False"
                 ANSIBLE_ROLES_PATH = "../../ansible/roles"
             }
@@ -53,7 +54,7 @@ pipeline {
             sh script: "/bin/rm -rf .terraform"
 	        print  "sh script: ${tf_cmd} init -upgrade"
 	        sh script: "${tf_cmd} init -upgrade"
-            sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'	
+            sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}' + " -var sol_name=" + '${sol}'	
             sh script: "python3 ../../build-inventory.py " + sol.trim()
             sh script: "cat hosts.ini"
         }
@@ -76,7 +77,7 @@ pipeline {
             } else {
                 println "Executing Infrstructure destroy step" 
                 sh script: "${tf_cmd} init -reconfigure"
-			    sh script: "${tf_cmd} destroy -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	+ " -var ansible_key=" + '${SSH_KEY}'	 +	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'		
+			    sh script: "${tf_cmd} destroy -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	+ " -var ansible_key=" + '${SSH_KEY}'	 +	 " -var infoblox_pass=" + '${INFOBLOX_PASS}' + " -var sol_name=" + '${sol}'			
             }
 			
         }
