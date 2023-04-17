@@ -91,7 +91,7 @@
 
 - name: check permission
   ansible.builtin.file:
-    path: "{{ mount_point }}"
+    path: /var/lib/pgsql
     owner: "postgres"
     group: "postgres"
     mode: '0700'
