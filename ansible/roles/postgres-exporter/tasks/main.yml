@@ -45,6 +45,9 @@
   copy:
     src: "/opt/postgres_exporter/*"
     dest: "{{ postgres_exporter_bin }}"
+    remote_src: yes
+    recurse: yes
+    copy_links: no
     owner: "{{ exporter_user }}"
     group: "{{ exporter_group }}"
     mode: 0755
