@@ -15,3 +15,5 @@ mysql_exporter_dir_conf: /etc/mysql_exporter
 postgres_exporter_dir_conf: /etc/postgres_exporter
 sqlpass: ""
 postgrespass: ""
+postgres_db_name: postgresdbapp
+postgresdb_user: dbuser
