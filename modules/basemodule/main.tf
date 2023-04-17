@@ -58,17 +58,17 @@ data "vsphere_content_library_item" "my_ovf_item" {
   library_id = data.vsphere_content_library.my_content_library.id
 }
 
-# resource "infoblox_ip_allocation" "alloc1" {
-#   count = var.vm_count
-#   network_view="default"
-#   #cidr = var.network + "/" + var.netmask
-#   ipv4_cidr = format("%s/%s",var.network,var.netmask)
+resource "infoblox_ip_allocation" "alloc1" {
+  count = var.vm_count
+  network_view="default"
+  #cidr = var.network + "/" + var.netmask
+  ipv4_cidr = format("%s/%s",var.network,var.netmask)
                        
-#   dns_view="INTERNAL" # may be commented out
-#   fqdn=format("%s-%d.%s",var.vm_name,count.index +1,var.internal_domain)
-#   enable_dns = "true"
-#   comment = "Allocating an IPv4 address"
-# }
+  dns_view="INTERNAL" # may be commented out
+  fqdn=format("%s-%d.%s",var.vm_name,count.index +1,var.internal_domain)
+  enable_dns = "true"
+  comment = "Allocating an IPv4 address"
+}
 
 resource "vsphere_virtual_machine" "vm" {
   #depends_on = infoblox
@@ -127,8 +127,8 @@ resource "vsphere_virtual_machine" "vm" {
       }
       network_interface {
 
-        #ipv4_address = infoblox_ip_allocation.alloc1[count.index].allocated_ipv4_addr
-        ipv4_address = var.ip[count.index]
+        ipv4_address = infoblox_ip_allocation.alloc1[count.index].allocated_ipv4_addr
+        #ipv4_address = var.ip[count.index]
         ipv4_netmask = var.netmask
       }
        ipv4_gateway    = var.gateway
