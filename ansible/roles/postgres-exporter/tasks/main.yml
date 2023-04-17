@@ -48,19 +48,34 @@
     remote_src: yes
 
 
-- name: Create user with password and grant priv
-  community.postgresql.postgresql_user:
-    db: "{{ postgres_db_name }}"
+#- name: Create user with password and grant priv
+ # community.postgresql.postgresql_user:
+ #   db: "{{ postgres_db_name }}"
+   # name: postgresd_exporter
+   # password: "{{ postgrespass }}"
+   # login_password: "{{ postgrespass }}"
+
+- name: "database user creation"
+  postgresql_user:
+    state: present
     name: postgresd_exporter
     password: "{{ postgrespass }}"
-    login_password: "{{ postgrespass }}"
-    
-- name: Grant all privileges to the user on the database
-  community.postgresql.postgresql_privs:
+
+  
+- name: "database  user access to app db"
+  postgresql_privs:
+    type: database
     database: "{{ postgres_db_name }}"
-    role_name: postgresd_exporter
-    priv: ALL
-    state: present
+    roles: postgresd_exporter
+    grant_option: yes
+    privs: all
+
+#- name: Grant all privileges to the user on the database
+#  community.postgresql.postgresql_privs:
+    #database: "{{ postgres_db_name }}"
+   # role_name: postgresd_exporter
+   # priv: ALL
+    #state: present
 
 - name: add postgres exporter config 
   template:
