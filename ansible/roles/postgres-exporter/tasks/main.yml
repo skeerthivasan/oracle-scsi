@@ -55,7 +55,7 @@
    # password: "{{ postgrespass }}"
    # login_password: "{{ postgrespass }}"
 
-- name: "database user creation"
+- name: "prometheus user creation for DB"
   postgresql_user:
     state: present
     name: postgresd_exporter
@@ -64,7 +64,7 @@
   become_user: postgres
 
   
-- name: "database  user access to app db"
+- name: "prometheus user access to app db"
   postgresql_privs:
     type: database
     database: "{{ postgres_db_name }}"
