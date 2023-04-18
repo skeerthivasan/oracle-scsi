@@ -24,17 +24,18 @@
 #     state: stopped
 #     enabled: no
 
-# - name: "Ansible Create directory if not exists"
-#   file:
-#     path: "{{ item }}"
-#     state: directory
-#     mode: 0775
-#     group: oinstall
-#     owner: oracle
-#   with_items:
-#     - /u01/app/oracle/product/19.0.0/dbhome_1
-#     - /u02/oradata
-#     - /home/oracle/scripts
+- name: "Ansible Create directory if not exists"
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0775
+    group: oinstall
+    owner: oracle
+  with_items:
+    - /u01/app/oracle/product/19.0.0/dbhome_1
+    - /u02/oradata
+    - /home/oracle/scripts
+    - /u01/stage
 
 
 # - name: format the additional disk
@@ -90,26 +91,36 @@
 #     remote_src: yes
 
 
+- name: 'Create oracle install response file'
+  template:
+    src: oracle-install.j2
+    dest: '{{ stage_dir }}/{{ oradbsoft_rsp }}.rsp'
+    owner: oracle
+    group: oinstall
+    mode: 0744
 
 - name: Install Oracle 19c Database Software
   remote_user: ansible
   become: yes
   become_method: sudo
   become_user: oracle
-  # shell: "{{ oracle_home }}/runInstaller -silent -responseFile {{ stage_dir }}/{{ oradbsoft_rsp }}.rsp -noconfig -ignorePrereqFailure"
-  shell: whoami > /tmp/user
+  shell: "{{ oracle_home }}/runInstaller -silent -responseFile {{ stage_dir }}/{{ oradbsoft_rsp }}.rsp -noconfig -ignorePrereqFailure"
+  #shell: whoami > /tmp/user
   ignore_errors: True
 
 
-# - name: Execute orainstroot.sh
-#   remote_user: root
-#   # become: yes
-#   become_user: oracle
-#   shell: /bin/sh “{{ oracle_inventory }}/orainstRoot.sh”
+- name: Execute orainstroot.sh
+  remote_user: ansible
+  become: yes
+  become_user: oracle
+  shell: /bin/sh “{{ oracle_inventory }}/orainstRoot.sh”
  
-# - name: Execute root.sh
-#   remote_user: root
-#   shell: /bin/sh “{{ oracle_home }}/root.sh”
+- name: Execute root.sh
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  become_user: root
+  shell: /bin/sh “{{ oracle_home }}/root.sh”
  
 
 

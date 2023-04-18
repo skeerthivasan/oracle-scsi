@@ -20,4 +20,8 @@ postgresdb_user: dbuser
 oracle_pdb: pdb1
 oracle_sid: cdb1
 oracle_home: /u01/app/oracle/product/19.0.0/dbhome_1
+oracle_base: /u01/app/oracle
+oracle_inventory: /u01/app/oraInventory
+stage_dir: /u01/stage
+oradbsoft_rsp: oracle-instal
 
