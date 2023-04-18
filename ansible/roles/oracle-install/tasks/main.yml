@@ -39,7 +39,7 @@
 
 - name: format the additional disk
   filesystem:
-    fstype: ext4
+    fstype: xfs
     dev: /dev/sdb
 
 - name: Mount migration volume
