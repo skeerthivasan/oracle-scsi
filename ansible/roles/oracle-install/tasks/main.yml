@@ -82,7 +82,7 @@
       dest: start_all.sh
 
 
-- name: Extract foo.tgz into /var/lib/foo
+- name: Extract oracle installation package into oracle home
   unarchive:
     src: /tmp/LINUX.X64_193000_db_home.zip
     dest: /u01/app/oracle/product/19.0.0/dbhome_1
@@ -113,14 +113,14 @@
   remote_user: ansible
   become: yes
   become_user: oracle
-  shell: /bin/sh “{{ oracle_inventory }}/orainstRoot.sh”
+  shell: /bin/sh "{{ oracle_inventory }}/orainstRoot.sh"
  
 - name: Execute root.sh
   remote_user: ansible
   become: yes
   become_method: sudo
   become_user: root
-  shell: /bin/sh “{{ oracle_home }}/root.sh”
+  shell: /bin/sh "{{ oracle_home }}/root.sh"
  
 
 
