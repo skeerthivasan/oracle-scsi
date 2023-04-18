@@ -24,23 +24,26 @@
     owner: "{{ exporter_user }}"
     group: "{{ exporter_group }}"
 
-- name: "Create directory for exporter"
-  command: mkdir /opt/postgres_exporter
+#- name: "Create directory for exporter"
+ # command: mkdir /opt/postgres_exporter
 
 - name: "Download and extract postgres_exporter"
-  command: wget https://github.com/prometheus-community/postgres_exporter/releases/download/v0.12.0-rc.0/postgres_exporter-0.12.0-rc.0.linux-amd64.tar.gz -P /opt/postgres_exporter
+  command: wget https://github.com/prometheus-community/postgres_exporter/releases/download/v0.12.0-rc.0/postgres_exporter-0.12.0-rc.0.linux-amd64.tar.gz -P /opt/postgres_exporter/
 
 - name: "Extract the postgres_exporter"
   command: tar -xzvf /opt/postgres_exporter/postgres_exporter-0.12.0-rc.0.linux-amd64.tar.gz -C /opt/postgres_exporter/
+  
+#- name: "Extract the postgres_exporter"
+ # command: "cp /opt/postgres_exporter/postgres_exporter-0.12.0-rc.0.linux-amd64/postgres_exporter /usr/local/bin/"
 
 - name: "Create environment variable"
   copy:
     dest: /opt/postgres_exporter/postgres_exporter.env
-    content: DATA_SOURCE_NAME="postgresql://postgres:postgres@0.0.0.0:5432/?sslmode=disable"
+    content: DATA_SOURCE_NAME="postgresql://prometheus:postgres@0.0.0.0:5432/?sslmode=disable"
 
 - name: "Copying the postgres_exporter contents to local bin"
   copy:
-    src: "/opt/postgres_exporter"
+    src: "/opt/postgres_exporter/postgres_exporter-0.12.0-rc.0.linux-amd64/postgres_exporter"
     dest: "{{ postgres_exporter_bin }}"
     owner: "{{ exporter_user }}"
     group: "{{ exporter_group }}"
@@ -48,16 +51,38 @@
     remote_src: yes
 
 
-- name: Create user with password and grant priv
-  community.postgresql.postgresql_user:
+#- name: Create user with password and grant priv
+ # community.postgresql.postgresql_user:
+ #   db: "{{ postgres_db_name }}"
+   # name: postgresd_exporter
+   # password: "{{ postgrespass }}"
+   # login_password: "{{ postgrespass }}"
+
+- name: "prometheus user creation for DB"
+  postgresql_user:
     state: present
-    name: postgresd_exporter
-    password: "{{ postgrespass }}"
-    login_password: "{{ postgrespass }}"
-    priv:
-      '*.*' : 'ALL,GRANT'
+    name: "{{ exporter_user }}"
+    password: postgres
+  become: yes
+  become_user: postgres
 
+  
+- name: "prometheus user access to app db"
+  postgresql_privs:
+    type: database
+    database: "{{ postgres_db_name }}"
+    roles: "{{ exporter_user }}"
+    grant_option: yes
+    privs: all
+  become: yes
+  become_user: postgres
 
+#- name: Grant all privileges to the user on the database
+#  community.postgresql.postgresql_privs:
+    #database: "{{ postgres_db_name }}"
+   # role_name: postgresd_exporter
+   # priv: ALL
+    #state: present
 
 - name: add postgres exporter config 
   template:
