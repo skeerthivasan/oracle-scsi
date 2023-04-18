@@ -93,7 +93,7 @@
 
 - name: Install Oracle 19c Database Software
   remote_user: ansible
-  # become: yes
+  become: yes
   become_method: sudo
   become_user: oracle
   # shell: "{{ oracle_home }}/runInstaller -silent -responseFile {{ stage_dir }}/{{ oradbsoft_rsp }}.rsp -noconfig -ignorePrereqFailure"
