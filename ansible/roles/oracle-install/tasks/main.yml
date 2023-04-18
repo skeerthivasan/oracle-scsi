@@ -1,0 +1,95 @@
+- name: install mysql
+  package:
+    name: oracle-database-preinstall-19c
+    state: latest
+
+- name: Set password for oracle user
+  user:
+    name: oracle
+    password: oracle
+
+- name: Ensure SELinux is set to enforcing mode
+  ansible.builtin.lineinfile:
+    path: /etc/selinux/config
+    regexp: '^SELINUX='
+    line: SELINUX=permissive
+
+- name: Disable Selinux
+  selinux:
+   state: disabled
+
+- name: stop and disable firewalld
+  systemd:
+    name: firewalld
+    state: stopped
+    enabled: no
+
+- name: "Ansible Create directory if not exists"
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0775
+    group: oinstall
+    owner: oracle
+  with_items:
+    - /u01/app/oracle/product/19.0.0/dbhome_1
+    - /u02/oradata
+    - /home/oracle/scripts
+
+
+- name: format the additional disk
+  filesystem:
+    fstype: ext4
+    dev: /dev/sdb
+
+- name: Mount migration volume
+  mount:
+    path: "/u02/oradata"
+    fstype: xfs
+    src: /dev/sdb
+    state: mounted
+
+
+- name: 'Create oracle env file'
+  template:
+    src: oracle-env.j2
+    dest: /home/oracle/scripts/setEnv.sh
+    owner: oracle
+    group: oinstall
+    mode: 0744
+  with_items:
+    -
+      src: rhel8-repo.j2
+      dest: rhel8-local.repo
+
+- name: Add env to oracle profile
+  lineinfile:
+    path: /home/oracle/.bash_profile
+    line: '. /home/oracle/scripts/setEnv.sh'
+    create: no
+
+- name: copy the env scripts  
+  copy:
+    src: '{{ item.src}}'
+    dest: '/home/oracle/scripts/{{ item.dest}}'
+    owner: oracle
+    group: oinstall
+    mode: 0744
+  with_items:
+    -
+      src: stop_all.sh
+      dest: stop_all.sh
+    -
+      src: start_all.sh
+      dest: start_all.sh
+
+
+
+
+
+
+
+
+
+
+

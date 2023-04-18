@@ -17,3 +17,6 @@ sqlpass: ""
 postgrespass: ""
 postgres_db_name: postgresdbapp
 postgresdb_user: dbuser
+oracle_pdb: pdb1
+oracle_sid: cdb1
+
