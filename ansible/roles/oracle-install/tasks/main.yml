@@ -92,7 +92,7 @@
 
 
 - name: Install Oracle 19c Database Software
-  remote_user: root
+  remote_user: ansible
   # become: yes
   become_method: sudo
   become_user: oracle
