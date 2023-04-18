@@ -6,8 +6,8 @@
     gather_facts:  yes
     vars_files:
        - "../vars/common.yml"
-    roles:
-      - {role: common}
-      - {role: node-exporter}
+    # roles:
+    #   # - {role: common}
+    #   # - {role: node-exporter}
 
       

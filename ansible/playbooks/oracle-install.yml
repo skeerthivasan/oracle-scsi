@@ -1,9 +1,10 @@
 ---
     # common playbook
   - hosts:         all
-    become:        yes
-    become_method: sudo
-    gather_facts:  yes
+    user: ansible
+    # become:        yes
+    # become_method: sudo
+    # gather_facts:  yes
     vars_files:
        - "../vars/common.yml"
     roles:
