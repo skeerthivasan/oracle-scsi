@@ -104,7 +104,7 @@
   become: yes
   become_method: sudo
   become_user: oracle
-  shell: "{{ oracle_home }}/runInstaller -silent -responseFile {{ stage_dir }}/{{ oradbsoft_rsp }}.rsp -noconfig -ignorePrereqFailure"
+  shell: "export CV_ASSUME_DISTID=OEL7.8;{{ oracle_home }}/runInstaller -silent -responseFile {{ stage_dir }}/{{ oradbsoft_rsp }}.rsp -noconfig -ignorePrereqFailure"
   #shell: whoami > /tmp/user
   ignore_errors: True
 
