@@ -81,7 +81,12 @@
       dest: start_all.sh
 
 
-
+- name: Extract foo.tgz into /var/lib/foo
+  ansible.builtin.unarchive:
+    src: /tmp/LINUX.X64_193000_db_home.zip
+    dest: /u01/app/oracle/product/19.0.0/dbhome_1
+    user: oracle
+    group: oinstall
 
 
 
