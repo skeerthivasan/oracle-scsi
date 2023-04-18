@@ -93,6 +93,8 @@
   become_user: oracle
   become_method: su
   become_flags: '--login'
+  vars:
+    ansible_become_pass: oracle
   shell: whoami
 
 
