@@ -136,5 +136,5 @@
   become: yes
   become_method: sudo
   become_user: oracle
-  shell: "dbca -silent -createDatabase -templateName General_Purpose.dbc -sysPassword SysPassword1 -systemPassword SysPassword1  -responseFile NO_VALUE -gdbname {{ oracle_sid }} -sid {{ oracle_sid }} -emConfiguration NONE -storageType FS -datafileDestination /u02/oradata -memoryMgmtType auto_sga -J-Doracle.assistants.dbca.validate.ConfigurationParams=false -memoryPercentage 40"
+  shell: "/u01/app/oracle/product/19.0.0/dbhome_1/bin/dbca -silent -createDatabase -templateName General_Purpose.dbc -sysPassword SysPassword1 -systemPassword SysPassword1  -responseFile NO_VALUE -gdbname {{ oracle_sid }} -sid {{ oracle_sid }} -emConfiguration NONE -storageType FS -datafileDestination /u02/oradata -memoryMgmtType auto_sga -J-Doracle.assistants.dbca.validate.ConfigurationParams=false -memoryPercentage 40"
   ignore_errors: True
