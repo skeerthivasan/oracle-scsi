@@ -57,10 +57,7 @@
     owner: oracle
     group: oinstall
     mode: 0744
-  with_items:
-    -
-      src: rhel8-repo.j2
-      dest: rhel8-local.repo
+
 
 - name: Add env to oracle profile
   lineinfile:
