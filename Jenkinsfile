@@ -4,7 +4,7 @@ pipeline {
         ansiColor('xterm')
     }
     parameters {
-        choice(choices: ['MySql','MSSQL','FS', 'Postgres', 'Veem', 'Commvault'], description: 'Select the Solution to build', name: 'solution')
+        choice(choices: ['MySql','MSSQL','FS', 'Postgres', 'Oracle', 'Commvault'], description: 'Select the Solution to build', name: 'solution')
         //password(name: 'vcpass', defaultValue: 'SECRET', description: 'Enter VCenter Password')
         choice(choices: ['fsvc', 'vc3'], description: 'Select the VC to use', name: 'vcenter')
         booleanParam(name: 'Build', defaultValue: false, description: 'Build Intrastructure')
