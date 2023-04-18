@@ -1,4 +1,4 @@
-- name: install mysql
+- name: install oracle preinstall
   package:
     name: oracle-database-preinstall-19c
     state: latest
@@ -8,15 +8,15 @@
     name: oracle
     password: oracle
 
-- name: Ensure SELinux is set to enforcing mode
+- name: Ensure SELinux is set to permissive mode
   ansible.builtin.lineinfile:
     path: /etc/selinux/config
     regexp: '^SELINUX='
     line: SELINUX=permissive
 
-- name: Disable Selinux
-  selinux:
-   state: disabled
+# - name: Disable Selinux
+#   selinux:
+#    state: disabled
 
 - name: stop and disable firewalld
   systemd:
