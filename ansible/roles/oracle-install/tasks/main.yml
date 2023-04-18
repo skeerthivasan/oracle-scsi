@@ -97,7 +97,7 @@
   become_method: sudo
   become_user: oracle
   # shell: "{{ oracle_home }}/runInstaller -silent -responseFile {{ stage_dir }}/{{ oradbsoft_rsp }}.rsp -noconfig -ignorePrereqFailure"
-  shell: whoami
+  shell: whoami > /tmp/user
   ignore_errors: True
 
 
