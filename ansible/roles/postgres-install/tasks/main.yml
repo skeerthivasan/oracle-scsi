@@ -88,34 +88,34 @@
   postgresql_user:
     db: postgres
     user: postgres
-    password: "{{ postgres_password }}"
+    password: "{{ postgrespass }}"
   become_user: postgres          
 
 - name: Change password for postgres user
   user:
     name: postgres
-    password: "{{ postgres_password | password_hash('sha512') }}"
+    password: "{{ postgrespass | password_hash('sha512') }}"
 
 - name: "App database Creation"
   postgresql_db:
     state: present
-    name: "{{ db_name }}"
+    name: "{{ postgres_db_name }}"
   become: yes
   become_user: postgres
 
 - name: "database user creation"
   postgresql_user:
     state: present
-    name: "{{ db_user }}"
-    password: "{{ db_password }}"
+    name: "{{ postgresdb_user }}"
+    password: "{{ postgrespass }}"
   become: yes
   become_user: postgres
 
 - name: "database  user access to app db"
   postgresql_privs:
     type: database
-    database: "{{ db_name }}"
-    roles: "{{ db_user }}"
+    database: "{{ postgres_db_name }}"
+    roles: "{{ postgresdb_user }}"
     grant_option: yes
     privs: all
   become: yes
@@ -123,7 +123,7 @@
 
 - name: check permission
   ansible.builtin.file:
-    path: "{{ mount_point }}"
+    path: /var/lib/pgsql
     owner: "postgres"
     group: "postgres"
     mode: '0700'
