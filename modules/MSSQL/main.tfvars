@@ -6,7 +6,7 @@ vsphere_password = ""
 
 #common
 osguest_id = "windows9Server64Guest"
-internal_domain = "soln.local."
+internal_domain = "puretec.purestorage.com"
 vmSubnet = "2210"
 dns_servers = ["10.21.237.250"]
 vm_cluster = "Management-Cluster"
