@@ -5,6 +5,10 @@ terraform {
       source  = "hashicorp/vsphere"
       #version = "2.1.1"
     }
+    infoblox = {
+    source = "infobloxopen/infoblox"
+    version = "2.3.0"
+    }
   }
 }
 
