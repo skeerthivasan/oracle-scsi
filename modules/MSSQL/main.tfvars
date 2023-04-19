@@ -1,8 +1,8 @@
 
 
-vsphere_server = "10.21.210.240"
+vsphere_server = "flashstack-vcenter.puretec.purestorage.com"
 vsphere_user = "administrator@vsphere.local"
-vsphere_password = "Osmium76&"
+vsphere_password = ""
 
 #common
 osguest_id = "windows9Server64Guest"

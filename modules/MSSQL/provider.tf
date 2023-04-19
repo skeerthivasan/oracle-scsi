@@ -20,3 +20,8 @@ provider "vsphere" {
   allow_unverified_ssl = true
 }
 
+provider "infoblox" {
+username = "svc_fb_infoblox_auto"
+password = var.infoblox_pass
+server = "prod-ipam.puretec.purestorage.com"
+}
