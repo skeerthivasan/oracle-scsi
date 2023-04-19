@@ -57,3 +57,12 @@ variable "winadminpass" {
   
 }
 
+variable "contentlib_name" {}
+
+variable "ansible_key" {
+  
+}
+
+variable "infoblox_pass" {
+  
+}

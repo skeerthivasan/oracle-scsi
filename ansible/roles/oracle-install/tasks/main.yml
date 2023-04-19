@@ -36,7 +36,14 @@
     - /u02/oradata
     - /home/oracle/scripts
     - /u01/stage
+    - /packages
 
+- name: Mount migration volume
+  mount:
+    path: /packages
+    fstype: nfs
+    src: 10.21.236.80:/packages_share
+    state: mounted
 
 - name: format the additional disk
   filesystem:
@@ -89,7 +96,7 @@
 
 - name: Extract oracle installation package into oracle home
   unarchive:
-    src: /u02/oradata/LINUX.X64_193000_db_home.zip
+    src: /packages/oracle/LINUX.X64_193000_db_home.zip
     dest: /u01/app/oracle/product/19.0.0/dbhome_1
     owner: oracle
     group: oinstall
@@ -110,7 +117,6 @@
   become_method: sudo
   become_user: oracle
   shell: "export CV_ASSUME_DISTID=OEL7.8;{{ oracle_home }}/runInstaller -silent -responseFile {{ stage_dir }}/{{ oradbsoft_rsp }}.rsp -noconfig -ignorePrereqFailure"
-  #shell: whoami > /tmp/user
   ignore_errors: True
 
 
@@ -132,7 +138,7 @@
   become: yes
   become_method: sudo
   become_user: oracle
-  shell: "/u01/app/oracle/product/19.0.0/dbhome_1/bin/lsnrctl/lsnrctl start"
+  shell: "/u01/app/oracle/product/19.0.0/dbhome_1/bin/lsnrctl start"
   ignore_errors: True
 
 
