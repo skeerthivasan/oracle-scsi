@@ -1,7 +1,7 @@
 - name: format the additional disk
   filesystem:
     fstype: ext4
-    dev: /dev/sdc
+    dev: /dev/sdb
 
 - name: create mount directory
   file:
