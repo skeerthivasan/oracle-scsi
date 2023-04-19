@@ -43,8 +43,8 @@
 
 - name: Install the PGSQL server package.
   ansible.builtin.dnf:
-  name: postgresql14-server
-  state: present
+    name: postgresql14-server
+    state: present
           
           #- name: "postgres packages Installation"
           #command: dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
