@@ -50,6 +50,11 @@
     src: /dev/sdb
     state: mounted
 
+- name: "Ansible Create directory if not exists"
+  file:
+    path: /u02/oradata
+    group: oinstall
+    owner: oracle
 
 - name: 'Create oracle env file'
   template:
@@ -127,7 +132,7 @@
   become: yes
   become_method: sudo
   become_user: oracle
-  shell: lsnrctl start
+  shell: "/u01/app/oracle/product/19.0.0/dbhome_1/bin/lsnrctl/lsnrctl start"
   ignore_errors: True
 
 
@@ -138,3 +143,4 @@
   become_user: oracle
   shell: "/u01/app/oracle/product/19.0.0/dbhome_1/bin/dbca -silent -createDatabase -templateName General_Purpose.dbc -sysPassword SysPassword1 -systemPassword SysPassword1  -responseFile NO_VALUE -gdbname {{ oracle_sid }} -sid {{ oracle_sid }} -emConfiguration NONE -storageType FS -datafileDestination /u02/oradata -memoryMgmtType auto_sga -J-Doracle.assistants.dbca.validate.ConfigurationParams=false -memoryPercentage 40"
   ignore_errors: True
+
