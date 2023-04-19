@@ -36,7 +36,7 @@
   with_items:
     - mysql-server
     - mysql
-    - python3-mysql
+ #   - python-mysql
     - mysql-devel
 
 
