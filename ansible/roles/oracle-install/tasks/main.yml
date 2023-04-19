@@ -92,6 +92,9 @@
     -
       src: start_all.sh
       dest: start_all.sh
+    -
+      src: ocenv
+      dest: ocenv
 
 
 - name: Extract oracle installation package into oracle home
@@ -102,7 +105,15 @@
     group: oinstall
     remote_src: yes
 
+- name: add ocenv
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  become_user: oracle
+  shell: alias ocenv=/home/oracle/scripts/ocenv
 
+
+ 
 - name: 'Create oracle install response file'
   template:
     src: oracle-install.j2
