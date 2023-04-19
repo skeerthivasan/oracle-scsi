@@ -89,7 +89,7 @@
 
 - name: Extract oracle installation package into oracle home
   unarchive:
-    src: /LINUX.X64_193000_db_home.zip
+    src: /u02/oradata/LINUX.X64_193000_db_home.zip
     dest: /u01/app/oracle/product/19.0.0/dbhome_1
     owner: oracle
     group: oinstall
