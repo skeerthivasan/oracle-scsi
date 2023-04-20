@@ -104,7 +104,7 @@
 - name: check if oracle_home exists
   stat:
     path: /u01/app/oracle/product/19.0.0/dbhome_1
-    register: ora_home
+  register: ora_home
 
 - name: Extract oracle installation package into oracle home
   unarchive:
