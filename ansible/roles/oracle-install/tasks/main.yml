@@ -132,7 +132,7 @@
   register: orainstall  
 
 - debug:
-  msg: "{{orainstall.stdout}}"
+    msg: "{{orainstall.stdout}}"
 
 
 - name: Execute orainstroot.sh
@@ -143,7 +143,7 @@
   register: script1  
 
 - debug:
-  msg: "{{script1.stdout}}"
+    msg: "{{script1.stdout}}"
   
  
 - name: Execute root.sh
@@ -155,7 +155,7 @@
   register: script2  
 
 - debug:
-  msg: "{{script2.stdout}}"
+    msg: "{{script2.stdout}}"
  
 - name: start listner
   remote_user: ansible
@@ -167,7 +167,7 @@
   register: script3  
 
 - debug:
-  msg: "{{script3.stdout}}"
+    msg: "{{script3.stdout}}"
 
 
 
@@ -181,6 +181,6 @@
   register: script4  
 
 - debug:
-  msg: "{{script4.stdout}}"
+    msg: "{{script4.stdout}}"
 
 
