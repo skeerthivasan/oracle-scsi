@@ -109,7 +109,7 @@
 - name: Extract oracle installation package into oracle home
   unarchive:
     src: /packages/oracle/LINUX.X64_193000_db_home.zip
-    dest: {{ oracle_home }}
+    dest: '{{ oracle_home }}'
     owner: oracle
     group: oinstall
     remote_src: yes
