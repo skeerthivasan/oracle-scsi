@@ -113,7 +113,7 @@
     owner: oracle
     group: oinstall
     remote_src: yes
-    when: not ora_home.stat.isdir
+  when: not ora_home.stat.isdir
 
 - name: add ocenv
   remote_user: ansible
