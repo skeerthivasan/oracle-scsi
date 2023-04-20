@@ -103,13 +103,13 @@
 
 - name: check if oracle_home exists
   stat:
-    path: '{{ oracle_home }}'
+    path: /u01/app/oracle/product/19.0.0/dbhome_1
     register: ora_home
 
 - name: Extract oracle installation package into oracle home
   unarchive:
     src: /packages/oracle/LINUX.X64_193000_db_home.zip
-    dest: '{{ oracle_home }}'
+    dest: /u01/app/oracle/product/19.0.0/dbhome_1
     owner: oracle
     group: oinstall
     remote_src: yes
