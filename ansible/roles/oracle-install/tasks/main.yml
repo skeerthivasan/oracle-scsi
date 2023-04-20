@@ -103,7 +103,7 @@
 
 - name: check if oracle_home exists
   stat:
-    path: {{ oracle_home }}
+    path: '{{ oracle_home }}'
     register: ora_home
 
 - name: Extract oracle installation package into oracle home
