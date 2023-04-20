@@ -140,6 +140,10 @@
   become: yes
   become_user: root
   shell: /bin/sh "{{ oracle_inventory }}/orainstRoot.sh"
+  register: script1  
+
+- debug:
+  msg: "{{script1.stdout}}"
   
  
 - name: Execute root.sh
@@ -148,7 +152,10 @@
   become_method: sudo
   become_user: root
   shell: /bin/sh "{{ oracle_home }}/root.sh"
-  
+  register: script2  
+
+- debug:
+  msg: "{{script2.stdout}}"
  
 - name: start listner
   remote_user: ansible
@@ -157,6 +164,10 @@
   become_user: oracle
   shell: /u01/app/oracle/product/19.0.0/dbhome_1/bin/lsnrctl start
   ignore_errors: True
+  register: script3  
+
+- debug:
+  msg: "{{script3.stdout}}"
 
 
 
@@ -167,5 +178,9 @@
   become_user: oracle
   shell: "/u01/app/oracle/product/19.0.0/dbhome_1/bin/dbca -silent -createDatabase -templateName General_Purpose.dbc -sysPassword SysPassword1 -systemPassword SysPassword1  -responseFile NO_VALUE -gdbname {{ oracle_sid }} -sid {{ oracle_sid }} -emConfiguration NONE -storageType FS -datafileDestination /u02/oradata -memoryMgmtType auto_sga -J-Doracle.assistants.dbca.validate.ConfigurationParams=false -memoryPercentage 40"
   ignore_errors: True
+  register: script4  
+
+- debug:
+  msg: "{{script4.stdout}}"
 
 
