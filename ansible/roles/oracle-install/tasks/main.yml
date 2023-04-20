@@ -36,7 +36,12 @@
     - /u02/oradata
     - /home/oracle/scripts
     - /u01/stage
-    - /packages
+
+
+- name: "Package Create directory if not exists"
+  file:
+    path: /packages
+    state: directory
 
 - name: Mount migration volume
   mount:
