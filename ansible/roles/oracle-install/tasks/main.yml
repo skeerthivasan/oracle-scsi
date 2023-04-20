@@ -141,8 +141,7 @@
   become_user: oracle
   shell: "export CV_ASSUME_DISTID=OEL7.8;{{ oracle_home }}/runInstaller -silent -responseFile {{ stage_dir }}/{{ oradbsoft_rsp }}.rsp -noconfig -ignorePrereqFailure"
   ignore_errors: True
-  register: orainstall  
-  changed_when: "'Choose a different location as Oracle home' not in orainstall.stderr"
+  #changed_when: "'Choose a different location as Oracle home' not in orainstall.stderr"
   #when: not ora_home.stat.isdir
 
 
@@ -190,7 +189,7 @@
   shell: "/u01/app/oracle/product/19.0.0/dbhome_1/bin/dbca -silent -createDatabase -templateName General_Purpose.dbc -sysPassword SysPassword1 -systemPassword SysPassword1  -responseFile NO_VALUE -gdbname {{ oracle_sid }} -sid {{ oracle_sid }} -emConfiguration NONE -storageType FS -datafileDestination /u02/oradata -memoryMgmtType auto_sga -J-Doracle.assistants.dbca.validate.ConfigurationParams=false -memoryPercentage 40"
   ignore_errors: True
   register: script4  
-  changed_when: "'DBT-10317' not in script4.stderr"
-  when: db_count.stdout == '0'
+  #changed_when: "'DBT-10317' not in script4.stderr"
+  #when: db_count.stdout == '0'
 
 
