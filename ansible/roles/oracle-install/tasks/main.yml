@@ -113,7 +113,7 @@
     owner: oracle
     group: oinstall
     remote_src: yes
-    when: not ora_home.stat.exists
+    when: not ora_home.stat.isdir
 
 - name: add ocenv
   remote_user: ansible
@@ -143,7 +143,7 @@
   ignore_errors: True
   register: orainstall  
   changed_when: "'Choose a different location as Oracle home' not in orainstall.stderr"
-  when: not ora_home.stat.exists
+  when: not ora_home.stat.isdir
 
 
 
