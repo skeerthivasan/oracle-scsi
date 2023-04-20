@@ -102,7 +102,7 @@
       dest: ocenv
 
 - name: check if oracle_home exists
-  stat:
+  find:
     path: /u01/app/oracle/product/19.0.0/dbhome_1
   register: ora_home
 
@@ -113,7 +113,7 @@
     owner: oracle
     group: oinstall
     remote_src: yes
-  #when: not ora_home.stat.isdir
+  when: not ora_home.matched > 0
 
 - name: add ocenv
   remote_user: ansible
