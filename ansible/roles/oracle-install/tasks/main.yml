@@ -191,6 +191,6 @@
   ignore_errors: True
   register: script4  
   changed_when: "'DBT-10317' not in script4.stderr"
-  when: "{{ db_count.stdout }} == '0'"
+  when: db_count.stdout == '0'
 
 
