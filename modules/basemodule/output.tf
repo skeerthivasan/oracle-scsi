@@ -1,3 +1,3 @@
 output "vm_ip" {
-  value = vsphere_virtual_machine.vm.*.default_ip_address
+  value = vsphere_virtual_machine.vm.*.allocated_ipv4_addr
 }
