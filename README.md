@@ -1,7 +1,7 @@
 To use this solution, follow these steps in order:
 
 - Clone the repository
-- Navigate to the path for the solution (e.g. for MySQL, this path is "Solutions-Infra-Automation/modules/MySql")
+- Navigate to the path for the solution (e.g. for MySQL, this path is "Solutions-as-Code/modules/MySql")
 - Update the "main.tfvars" with the appropriate variables
 
         vsphere_server = "" - vcenter name or IP
