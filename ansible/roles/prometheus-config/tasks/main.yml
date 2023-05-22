@@ -25,7 +25,7 @@
 - name: Write  JSON file
   copy:
     content: "{{ json_content | to_json }}"
-    dest: /tmp/target.json
+    dest: /home/ansible/target.json
 
 
 
