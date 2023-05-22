@@ -1,6 +1,6 @@
 - name: copy the prometheus config file 
   copy:
-    src: /tmp/target.json
+    src: /home/ansible/target.json
     dest: /etc/prometheus/target.json
     owner: root
     group: root
