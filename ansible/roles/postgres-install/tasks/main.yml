@@ -53,8 +53,8 @@
           #command: dnf install -y postgresql14-server
           
           
-- name: Optionally initialize the database and enable automatic start
-  command: /usr/pgsql-14/bin/postgresql-14-setup initdb
+# - name: Optionally initialize the database and enable automatic start
+#   command: /usr/pgsql-14/bin/postgresql-14-setup initdb
 
 
         #- name: "Initializing PostgreSQL"
