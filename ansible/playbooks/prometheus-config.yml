@@ -2,8 +2,8 @@
     # common playbook
   - hosts: 'localhost'
     gather_facts: false
-    # vars_files:
-    #   - "hosts.yml"
+    vars_files:
+      - "../../modules/{{ solution }}/hosts.yml"
     roles:
       - {role: prometheus-config}
 
