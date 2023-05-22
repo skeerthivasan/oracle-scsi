@@ -192,7 +192,3 @@
   #changed_when: "'DBT-10317' not in script4.stderr"
   #when: db_count.stdout == '0'
 
-
-dbca -silent -createPluggableDatabase -sourceDB cdborcl  -pdbName pdb4 -createPDBFrom default  -pdbAdminUserName pdb4  -pdbAdminPassword qwe123 -createUserTableSpace true -sampleSchema true -TEMPLATENAME General_Purpose.dbc
-
-/u01/app/oracle/product/19.0.0/dbhome_1/bin/dbca -silent -createDatabase -createAsContainerDatabase true -pdbName pdb1 -numberOfPDBs 1 -pdbAdminPassword qwe123 -templateName General_Purpose.dbc -sysPassword SysPassword1 -systemPassword SysPassword1  -responseFile NO_VALUE -gdbname db2 -sid db2 -emConfiguration NONE -storageType FS -datafileDestination /u02/oradata -memoryMgmtType auto_sga -J-Doracle.assistants.dbca.validate.ConfigurationParams=false -memoryPercentage 40 -createListener listener:1522 
