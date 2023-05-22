@@ -21,6 +21,6 @@ with open(filename,'w') as fh:
 with open(var_filename,'w') as fh:
     fh.write('hg:' + '\n')
     for ip in ips:
-        fh.write(' -' + ip.rstrip() + '\n')
+        fh.write(' - ' + ip.rstrip() + '\n')
 
 
