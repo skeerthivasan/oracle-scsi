@@ -64,7 +64,7 @@ pipeline {
         if (params.Install) {
 			println "Installing and conifguring the solution"
             sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/common.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
-            sh script: "ansible-playbook -i 10.21.210.9, ../../ansible/playbooks/prometheus-config.yml --private-key "  + '${SSH_KEY}' + " --user ansible"  + " -e solution=" +  sol.trim()
+            sh script: "ansible-playbook -i 10.21.210.9, ../../ansible/playbooks/prometheus-config.yml --private-key "  + '${SSH_KEY}' + " --user root"  + " -e solution=" +  sol.trim() + "--connection-password-file pss.txt"
 
             //sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-install.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
 			// execute ansible playbook
