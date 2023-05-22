@@ -24,4 +24,6 @@ oracle_base: /u01/app/oracle
 oracle_inventory: /u01/app/oraInventory
 stage_dir: /u01/stage
 oradbsoft_rsp: oracle-instal
-
+ips:
+  - 10.21.210.9
+  - 10.21.210.11
