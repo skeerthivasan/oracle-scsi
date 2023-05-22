@@ -1,7 +1,7 @@
 - name: copy the prometheus config file 
   copy:
     src: /tmp/target.json
-    dest: /etc/prometheus/target.json
+    dest: /etc/prometheus/targets.json
     owner: root
     group: root
     mode: 0755
