@@ -24,7 +24,7 @@ pipeline {
                 AWS_SECRET_ACCESS_KEY = credentials('s3token')
                 ANSIBLE_HOST_KEY_CHECKING = "False"
                 ANSIBLE_ROLES_PATH = "../../ansible/roles"
-                vm_count = "${params.count}".toInteger()
+                count = "${params.count}".toInteger()
             }
             steps {
                 
@@ -57,6 +57,9 @@ pipeline {
             sh script: "/bin/rm -rf .terraform"
 	        print  "sh script: ${tf_cmd} init -upgrade"
 	        sh script: "${tf_cmd} init -upgrade"
+            c_count=grep vm_count main.tfvars|cut -d'"' -f2
+            vm_count = ${count} + ${c_count}
+            print  "vm_count = ${vm_count}"
             sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + '${vm_count}'
             sh script: "python3 ../../build-inventory.py " + sol.trim()
             sh script: "cat hosts.ini"
