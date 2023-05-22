@@ -50,3 +50,9 @@
 # - name: 'Configure NTP server'
 
 # - name: 'Configure mail client'
+
+- name: stop firewalld service
+  systemd:
+    name: firewalld
+    state: stopped
+    enabled: no

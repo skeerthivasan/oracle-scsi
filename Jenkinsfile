@@ -5,7 +5,7 @@ pipeline {
     }
     parameters {
         choice(choices: ['MySql','MSSQL', 'Postgres', 'Oracle'], description: 'Select the Solution to build', name: 'solution')
-        //password(name: 'vcpass', defaultValue: 'SECRET', description: 'Enter VCenter Password')
+        string(name: 'count', defaultValue: "1", description: 'Number of VMs')
         choice(choices: ['fsvc', 'vc3'], description: 'Select the VC to use', name: 'vcenter')
         booleanParam(name: 'Build', defaultValue: false, description: 'Build Intrastructure')
         booleanParam(name: 'Install', defaultValue: false, description: 'Install and configure solution')
@@ -24,6 +24,7 @@ pipeline {
                 AWS_SECRET_ACCESS_KEY = credentials('s3token')
                 ANSIBLE_HOST_KEY_CHECKING = "False"
                 ANSIBLE_ROLES_PATH = "../../ansible/roles"
+                vm_count = params.count
             }
             steps {
                 
@@ -56,7 +57,7 @@ pipeline {
             sh script: "/bin/rm -rf .terraform"
 	        print  "sh script: ${tf_cmd} init -upgrade"
 	        sh script: "${tf_cmd} init -upgrade"
-            sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}' 	
+            sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + '${vm_count}'
             sh script: "python3 ../../build-inventory.py " + sol.trim()
             sh script: "cat hosts.ini"
         }
@@ -80,7 +81,7 @@ pipeline {
                 println "Executing Infrstructure destroy step" 
                 sh script: "sed -i -e 's/sol_name/"+sol.trim()+"/g' backend.tf"
                 sh script: "${tf_cmd} init -reconfigure"
-			    sh script: "${tf_cmd} destroy -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	+ " -var ansible_key=" + '${SSH_KEY}'	 +	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'		
+			    sh script: "${tf_cmd} destroy -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	+ " -var ansible_key=" + '${SSH_KEY}'	 +	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'	 +	" -var vm_count=" + '${vm_count}'	
             }
 			
         }
