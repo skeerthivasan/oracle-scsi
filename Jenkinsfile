@@ -57,8 +57,8 @@ pipeline {
             sh script: "/bin/rm -rf .terraform"
 	        print  "sh script: ${tf_cmd} init -upgrade"
 	        sh script: "${tf_cmd} init -upgrade"
-            c_count=grep vm_count main.tfvars|cut -d'"' -f2
-            vm_count = ${count} + ${c_count}
+            sh script: "c_count=grep vm_count main.tfvars|cut -d'"' -f2"
+            sh script: "vm_count = ${count} + ${c_count}"
             print  "vm_count = ${vm_count}"
             sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + '${vm_count}'
             sh script: "python3 ../../build-inventory.py " + sol.trim()
