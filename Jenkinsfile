@@ -58,8 +58,8 @@ pipeline {
 	        print  "sh script: ${tf_cmd} init -upgrade"
 	        sh script: "${tf_cmd} init -upgrade"
             count = sh(script: "grep vm_count main.tfvars | awk  '{print \$3}' |xargs", returnStdout: true)
-            println count.toInteger().getClass() 
-            //vm_count = vm_count + count
+            println count.toInteger()
+            vm_count = vm_count.toInteger() + count.toInteger()
             println vm_count.getClass() 
             sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + '${vm_count}'
             sh script: "python3 ../../build-inventory.py " + sol.trim()
