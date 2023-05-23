@@ -57,8 +57,8 @@ pipeline {
             sh script: "/bin/rm -rf .terraform"
 	        print  "sh script: ${tf_cmd} init -upgrade"
 	        sh script: "${tf_cmd} init -upgrade"
-            //count = sh(script: "grep vm_count main.tfvars | awk  '{print \$3}' |xargs", returnStdout: true)
-            count = sh(script: "cat hosts.ini|wc -l", returnStdout: true)
+            count = sh(script: "grep vm_count main.tfvars | awk  '{print \$3}' |xargs", returnStdout: true)
+            //count = sh(script: "cat hosts.ini|wc -l", returnStdout: true)
             println count
             println vm_count
             def total_count = vm_count.toInteger() + count.toInteger()
