@@ -1,4 +1,4 @@
-  pre_tasks:
+
     - name: Create a xfs filesystem on /dev/sdb for data
       filesystem:
         fstype: xfs
