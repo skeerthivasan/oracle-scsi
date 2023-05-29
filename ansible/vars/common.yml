@@ -27,3 +27,4 @@ oradbsoft_rsp: oracle-instal
 ips:
   - 10.21.210.9
   - 10.21.210.11
+nfs_share: 10.21.220.76:/saphana
