@@ -5,7 +5,7 @@ pipeline {
     }
     parameters {
         choice(choices: ['MySql','MSSQL', 'Postgres', 'Oracle'], description: 'Select the Solution to build', name: 'solution')
-        string(name: 'count', defaultValue: "1", description: 'Number of VMs')
+        string(name: 'count', defaultValue: "0", description: 'Number of VMs')
         choice(choices: ['fsvc', 'vc3'], description: 'Select the VC to use', name: 'vcenter')
         booleanParam(name: 'Build', defaultValue: false, description: 'Build Intrastructure')
         booleanParam(name: 'Install', defaultValue: false, description: 'Install and configure solution')
