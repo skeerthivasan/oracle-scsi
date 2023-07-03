@@ -12,7 +12,7 @@ mssql_temp_download_path: C:\tmp
 
 # instance details
 mssql_instance_name: MSSQLSERVER
-mssql_drive: D
+mssql_drive: C
 mssql_userdbvol_name: Userdbvol01
 mssql_port: 1433
 
