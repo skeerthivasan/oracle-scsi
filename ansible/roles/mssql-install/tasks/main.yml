@@ -1,3 +1,4 @@
+
 ---
 #
 # Install SQL Server
@@ -127,51 +128,12 @@
 
 - meta: flush_handlers
 
-#- name: Fetch SQL Media Downloader
-#  win_get_url:
-#    url: "{{ mssql_installation_source }}"
-#    dest: "{{ mssql_temp_download_path }}\\SQLServer2017-SSEI-Dev.exe"
-
-#- name: Use Media Downloader to fetch SQL Installation CABs to {{ mssql_installation_path }}
-#  win_shell: "{{ mssql_temp_download_path }}\\SQLServer2017-SSEI-Dev.exe /Action=Download /MediaPath={{ mssql_installation_path }} /MediaType=CAB /Quiet"
-
-# Job will fail if extracted media folder is not empty, quick step to ensure it's empty
-#- name: Ensure installation media extraction path is empty
-#  win_file:
-#    path: "{{ mssql_installation_path }}\\Media"
-#    state: absent
-
-#- name: Extract installation media
-#  win_shell: "{{ mssql_installation_path }}\\SQLServer2017-DEV-x64-ENU.exe /X:{{ mssql_installation_path }}\\Media /Q"
-# If this step fails, logs are in C:\Program Files\Microsoft SQL Server\...\Setup Bootstrap\Log
-# it will often contain the actual error.  If it shows everything passing, the issue is within the DSC logs.
-# 
-# This module also typically throws this error fpr all failure conditions:
-# PowerShell DSC resource MSFT_SqlSetup  failed to execute Set-TargetResource functionality with error message: 
-# System.Exception: Test-TargetResource returned false after calling Set-TargetResource.
-#
-#
-# This document can also be useful to troubleshoot issues with DSC modules
-# https://docs.microsoft.com/en-us/powershell/dsc/troubleshooting 
-#
-# In particular completing these steps:
-# https://docs.microsoft.com/en-us/powershell/dsc/troubleshooting#gathering-events-from-a-single-dsc-operation
-# then re-running a failing PowershellDSC job can help you find the source of your error
-
-- name: Add everyone allow rights on SQL Installation files
-  ansible.windows.win_acl:
-    path: "{{ mssql_installation_path }}"
-    user: Everyone
-    rights: FullControl
-    type: allow
-    state: present
-
 - name: Install SQL Server
   win_dsc:
     resource_name: SQLSetup
     Action: Install
     UpdateEnabled: True
-    SourcePath: "{{ mssql_installation_path }}\\Media"
+    SourcePath: "{{ mssql_installation_path }}"
     InstanceName: "{{ mssql_instance_name }}"
     InstallSharedDir: "{{ mssql_installshared_path }}"
     InstallSharedwowDir: "{{ mssql_installsharedwow_path }}"
