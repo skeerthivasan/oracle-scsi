@@ -1,5 +1,24 @@
 
 ---
+# initialize the additional disks
+
+- name: Initialize a disk with an MBR partition style
+  win_initialize_disk:
+    disk_number: {{ item }}
+  with_items: 
+    - 1
+    - 2
+    - 3
+    - 4
+
+- name: Full format the newly created partition as NTFS and label it
+  win_format:
+    file_system: NTFS
+    new_label: Formatted
+    full: True
+
+
+
 #
 # Install SQL Server
 #
