@@ -100,7 +100,7 @@ resource "vsphere_virtual_machine" "vm" {
   disk {
     label = "DATA-DISK1"
 
-    size        = 50
+    size        = var.data_disk_size
     datastore_id = data.vsphere_datastore.datastore_data.id
     unit_number = 15
   }
