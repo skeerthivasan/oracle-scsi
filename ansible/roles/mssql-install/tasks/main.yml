@@ -55,12 +55,6 @@
     name: SqlServer
     state: present
 
-
-- name: Powershell | Check for SQLPS Powershell module
-  win_psmodule:
-    name: SQLPS
-    state: present
-
 - name: Powershell | Check for Storage DSC Powershell module
   win_psmodule:
     name: StorageDsc
