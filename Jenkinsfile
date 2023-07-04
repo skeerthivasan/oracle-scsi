@@ -72,7 +72,7 @@ pipeline {
             //sh script: "ansible-playbook -i 10.21.152.65, ../../ansible/playbooks/prometheus-config.yml --private-key "  + '${SSH_KEY}' + " --user root"  + " -e solution=" +  sol.trim() + " --connection-password-file pss.txt"
 
            // sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-install.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
-           sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-install.yml 
+           sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-install.yml"
 			// execute ansible playbook
         }
         if (params.Test) {
