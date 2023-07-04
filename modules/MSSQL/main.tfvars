@@ -27,7 +27,7 @@ vm_memory = 16384
 os_disk_size = "300"
 data_disk_size = "600"
 datastore_os = "Metro_Cluster1_Prod01"
-datastore_data = "Metro_Cluster1_Prod02"
+datastore_data = "datastore-DB"
 winadminpass = "VMware1!"
 contentlib_name = "SolutionsLab-ContentLib"
 

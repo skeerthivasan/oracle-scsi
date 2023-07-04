@@ -102,7 +102,7 @@ resource "vsphere_virtual_machine" "vm" {
 
     size        = var.data_disk_size
     datastore_id = data.vsphere_datastore.datastore_data.id
-    unit_number = 15
+    unit_number = 14
   }
 
   disk {
@@ -110,7 +110,7 @@ resource "vsphere_virtual_machine" "vm" {
 
     size        = var.data_disk_size
     datastore_id = data.vsphere_datastore.datastore_data.id
-    unit_number = 30
+    unit_number = 15
   }
 
   disk {
@@ -118,7 +118,7 @@ resource "vsphere_virtual_machine" "vm" {
 
     size        = var.data_disk_size
     datastore_id = data.vsphere_datastore.datastore_data.id
-    unit_number = 45
+    unit_number = 30
   }
 
   disk {
@@ -126,7 +126,7 @@ resource "vsphere_virtual_machine" "vm" {
 
     size        = var.data_disk_size
     datastore_id = data.vsphere_datastore.datastore_data.id
-    unit_number = 59
+    unit_number = 45
   }
 
 
