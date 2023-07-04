@@ -83,7 +83,7 @@ resource "vsphere_virtual_machine" "vm" {
   sync_time_with_host = true
   guest_id = var.osguest_id
   firmware = "efi"
-  #scsi_controller_count = 4
+  scsi_controller_count = 4
   #scsi_bus_sharing = "physicalSharing"  
  
   network_interface {
@@ -100,34 +100,34 @@ resource "vsphere_virtual_machine" "vm" {
   disk {
     label = "DATA-DISK1"
 
-    size        = 50
+    size        = var.data_disk_size
     datastore_id = data.vsphere_datastore.datastore_data.id
-    unit_number = 1
+    unit_number = 15
   }
 
-  # disk {
-  #   label = "DATA-DISK2"
+  disk {
+    label = "DATA-DISK2"
 
-  #   size        = var.data_disk_size
-  #   datastore_id = data.vsphere_datastore.datastore_data.id
-  #   unit_number = 30
-  # }
+    size        = var.data_disk_size
+    datastore_id = data.vsphere_datastore.datastore_data.id
+    unit_number = 30
+  }
 
-  # disk {
-  #   label = "DATA-DISK3"
+  disk {
+    label = "DATA-DISK3"
 
-  #   size        = var.data_disk_size
-  #   datastore_id = data.vsphere_datastore.datastore_data.id
-  #   unit_number = 45
-  # }
+    size        = var.data_disk_size
+    datastore_id = data.vsphere_datastore.datastore_data.id
+    unit_number = 45
+  }
 
-  # disk {
-  #   label = "DATA-DISK4"
+  disk {
+    label = "DATA-DISK4"
 
-  #   size        = var.data_disk_size
-  #   datastore_id = data.vsphere_datastore.datastore_data.id
-  #   unit_number = 59
-  # }
+    size        = var.data_disk_size
+    datastore_id = data.vsphere_datastore.datastore_data.id
+    unit_number = 59
+  }
 
 
   clone {
