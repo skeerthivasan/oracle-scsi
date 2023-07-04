@@ -4,7 +4,7 @@
 
 - name: Initialize a disk with an MBR partition style
   win_initialize_disk:
-    disk_number: {{ item }}
+    disk_number: "{{ item }}"
   with_items: 
     - 1
     - 2
@@ -15,6 +15,7 @@
   win_format:
     file_system: NTFS
     new_label: Formatted
+    disk_number: "{{ item }}"
     full: True
 
 
