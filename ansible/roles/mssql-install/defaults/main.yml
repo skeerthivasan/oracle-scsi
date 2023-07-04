@@ -2,7 +2,7 @@
 #mssql_installation_source: https://go.microsoft.com/fwlink/?linkid=853016
 
 # Path to download installation media to
-mssql_installation_path: \\10.21.152.167\packages\SQL20
+mssql_installation_path: \\10.21.152.167\packages\SQL2019
 mssql_share_letter: M
 mssql_share_user: nobody
 mssql_share_password: nobody
