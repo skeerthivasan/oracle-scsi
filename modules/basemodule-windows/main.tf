@@ -83,7 +83,7 @@ resource "vsphere_virtual_machine" "vm" {
   sync_time_with_host = true
   guest_id = var.osguest_id
   firmware = "efi"
-  scsi_controller_count = 7
+  scsi_controller_count = 4
   #scsi_bus_sharing = "physicalSharing"  
  
   network_interface {
@@ -119,6 +119,14 @@ resource "vsphere_virtual_machine" "vm" {
     size        = var.data_disk_size
     datastore_id = data.vsphere_datastore.datastore_data.id
     unit_number = 45
+  }
+
+    disk {
+    label = "DATA-DISK4"
+
+    size        = var.data_disk_size
+    datastore_id = data.vsphere_datastore.datastore_data.id
+    unit_number = 60
   }
 
 
