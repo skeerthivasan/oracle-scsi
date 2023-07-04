@@ -27,7 +27,7 @@ vm_memory = 16384
 os_disk_size = "300"
 data_disk_size = "600"
 datastore_os = "FlashStack-Prod"
-datastore_data = "datastore-DB"
+datastore_data = "Datastore-DB"
 winadminpass = "VMware1!"
 contentlib_name = "SolutionsLab-ContentLib"
 
