@@ -26,10 +26,9 @@
 - name: Powershell mount drives
   ansible.windows.win_powershell:
     script: |
+      new-partition -disknumber {{ item }} -usemaximumsize | format-volume -filesystem NTFS -newfilesystemlabel d{{ item }}
       $Disk = Get-Disk {{ item }}
-      $Disk | New-Partition -UseMaximumSize -MbrType IFS
       $Partition = Get-Partition -DiskNumber $Disk.Number
-      $Partition | Format-Volume -FileSystem NTFS -Confirm:$false
       New-Item -ItemType Directory -Path "C:\Data{{ item }}"
       $Partition | Add-PartitionAccessPath -AccessPath "C:\Data{{ item }}"
   with_items: 
@@ -38,7 +37,7 @@
     - 3
     - 4
 
-
+ 
 
 
 #
