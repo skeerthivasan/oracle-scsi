@@ -9,7 +9,7 @@ osguest_id = "windows9Server64Guest"
 internal_domain = "puretec.purestorage.com"
 vmSubnet = "2210"
 dns_servers = ["10.21.237.250"]
-vm_cluster = "Management-Cluster"
+vm_cluster = "MetroCluster1"
 dc = "SolutionsLab"
 
 vm_gateway = "10.21.210.1"
@@ -21,13 +21,13 @@ vm_name = "mssql-test"
 network = "10.21.210.0"
 netmask = "24"
 vm_ip = ["10.21.210.22"]
-vmware_os_template = "windows-server-2022-standard-core-v23.04"
+vmware_os_template = "windows-server-2022-standard-core-v23.02"
 vm_cpus = 16
 vm_memory = 16384
 os_disk_size = "300"
 data_disk_size = "600"
-datastore_os = "FlashStack-Misc"
-datastore_data = "FlashStack-Misc"
+datastore_os = "Metro_Cluster1_Prod1"
+datastore_data = "Metro_Cluster1_Prod2"
 winadminpass = "VMware1!"
 contentlib_name = "SolutionsLab-ContentLib"
 
