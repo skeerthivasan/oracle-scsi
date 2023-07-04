@@ -181,7 +181,7 @@
 - name: Install SQL Server
   win_dsc:
     resource_name: SQLSetup
-    Action: InstallDefaultInstance
+    Action: Install
     InstanceName: "{{ mssql_instance_name }}"
     Features: "{{ mssql_features }}"
     SourcePath: "{{ mssql_installation_path }}"
