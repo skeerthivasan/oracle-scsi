@@ -126,7 +126,7 @@ resource "vsphere_virtual_machine" "vm" {
 
     size        = var.data_disk_size
     datastore_id = data.vsphere_datastore.datastore_data.id
-    unit_number = 60
+    unit_number = 59
   }
 
 
