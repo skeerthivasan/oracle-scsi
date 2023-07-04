@@ -9,7 +9,7 @@ osguest_id = "windows9Server64Guest"
 internal_domain = "puretec.purestorage.com"
 vmSubnet = "2210"
 dns_servers = ["10.21.237.250"]
-vm_cluster = "MetroCluster1"
+vm_cluster = "Management-Cluster"
 dc = "SolutionsLab"
 
 vm_gateway = "10.21.210.1"
@@ -26,7 +26,7 @@ vm_cpus = 16
 vm_memory = 16384
 os_disk_size = "300"
 data_disk_size = "600"
-datastore_os = "Metro_Cluster1_Prod01"
+datastore_os = "FlashStack-Prod"
 datastore_data = "datastore-DB"
 winadminpass = "VMware1!"
 contentlib_name = "SolutionsLab-ContentLib"
