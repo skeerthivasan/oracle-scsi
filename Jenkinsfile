@@ -69,6 +69,9 @@ pipeline {
         }
         if (params.Install) {
 			println "Installing and conifguring the solution"
+            solname = sol.trim()
+            println solname
+            println "------------------"
             // if sol.trim() == 'MSSQL':
                 sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-install.yml"
             // else:

@@ -10,6 +10,7 @@
     - 2
     - 3
     - 4
+    - 5
 
 # - name: Full format the newly created partition as NTFS and label it
 #   win_format:
