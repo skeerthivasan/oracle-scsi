@@ -69,12 +69,12 @@ pipeline {
         }
         if (params.Install) {
 			println "Installing and conifguring the solution"
-            if sol.trim() == 'MSSQL':
+            // if sol.trim() == 'MSSQL':
                 sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-install.yml"
-            else:
+            // else:
             //    sh script: "ansible-playbook -i 10.21.152.65, ../../ansible/playbooks/prometheus-config.yml --private-key "  + '${SSH_KEY}' + " --user root"  + " -e solution=" +  sol.trim() + " --connection-password-file pss.txt"
-                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "common.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
-                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-install.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
+                // sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "common.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
+                // sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-install.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
            
 			
         }
