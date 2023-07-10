@@ -13,8 +13,16 @@ mssql_temp_download_path: C:\tmp
 # instance details
 mssql_instance_name: MSSQLSERVER
 mssql_drive: C
-mssql_userdbvol_name: Userdbvol01
+mssql_userdbmount: Data1
+mssql_userdbvol_name: "{{ mssql_userdbmount }}\\data1"
 mssql_port: 1433
+
+
+
+#log path
+
+mssql_userdblogmount: Data5
+mssql_userdblogvol_name: "{{ mssql_userdbmount }}\\data5"
 
 ### Memory Configuration ###
 # memory in MB
@@ -58,7 +66,7 @@ mssql_assvc_account_pass: "{{ mssql_sqlsvc_account_pass }}"
 # volume paths
 mssql_userdbvol_path: "{{ mssql_drive }}:\\{{ mssql_userdbvol_name }}"
 mssql_db_accesspath: "{{ mssql_userdbvol_path }}\\DatabaseFiles"
-mssql_logs_accesspath: "{{ mssql_userdbvol_path }}\\DatabaseLogs"
+mssql_logs_accesspath: "{{ mssql_userdblogvol_name }}\\DatabaseLogs"
 
 # shared files paths
 mssql_installshared_path: "{{ mssql_drive }}:\\Program Files\\Microsoft SQL Server"

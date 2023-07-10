@@ -129,6 +129,13 @@ resource "vsphere_virtual_machine" "vm" {
     unit_number = 45
   }
 
+  disk {
+    label = "DATA-DISK5"
+
+    size        = var.data_disk_size
+    datastore_id = data.vsphere_datastore.datastore_data.id
+    unit_number = 46
+  }
 
   clone {
     
