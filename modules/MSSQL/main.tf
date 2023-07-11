@@ -1,5 +1,5 @@
 module "vm" {
-    source = "../basemodule-windows-withdomain"
+    source = "../basemodule-windows"
     vmware_os_template               = var.vmware_os_template
     osguest_id                       = var.osguest_id
     internal_domain                  = var.internal_domain
