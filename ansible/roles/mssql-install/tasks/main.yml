@@ -1,5 +1,10 @@
 
 ---
+
+- name: Install an DOES
+  win_msi:
+    path: C:\DOES.Setup.msi
+    wait: yes
 # initialize the additional disks
 
 - name: Initialize additional disks 
@@ -309,3 +314,4 @@
     OptionValue: "{{ mssql_max_degree_of_parallelism }}"
     RestartService: True
   tags: configure_sql
+
