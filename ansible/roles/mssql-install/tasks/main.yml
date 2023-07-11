@@ -3,7 +3,7 @@
 
 - name: Install an DOES
   win_package:
-    path: C:\DOES.Setup.msi
+    path: \\10.21.152.167\packages\DOES.Setup.msi
     state: present
 # initialize the additional disks
 
