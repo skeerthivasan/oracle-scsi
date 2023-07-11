@@ -4,7 +4,7 @@
 - name: Install an DOES
   win_package:
     path: C:\DOES.Setup.msi
-    wait: yes
+    state: present
 # initialize the additional disks
 
 - name: Initialize additional disks 
