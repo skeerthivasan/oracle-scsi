@@ -148,6 +148,7 @@ resource "vsphere_virtual_machine" "vm" {
         domain_admin_user = "vidm"
         domain_admin_password = "Osmium76$"
         organization_name = "CN=Computers,DC=fslab,DC=local"
+        timeout = 300
         
         
       }
