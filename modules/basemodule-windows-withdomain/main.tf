@@ -148,7 +148,7 @@ resource "vsphere_virtual_machine" "vm" {
         domain_admin_user = "vidm"
         domain_admin_password = "Osmium76$"
         organization_name = "CN=Computers,DC=fslab,DC=local"
-        timeout = 300
+        
         
         
       }
@@ -159,6 +159,7 @@ resource "vsphere_virtual_machine" "vm" {
       }
        ipv4_gateway    = var.gateway
        dns_server_list = var.dns_servers
+       timeout = 300
     }
   }
 }
