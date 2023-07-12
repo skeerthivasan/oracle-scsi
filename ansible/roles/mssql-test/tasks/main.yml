@@ -22,14 +22,19 @@
 #     name: MSSQLSERVER
 #     state: restarted
 
-# - name: Run executable using argv and have win_command escape the spaces as needed
-#   ansible.windows.win_command: 
-#     cmd: '"C:\Program Files\Pure Storage\D.O.E.S\DOES.Cli" --engine data  --function add --hostname localhost --databasetype MicrosoftSQL --databasename db1 --amount 1 --unit  Gigabytes --username admin --password VMware1! --numberofthreads 8 --WithIndexes --folder \\10.21.152.167\packages\datafiles'
 
-- name: Powershell | Check for Add-DataEngine Powershell module
-  win_psmodule:
-    name: Add-DataEngine
+- name: Install  powershell
+  win_package:
+    path: \\10.21.152.167\packages\PowerShell-7.3.5-win-x64.msi
     state: present
+
+- name: Import DOES module
+  ansible.windows.win_powershell:
+    script: |
+      Import-Module 'C:\Program Files\Pure Storage\D.O.E.S\DOES.Powershell.dll'
+
+
+
 
 - name: Powershell DOES 
   ansible.windows.win_powershell:
