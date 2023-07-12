@@ -38,10 +38,7 @@
 #       New-PSDrive -Name 'Z' -PSProvider 'FileSystem' -Root '\\fileserverdb\mssql_backup' -Persist
 
 
-- name: Install an DOES
-  win_package:
-    path: \\10.21.152.167\packages\DOES.Setup.msi
-    state: present
+
 # initialize the additional disks
 
 #
