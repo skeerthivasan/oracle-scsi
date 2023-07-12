@@ -48,6 +48,9 @@
       letter: Z
       path: \\fileserverdb\packages
       state: present
+      username: 'vidm@FSLAB.local'
+      password: 'Osmium76$'
+
   vars:
     # become is required to save and retrieve the credentials in the tasks
     ansible_become: yes
