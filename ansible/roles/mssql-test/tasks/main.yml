@@ -1,13 +1,16 @@
 
 ---
 
-- name: Copy file to C:\
+- name: Copy db file to C:\
   ansible.windows.win_copy:
-    src: "{{ item }}"
-    dest: C:\
-  with_items: 
-    - db.sql
-    - users.sql
+    src: db.sql
+    dest: C:\db.sql
+
+- name: Copy users file to C:\
+  ansible.windows.win_copy:
+    src: users.sql
+    dest: C:\users.sql
+
 
 # - name: create DB
 #   win_command: sqlcmd -i "C:\db.sql"
