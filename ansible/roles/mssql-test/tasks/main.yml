@@ -10,7 +10,7 @@
 #     var: sqlcmd_out
 
 - name: Update auth option
-  win_command: sqlcmd -i "C:\test2.sql"
+  win_command: sqlcmd -i "C:\test1.sql"
   register: sqlcmd2_out
 
 - name: print result
