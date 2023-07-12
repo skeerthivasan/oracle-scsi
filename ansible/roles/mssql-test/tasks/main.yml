@@ -1,26 +1,34 @@
 
 ---
 
-- name: create DB
-  win_command: sqlcmd -i "C:\test.sql"
-  register: sqlcmd_out
+- name: Copy file to C:\
+  ansible.windows.win_copy:
+    src: files/{{ item }}
+    dest: C:\
+  with_items: 
+    - db.sql
+    - users.sql
 
-- name: print result
-  debug:
-    var: sqlcmd_out
+# - name: create DB
+#   win_command: sqlcmd -i "C:\db.sql"
+#   register: sqlcmd_out
 
-- name: Update auth option
-  win_command: sqlcmd -i "C:\test1.sql"
-  register: sqlcmd2_out
+# - name: print result
+#   debug:
+#     var: sqlcmd_out
 
-- name: print result
-  debug:
-    var: sqlcmd2_out
+# - name: Update auth option
+#   win_command: sqlcmd -i "C:\users.sql"
+#   register: sqlcmd2_out
 
-- name: restart MSSQL
-  ansible.windows.win_service:
-    name: MSSQLSERVER
-    state: restarted
+# - name: print result
+#   debug:
+#     var: sqlcmd2_out
+
+# - name: restart MSSQL
+#   ansible.windows.win_service:
+#     name: MSSQLSERVER
+#     state: restarted
 
 # - name: Install an DOES
 #   win_package:
