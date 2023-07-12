@@ -3,33 +3,33 @@
 
 
 
-# - name: Initialize additional disks 
-#   win_initialize_disk:
-#     disk_number: "{{ item }}"
-#   with_items: 
-#     - 1
-#     - 2
-#     - 3
-#     - 4
-#     - 5
+- name: Initialize additional disks 
+  win_initialize_disk:
+    disk_number: "{{ item }}"
+  with_items: 
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
 
 
 
-# - name: Powershell mount drives
-#   ansible.windows.win_powershell:
-#     script: |
-#       new-partition -disknumber {{ item }} -usemaximumsize | format-volume -filesystem NTFS -newfilesystemlabel d{{ item }}
-#       $Disk = Get-Disk {{ item }}
-#       $Partition = Get-Partition -DiskNumber $Disk.Number
-#       New-Item -ItemType Directory -Path "C:\Data{{ item }}"
-#       $Partition | Add-PartitionAccessPath -AccessPath "C:\Data{{ item }}"
-#       New-Item -ItemType Directory -Path "C:\Data{{ item }}\data{{ item }}"
-#   with_items: 
-#     - 1
-#     - 2
-#     - 3
-#     - 4
-#     - 5
+- name: Powershell mount drives
+  ansible.windows.win_powershell:
+    script: |
+      new-partition -disknumber {{ item }} -usemaximumsize | format-volume -filesystem NTFS -newfilesystemlabel d{{ item }}
+      $Disk = Get-Disk {{ item }}
+      $Partition = Get-Partition -DiskNumber $Disk.Number
+      New-Item -ItemType Directory -Path "C:\Data{{ item }}"
+      $Partition | Add-PartitionAccessPath -AccessPath "C:\Data{{ item }}"
+      New-Item -ItemType Directory -Path "C:\Data{{ item }}\data{{ item }}"
+  with_items: 
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
 
 
 # - name: map drive | powershell
@@ -38,10 +38,10 @@
 #       New-PSDrive -Name 'Z' -PSProvider 'FileSystem' -Root '\\fileserverdb\mssql_backup' -Persist
 
 
-# - name: Install an DOES
-#   win_package:
-#     path: C:\DOES.Setup.msi
-#     state: present
+- name: Install an DOES
+  win_package:
+    path: \\10.21.152.167\packages\DOES.Setup.msi
+    state: present
 # initialize the additional disks
 
 #
