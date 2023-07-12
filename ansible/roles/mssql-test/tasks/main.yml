@@ -42,12 +42,14 @@
 
 # - name: Import DOES module
 #   ansible.windows.win_powershell:
+      # executable: pwsh.exe
 #     script: |
 #       Import-Module 'C:\Program Files\Pure Storage\D.O.E.S\DOES.Powershell.dll'
 
 
 - name: Powershell DOES 
   ansible.windows.win_powershell:
+    executable: pwsh.exe
     script: |
       Add-DataEngine -DatabaseType MicrosoftSQL -Hostname localhost -DatabaseName db1 -Amount 1 -Unit Gigabytes -NumberOfThreads 8 -UserName admin -Password VMware1! -Folder \\10.21.152.167\packages\datafiles
   register: output
