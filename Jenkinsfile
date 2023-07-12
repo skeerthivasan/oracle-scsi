@@ -83,8 +83,8 @@ pipeline {
         }
         if (params.Test) {
 			println "Executing Performance step"
- 
-            sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-test.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
+            sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-test.yml"
+            // sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-test.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
 			// execute ansible playbook
         }
 
