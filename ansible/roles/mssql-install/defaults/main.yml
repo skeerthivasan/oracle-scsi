@@ -125,6 +125,7 @@ mssql_sa_password: "{{ mssql_sqlsvc_account_pass }}"
 #mssql_features: SQLENGINE,FULLTEXT,CONN
 mssql_features: SQLENGINE
 
+
 # Collation
 mssql_collation: SQL_Latin1_General_CP1_CI_AS
 
