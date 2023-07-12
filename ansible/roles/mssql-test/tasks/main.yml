@@ -19,7 +19,10 @@
 
 - name: restart MSSQL
   ansible.windows.win_command:
-    cmd: net restart MSSQLSERVER
+    argv: 
+    - net 
+    - restart 
+    - MSSQLSERVER
 
 # - name: Run executable using argv and have win_command escape the spaces as needed
 #   ansible.windows.win_command:
