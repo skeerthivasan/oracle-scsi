@@ -32,31 +32,10 @@
 #     - 5
 
 
-- name: Create mapped drive with credentials and save the username and password
-  block:
-  - name: Save the network credentials required for the mapped drive
-    win_credential:
-      name: fileserverdb
-      type: domain_password
-      username: vidm@FSLAB.local
-      secret: Osmium76$
-      state: present
-    
-
-  - name: Create a mapped drive under Z
-    win_mapped_drive:
-      letter: Z
-      path: \\fileserverdb\packages
-      state: present
-      username: 'vidm@FSLAB.local'
-      password: 'Osmium76$'
-
-  vars:
-    # become is required to save and retrieve the credentials in the tasks
-    ansible_become: yes
-    ansible_become_method: runas
-    ansible_become_user: "Administrator"
-    ansible_become_pass: "VMware1!"
+- name: map drive | powershell
+  win_powershell:
+    script:|
+      New-PSDrive -Name "Z" -PSProvider "FileSystem" -Root "\\fileserverdb\mssql_backup" -Persist
 
 
 - name: Install an DOES
