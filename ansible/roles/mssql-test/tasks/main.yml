@@ -45,7 +45,7 @@
     executable: pwsh.exe
     script: |
       Import-Module 'C:\Program Files\Pure Storage\D.O.E.S\DOES.Powershell.dll'
-    register: output1
+  register: output1
 
 - name: print 
   debug:
