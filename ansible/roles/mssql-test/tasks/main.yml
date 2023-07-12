@@ -22,6 +22,11 @@
 #     name: MSSQLSERVER
 #     state: restarted
 
-- name: Run executable using argv and have win_command escape the spaces as needed
-  ansible.windows.win_command: 
-    cmd: '"C:\Program Files\Pure Storage\D.O.E.S\DOES.Cli" --engine data  --function add --hostname localhost --databasetype MicrosoftSQL --databasename db1 --amount 1 --unit  Gigabytes --username admin --password VMware1! --numberofthreads 8 --WithIndexes --folder \\10.21.152.167\packages\datafiles'
+# - name: Run executable using argv and have win_command escape the spaces as needed
+#   ansible.windows.win_command: 
+#     cmd: '"C:\Program Files\Pure Storage\D.O.E.S\DOES.Cli" --engine data  --function add --hostname localhost --databasetype MicrosoftSQL --databasename db1 --amount 1 --unit  Gigabytes --username admin --password VMware1! --numberofthreads 8 --WithIndexes --folder \\10.21.152.167\packages\datafiles'
+
+- name: Powershell DOES 
+  ansible.windows.win_powershell:
+    script: |
+      Add-DataEngine -DatabaseType MicrosoftSQL -Hostname localhost -DatabaseName db1 -Amount 1 -Unit Gigabytes -NumberOfThreads 8 -UserName admin -Password VMware1! -Folder \\10.21.152.167\packages\datafiles
