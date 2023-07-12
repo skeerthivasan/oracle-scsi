@@ -3,39 +3,50 @@
 
 
 
-- name: Initialize additional disks 
-  win_initialize_disk:
-    disk_number: "{{ item }}"
-  with_items: 
-    - 1
-    - 2
-    - 3
-    - 4
-    - 5
+# - name: Initialize additional disks 
+#   win_initialize_disk:
+#     disk_number: "{{ item }}"
+#   with_items: 
+#     - 1
+#     - 2
+#     - 3
+#     - 4
+#     - 5
 
 
 
-- name: Powershell mount drives
-  ansible.windows.win_powershell:
-    script: |
-      new-partition -disknumber {{ item }} -usemaximumsize | format-volume -filesystem NTFS -newfilesystemlabel d{{ item }}
-      $Disk = Get-Disk {{ item }}
-      $Partition = Get-Partition -DiskNumber $Disk.Number
-      New-Item -ItemType Directory -Path "C:\Data{{ item }}"
-      $Partition | Add-PartitionAccessPath -AccessPath "C:\Data{{ item }}"
-      New-Item -ItemType Directory -Path "C:\Data{{ item }}\data{{ item }}"
-  with_items: 
-    - 1
-    - 2
-    - 3
-    - 4
-    - 5
+# - name: Powershell mount drives
+#   ansible.windows.win_powershell:
+#     script: |
+#       new-partition -disknumber {{ item }} -usemaximumsize | format-volume -filesystem NTFS -newfilesystemlabel d{{ item }}
+#       $Disk = Get-Disk {{ item }}
+#       $Partition = Get-Partition -DiskNumber $Disk.Number
+#       New-Item -ItemType Directory -Path "C:\Data{{ item }}"
+#       $Partition | Add-PartitionAccessPath -AccessPath "C:\Data{{ item }}"
+#       New-Item -ItemType Directory -Path "C:\Data{{ item }}\data{{ item }}"
+#   with_items: 
+#     - 1
+#     - 2
+#     - 3
+#     - 4
+#     - 5
 
 
-- name: Create a mapped drive under Z
-  win_mapped_drive:
-    letter: Z
-    path: \\fileserverdb\packages
+- name: Create mapped drive with credentials and save the username and password
+  block:
+  - name: Save the network credentials required for the mapped drive
+    win_credential:
+      name: fileserverdb
+      type: domain_password
+      username: vidm@FSLAB.local
+      secret: Osmium76$
+      state: present
+
+  - name: Create a mapped drive under Z
+    win_mapped_drive:
+      letter: Z
+      path: \\fileserverdb\packages
+      state: present
 
 
 - name: Install an DOES
