@@ -1,49 +1,49 @@
 
 ---
 
-# - name: create DB
-#   win_command: sqlcmd -i "C:\test.sql"
-#   register: sqlcmd_out
+- name: create DB
+  win_command: sqlcmd -i "C:\test.sql"
+  register: sqlcmd_out
 
-# - name: print result
-#   debug:
-#     var: sqlcmd_out
+- name: print result
+  debug:
+    var: sqlcmd_out
 
-# - name: Update auth option
-#   win_command: sqlcmd -i "C:\test1.sql"
-#   register: sqlcmd2_out
+- name: Update auth option
+  win_command: sqlcmd -i "C:\test1.sql"
+  register: sqlcmd2_out
 
-# - name: print result
-#   debug:
-#     var: sqlcmd2_out
+- name: print result
+  debug:
+    var: sqlcmd2_out
 
-# - name: restart MSSQL
-#   ansible.windows.win_service:
-#     name: MSSQLSERVER
-#     state: restarted
+- name: restart MSSQL
+  ansible.windows.win_service:
+    name: MSSQLSERVER
+    state: restarted
 
-- name: Install an DOES
-  win_package:
-    path: \\10.21.152.167\packages\DOES.Setup.msi
-    state: present
+# - name: Install an DOES
+#   win_package:
+#     path: \\10.21.152.167\packages\DOES.Setup.msi
+#     state: present
 
-- name: Install  powershell
-  win_package:
-    path: \\10.21.152.167\packages\PowerShell-7.3.5-win-x64.msi
-    state: present
+# - name: Install  powershell
+#   win_package:
+#     path: \\10.21.152.167\packages\PowerShell-7.3.5-win-x64.msi
+#     state: present
 
-- name: Import DOES module
-  ansible.windows.win_powershell:
-    script: |
-      Import-Module 'C:\Program Files\Pure Storage\D.O.E.S\DOES.Powershell.dll'
-
-
-# - name: Powershell DOES 
+# - name: Import DOES module
 #   ansible.windows.win_powershell:
 #     script: |
-#       Add-DataEngine -DatabaseType MicrosoftSQL -Hostname localhost -DatabaseName db1 -Amount 1 -Unit Gigabytes -NumberOfThreads 8 -UserName admin -Password VMware1! -Folder \\10.21.152.167\packages\datafiles
-#   register: output
+#       Import-Module 'C:\Program Files\Pure Storage\D.O.E.S\DOES.Powershell.dll'
 
-# - name: print 
-#   debug:
-#     var: output
+
+- name: Powershell DOES 
+  ansible.windows.win_powershell:
+    script: |
+      Add-DataEngine -DatabaseType MicrosoftSQL -Hostname localhost -DatabaseName db1 -Amount 1 -Unit Gigabytes -NumberOfThreads 8 -UserName admin -Password VMware1! -Folder \\10.21.152.167\packages\datafiles
+  register: output
+
+- name: print 
+  debug:
+    var: output
