@@ -24,8 +24,8 @@ if sol == 'MSSQL':
         for ip in ips:
             fh.write(ip.rstrip() + '\n')
         fh.write("[win:vars]\n")
-        fh.write("ansible_user=FSLAB\\vidm\n")
-        fh.write("ansible_password=Osmium76$\n")
+        fh.write("ansible_user=administrator\n")
+        fh.write("ansible_password=VMware1!\n")
         fh.write("ansible_connection=winrm\n")
         fh.write("ansible_winrm_server_cert_validation=ignore\n")
         fh.write("ansible_port=5985\n")
