@@ -41,12 +41,19 @@
       username: vidm@FSLAB.local
       secret: Osmium76$
       state: present
+    
 
   - name: Create a mapped drive under Z
     win_mapped_drive:
       letter: Z
       path: \\fileserverdb\packages
       state: present
+  vars:
+    # become is required to save and retrieve the credentials in the tasks
+    ansible_become: yes
+    ansible_become_method: runas
+    ansible_become_user: "Administrator"
+    ansible_become_pass: "VMware1!"
 
 
 - name: Install an DOES
