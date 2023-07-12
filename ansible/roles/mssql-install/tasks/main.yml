@@ -236,6 +236,7 @@
     SQLSysAdminAccounts: "{{ mssql_sysadmin_accounts }}"
     # Analysis Services Admins (if installed)
     ASSysAdminAccounts: "{{ mssql_asadmin_accounts }}"
+    IACKNOWLEDGEENTCALLIMITS: true
   tags: install_sql
 
 # End of win_dsc for SQL Server
