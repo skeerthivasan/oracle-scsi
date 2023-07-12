@@ -24,4 +24,4 @@
 
 - name: Run executable using argv and have win_command escape the spaces as needed
   ansible.windows.win_command: 
-    cmd: '"C:\Program Files\Pure Storage\D.O.E.S\DOES.Cli" --engine data  --function add --hostname localhost --databasetype MicrosoftSQL --databasename db1 --amount 1 --unit  Terabytes --username admin --password VMware1! --numberofthreads 8 --WithIndexes --folder \\10.21.152.167\packages\datafiles'
+    cmd: '"C:\Program Files\Pure Storage\D.O.E.S\DOES.Cli" --engine data  --function add --hostname localhost --databasetype MicrosoftSQL --databasename db1 --amount 1 --unit  Gigabytes --username admin --password VMware1! --numberofthreads 8 --WithIndexes --folder \\10.21.152.167\packages\datafiles'
