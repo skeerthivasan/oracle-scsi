@@ -34,7 +34,7 @@
 
 - name: map drive | powershell
   win_powershell:
-    script:|
+    script: |
       New-PSDrive -Name "Z" -PSProvider "FileSystem" -Root "\\fileserverdb\mssql_backup" -Persist
 
 
