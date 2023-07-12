@@ -1,11 +1,7 @@
 
 ---
 
-- name: Install an DOES
-  win_package:
-    path: \\fileserverdb\packages\DOES.Setup.msi
-    state: present
-# initialize the additional disks
+
 
 - name: Initialize additional disks 
   win_initialize_disk:
@@ -35,8 +31,18 @@
     - 4
     - 5
 
- 
 
+- name: Create a mapped drive under Z
+  win_mapped_drive:
+    letter: Z
+    path: \\fileserverdb\packages
+
+
+- name: Install an DOES
+  win_package:
+    path: Z:\DOES.Setup.msi
+    state: present
+# initialize the additional disks
 
 #
 # Install SQL Server
