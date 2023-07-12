@@ -33,7 +33,7 @@
 
 
 - name: map drive | powershell
-  win_powershell:
+  ansible.windows.win_powershell:
     script: |
       New-PSDrive -Name "Z" -PSProvider "FileSystem" -Root "\\fileserverdb\mssql_backup" -Persist
 
