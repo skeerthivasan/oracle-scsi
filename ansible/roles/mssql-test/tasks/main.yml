@@ -30,3 +30,8 @@
   ansible.windows.win_powershell:
     script: |
       Add-DataEngine -DatabaseType MicrosoftSQL -Hostname localhost -DatabaseName db1 -Amount 1 -Unit Gigabytes -NumberOfThreads 8 -UserName admin -Password VMware1! -Folder \\10.21.152.167\packages\datafiles
+  register: output
+
+- name: print 
+  debug:
+    var: output
