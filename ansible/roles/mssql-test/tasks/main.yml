@@ -1,39 +1,39 @@
 
 ---
 
-- name: Copy file to C:\
-  ansible.windows.win_copy:
-    src: "{{ item }}"
-    dest: C:\
-  with_items: 
-    - db.sql
-    - users.sql
+# - name: Copy file to C:\
+#   ansible.windows.win_copy:
+#     src: "{{ item }}"
+#     dest: C:\
+#   with_items: 
+#     - db.sql
+#     - users.sql
 
-- name: create DB
-  win_command: sqlcmd -i "C:\db.sql"
-  register: sqlcmd_out
+# - name: create DB
+#   win_command: sqlcmd -i "C:\db.sql"
+#   register: sqlcmd_out
 
-- name: print result
-  debug:
-    var: sqlcmd_out
+# - name: print result
+#   debug:
+#     var: sqlcmd_out
 
-- name: Update auth option
-  win_command: sqlcmd -i "C:\users.sql"
-  register: sqlcmd2_out
+# - name: Update auth option
+#   win_command: sqlcmd -i "C:\users.sql"
+#   register: sqlcmd2_out
 
-- name: print result
-  debug:
-    var: sqlcmd2_out
+# - name: print result
+#   debug:
+#     var: sqlcmd2_out
 
-- name: restart MSSQL
-  ansible.windows.win_service:
-    name: MSSQLSERVER
-    state: restarted
+# - name: restart MSSQL
+#   ansible.windows.win_service:
+#     name: MSSQLSERVER
+#     state: restarted
 
-- name: Install an DOES
-  win_package:
-    path: \\10.21.152.167\packages\DOES.Setup.msi
-    state: present
+# - name: Install an DOES
+#   win_package:
+#     path: \\10.21.152.167\packages\DOES.Setup.msi
+#     state: present
 
 - name: Install  powershell
   win_package:
