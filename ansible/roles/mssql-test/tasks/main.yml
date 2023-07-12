@@ -18,11 +18,9 @@
     var: sqlcmd2_out
 
 - name: restart MSSQL
-  ansible.windows.win_command:
-    argv: 
-    - net 
-    - restart 
-    - MSSQLSERVER
+  ansible.windows.win_service:
+    name: MSSQLSERVER
+    state: restarted
 
 # - name: Run executable using argv and have win_command escape the spaces as needed
 #   ansible.windows.win_command:
