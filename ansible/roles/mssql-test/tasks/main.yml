@@ -7,8 +7,7 @@
 
 - name: print result
   debug:
-    var: result_batches
-    
+    var: sqlcmd_out
 
 
 # - name: Run executable using argv and have win_command escape the spaces as needed
