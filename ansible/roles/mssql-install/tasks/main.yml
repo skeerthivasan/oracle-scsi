@@ -3,7 +3,7 @@
 
 - name: Install an DOES
   win_package:
-    path: \\10.21.152.167\packages\DOES.Setup.msi
+    path: \\fileserverdb\packages\DOES.Setup.msi
     state: present
 # initialize the additional disks
 
@@ -17,17 +17,7 @@
     - 4
     - 5
 
-# - name: Full format the newly created partition as NTFS and label it
-#   win_format:
-#     file_system: NTFS
-#     new_label: Formatted
-#     disk_number: "{{ item }}"
-#     full: True
-#   with_items: 
-#     - 1
-#     - 2
-#     - 3
-#     - 4
+
 
 - name: Powershell mount drives
   ansible.windows.win_powershell:
