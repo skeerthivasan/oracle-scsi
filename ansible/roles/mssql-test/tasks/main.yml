@@ -9,42 +9,42 @@
     - db.sql
     - users.sql
 
-# - name: create DB
-#   win_command: sqlcmd -i "C:\db.sql"
-#   register: sqlcmd_out
+- name: create DB
+  win_command: sqlcmd -i "C:\db.sql"
+  register: sqlcmd_out
 
-# - name: print result
-#   debug:
-#     var: sqlcmd_out
+- name: print result
+  debug:
+    var: sqlcmd_out
 
-# - name: Update auth option
-#   win_command: sqlcmd -i "C:\users.sql"
-#   register: sqlcmd2_out
+- name: Update auth option
+  win_command: sqlcmd -i "C:\users.sql"
+  register: sqlcmd2_out
 
-# - name: print result
-#   debug:
-#     var: sqlcmd2_out
+- name: print result
+  debug:
+    var: sqlcmd2_out
 
-# - name: restart MSSQL
-#   ansible.windows.win_service:
-#     name: MSSQLSERVER
-#     state: restarted
+- name: restart MSSQL
+  ansible.windows.win_service:
+    name: MSSQLSERVER
+    state: restarted
 
-# - name: Install an DOES
-#   win_package:
-#     path: \\10.21.152.167\packages\DOES.Setup.msi
-#     state: present
+- name: Install an DOES
+  win_package:
+    path: \\10.21.152.167\packages\DOES.Setup.msi
+    state: present
 
-# - name: Install  powershell
-#   win_package:
-#     path: \\10.21.152.167\packages\PowerShell-7.3.5-win-x64.msi
-#     state: present
+- name: Install  powershell
+  win_package:
+    path: \\10.21.152.167\packages\PowerShell-7.3.5-win-x64.msi
+    state: present
 
-# - name: Import DOES module
-#   ansible.windows.win_powershell:
-      # executable: pwsh.exe
-#     script: |
-#       Import-Module 'C:\Program Files\Pure Storage\D.O.E.S\DOES.Powershell.dll'
+- name: Import DOES module
+  ansible.windows.win_powershell:
+    executable: pwsh.exe
+    script: |
+      Import-Module 'C:\Program Files\Pure Storage\D.O.E.S\DOES.Powershell.dll'
 
 
 - name: Powershell DOES 
