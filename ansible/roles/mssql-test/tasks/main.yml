@@ -1,13 +1,13 @@
 
 ---
 
-- name: create DB
-  win_command: sqlcmd -i "C:\test.sql"
-  register: sqlcmd_out
+# - name: create DB
+#   win_command: sqlcmd -i "C:\test.sql"
+#   register: sqlcmd_out
 
-- name: print result
-  debug:
-    var: sqlcmd_out
+# - name: print result
+#   debug:
+#     var: sqlcmd_out
 
 - name: Update auth option
   win_command: sqlcmd -i "C:\test2.sql"
@@ -17,6 +17,9 @@
   debug:
     var: sqlcmd2_out
 
+- name: restart MSSQL
+  ansible.windows.win_command:
+    cmd: net restart MSSQLSERVER
 
 # - name: Run executable using argv and have win_command escape the spaces as needed
 #   ansible.windows.win_command:
