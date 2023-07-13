@@ -42,12 +42,7 @@
     path: \\10.21.152.167\packages\PowerShell-7.3.5-win-x64.msi
     state: present
 
-# - name: Import DOES module
-#   ansible.windows.win_powershell:
-#     executable: pwsh.exe
-#     script: |
-#       Import-Module 'C:\Program Files\Pure Storage\D.O.E.S\DOES.Powershell.dll'
-#   register: output1
+
 
 - name: Import DOES module and run DOES
   win_command: pwsh C:\script.ps1
@@ -56,15 +51,3 @@
 - name: print 
   debug:
     var: output1
-
-
-# - name: Powershell DOES 
-#   ansible.windows.win_powershell:
-#     executable: pwsh.exe
-#     script: |
-#       Add-DataEngine -DatabaseType MicrosoftSQL -Hostname localhost -DatabaseName db1 -Amount 1 -Unit Gigabytes -NumberOfThreads 8 -UserName admin -Password VMware1! -Folder \\10.21.152.167\packages\datafiles\DataEngineFilesOracle1
-#   register: output
-
-# - name: print 
-#   debug:
-#     var: output
