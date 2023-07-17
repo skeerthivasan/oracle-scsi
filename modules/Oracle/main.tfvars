@@ -12,7 +12,7 @@ vm_cluster = "MetroCluster1"
 dc = "SolutionsLab"
 vm_gateway = "10.21.210.1"
 #vm 
-vm_count = "1"
+vm_count = "8"
 vm_name = "oracle-vm"
 network = "10.21.210.0"
 netmask = "24"
