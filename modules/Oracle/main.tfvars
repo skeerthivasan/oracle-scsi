@@ -22,8 +22,8 @@ vm_cpus = 32
 vm_memory = 65536
 os_disk_size = "100"
 data_disk_size = "200"
-datastore_os = "FlashStack-Prod"
-datastore_data = "FlashStack-Prod"
+datastore_os = "Metro_Cluster1_Prod01"
+datastore_data = "vvOLs-Metro"
 contentlib_name = "SolutionsLab-ContentLib"
 
 
