@@ -59,6 +59,7 @@ data "vsphere_content_library_item" "my_ovf_item" {
   type       = "ovf"
   library_id = data.vsphere_content_library.my_content_library.id
 }
+
 resource "infoblox_ip_allocation" "alloc1" {
   count = var.vm_count
   network_view="default"

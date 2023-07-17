@@ -7,13 +7,10 @@ vsphere_password = ""
 osguest_id = "oracleLinux64Guest"
 internal_domain = "puretec.purestorage.com"
 vmSubnet = "2210"
-dns_servers = ["10.21.237.250"]
+dns_servers = ["10.21.93.16"]
 vm_cluster = "MetroCluster1"
 dc = "SolutionsLab"
-
 vm_gateway = "10.21.210.1"
-
-
 #vm 
 vm_count = "1"
 vm_name = "oracle-vm"
