@@ -73,7 +73,7 @@ pipeline {
             println solname
             println "------------------"
             // if sol.trim() == 'MSSQL':
-                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-install.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
+                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-install.yml"
             // else:
             //    sh script: "ansible-playbook -i 10.21.152.65, ../../ansible/playbooks/prometheus-config.yml --private-key "  + '${SSH_KEY}' + " --user root"  + " -e solution=" +  sol.trim() + " --connection-password-file pss.txt"
                 // sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "common.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
@@ -83,8 +83,9 @@ pipeline {
         }
         if (params.Test) {
 			println "Executing Performance step"
-            sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-test.yml"
-            // sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-test.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
+            // for MSSQL
+            // sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-test.yml 
+            sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-test.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
 			// execute ansible playbook
         }
 
