@@ -20,6 +20,7 @@
     mode: 0775
     group: oinstall
     owner: oracle
+    recurse: true
 
 - name: "Ansible Create directory if not exists"
   file:
