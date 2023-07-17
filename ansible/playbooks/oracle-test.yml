@@ -8,7 +8,7 @@
     vars_files:
        - "../vars/common.yml"
     roles:
-      - {role: oracle-install}
+      - {role: oracle-test}
 
 
 
