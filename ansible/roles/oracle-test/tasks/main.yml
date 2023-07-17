@@ -17,6 +17,13 @@
 - name: "Ansible Create directory if not exists"
   file:
     path: /opt/purestorage
+    mode: 0775
+    group: oinstall
+    owner: oracle
+
+- name: "Ansible Create directory if not exists"
+  file:
+    path: /opt/purestorage
     state: directory
     mode: 0775
     group: oinstall
