@@ -23,7 +23,7 @@ vm_memory = 65536
 os_disk_size = "100"
 data_disk_size = "200"
 datastore_os = "Metro_Cluster1_Prod01"
-datastore_data = "vvOLs-Metro"
+datastore_data = "oraclerman"
 contentlib_name = "SolutionsLab-ContentLib"
 
 
