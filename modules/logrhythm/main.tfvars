@@ -5,7 +5,7 @@ vsphere_user = "administrator@vsphere.local"
 vsphere_password = ""
 
 #common
-osguest_id = "windows9Server64Guest"
+osguest_id = "windows2019srv_64Guest"
 internal_domain = "puretec.purestorage.com"
 vmSubnet = "2210"
 dns_servers = ["10.21.210.28"]
