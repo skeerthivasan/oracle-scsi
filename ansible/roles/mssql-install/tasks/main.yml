@@ -1,8 +1,6 @@
 
 ---
 
-
-
 - name: Initialize additional disks 
   win_initialize_disk:
     disk_number: "{{ item }}"
@@ -185,6 +183,8 @@
 #     Features: "{{ mssql_features }}"
 #     SourcePath: "{{ mssql_installation_path }}"
 #     SQLSysAdminAccounts: "{{ mssql_sysadmin_accounts }}"
+
+#map a SMB share from FB
 
 
 - name: Install SQL Server
