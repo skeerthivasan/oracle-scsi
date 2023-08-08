@@ -45,7 +45,7 @@ pipeline {
 	def workspace = pwd()
 	println "workspace ------${workspace}-----"
 	
-	solname = sol.trim()
+	def solname = sol.trim()
 	def path = workspace + "/" + "modules" + "/" + solname
 	println "path ------${path}-----"
 	dir(path) {
