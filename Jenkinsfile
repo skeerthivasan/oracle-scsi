@@ -45,14 +45,14 @@ pipeline {
 	def workspace = pwd()
 	println "workspace ------${workspace}-----"
 	
-	
-	def path = workspace + "/" + "modules" + "/" + sol.trim()
+	solname = sol.trim()
+	def path = workspace + "/" + "modules" + "/" + solname
 	println "path ------${path}-----"
 	dir(path) {
 
 	    if (params.Build) {
             println "Updating backend file"
-            sh script: "sed -i -e 's/sol_name/"+sol.trim()+"/g' backend.tf"
+            sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
 			println "Executing Infrstructure build step" 
             sh script: "/bin/rm -rf .terraform"
 	        print  "sh script: ${tf_cmd} init -upgrade"
@@ -64,27 +64,27 @@ pipeline {
             def total_count = vm_count.toInteger() + count.toInteger()
             println total_count
             sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
-            sh script: "python3 ../../build-inventory.py " + sol.trim()
+            sh script: "python3 ../../build-inventory.py " + solname
             sh script: "cat hosts.ini"
         }
         if (params.Install) {
 			println "Installing and conifguring the solution"
-            solname = sol.trim()
+            
             println solname
             println "------------------"
-            if solname == 'MSSQL':
-                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-install.yml"
+            if solname == 'MSSQLDC':
+                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + solname.toLowerCase() + "-install.yml"
             else:
                 sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "common.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
-                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-install.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
+                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + solname.toLowerCase() + "-install.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
            
 			
         }
         if (params.Test) {
 			println "Executing Performance step"
             // for MSSQL
-            // sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-test.yml 
-            sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + sol.trim().toLowerCase() + "-test.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
+            // sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + solname.toLowerCase() + "-test.yml 
+            sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + solname.toLowerCase() + "-test.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
 			// execute ansible playbook
         }
 
@@ -93,7 +93,7 @@ pipeline {
                 println "Build already executed in this pipeline" 
             } else {
                 println "Executing Infrstructure destroy step" 
-                sh script: "sed -i -e 's/sol_name/"+sol.trim()+"/g' backend.tf"
+                sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
                 sh script: "${tf_cmd} init -reconfigure"
 			    sh script: "${tf_cmd} destroy -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	+ " -var ansible_key=" + '${SSH_KEY}'	 +	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'	 +	" -var vm_count=" + '${vm_count}'	
             }
