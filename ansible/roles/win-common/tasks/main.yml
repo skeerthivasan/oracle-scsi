@@ -1,10 +1,14 @@
-- name: Map SMB share
-  win_mapped_drive:
-    letter: Z
-    path: \\fileserverdb\packages
-    state: present
-  register: map_drive
+- name: map drive 
+  block:
+    - name: Map SMB share
+      win_mapped_drive:
+        letter: Z
+        path: \\fileserverdb\packages
+        state: present
+      register: mount_drive
 
-- name: print status
-  debug:
-    var: map_drive
+    - name: Reboot the machine with all defaults
+      win_reboot:
+        run_once: true
+      when: 
+        - mount_drive.changed
