@@ -39,7 +39,7 @@
 
 - name: Install  powershell
   win_package:
-    path: Z:\PowerShell-7.3.6-win-x64.msi
+    path: \\fileserverdb\PowerShell-7.3.6-win-x64.msi
     state: present
 
 
