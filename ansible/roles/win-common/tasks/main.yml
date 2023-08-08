@@ -1,5 +1,5 @@
 - name: Map SMB share
   win_mapped_drive:
     letter: Z
-    path: \\fileserverdb.fslab.local\packages_share
+    path: \\fileserverdb.fslab.local\packages
     state: present
