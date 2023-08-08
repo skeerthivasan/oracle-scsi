@@ -3,3 +3,8 @@
     letter: Z
     path: \\fileserverdb\packages
     state: present
+  register: map_drive
+
+- name: print status
+  debug:
+    var: map_drive
