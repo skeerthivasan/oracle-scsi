@@ -6,7 +6,7 @@ vsphere_password = ""
 
 #common
 osguest_id = "windows9Server64Guest"
-internal_domain = "puretec.purestorage.com"
+internal_domain = "fslab.local"
 vmSubnet = "2210"
 dns_servers = ["10.21.210.28"]
 vm_cluster = "MetroCluster1"

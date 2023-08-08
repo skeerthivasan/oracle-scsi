@@ -26,7 +26,7 @@ if sol == 'MSSQL' or 'MSSQLDC':
         fh.write("[win:vars]\n")
         # fh.write("ansible_user=administrator\n")
         # fh.write("ansible_password=VMware1!\n")
-        fh.write("ansible_user=vidm@fslab.local\n")
+        fh.write("ansible_user=vidm@FSLAB.LOCAL\n")
         fh.write("ansible_password=Osmium76$\n")
         fh.write("ansible_connection=winrm\n")
         fh.write("ansible_winrm_server_cert_validation=ignore\n")
