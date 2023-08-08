@@ -74,7 +74,7 @@ pipeline {
             println "------------------"
             if (solname == 'MSSQLDC') {
                 sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "common-win.yml"
-                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + solname.toLowerCase() + "-install.yml"
+                //sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + solname.toLowerCase() + "-install.yml"
             } else {
                 sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "common.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
                 sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + solname.toLowerCase() + "-install.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
