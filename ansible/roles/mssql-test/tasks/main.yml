@@ -34,12 +34,12 @@
 
 - name: Install an DOES
   win_package:
-    path: \\10.21.152.167\packages\DOES.Setup.msi
+    path: Z:\packages\DOES.Setup.msi
     state: present
 
 - name: Install  powershell
   win_package:
-    path: \\10.21.152.167\packages\PowerShell-7.3.5-win-x64.msi
+    path: Z:\packages\PowerShell-7.3.6-win-x64.msi
     state: present
 
 
