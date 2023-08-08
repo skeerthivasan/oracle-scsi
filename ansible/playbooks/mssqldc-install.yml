@@ -1,4 +1,4 @@
 ---
   - hosts:         all
     roles:
-      - {role: mssql-install}
+      - {role: mssqldc-install}
