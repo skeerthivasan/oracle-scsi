@@ -9,6 +9,6 @@
 
     - name: Reboot the machine with all defaults
       win_reboot:
-        run_once: true
+      run_once: true
       when: 
         - mount_drive.changed
