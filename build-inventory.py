@@ -10,6 +10,7 @@ ouput = out.decode('utf-8')
 
 data = json.loads(ouput)
 ips = data['vm_ip']['value']
+names = data['vm_name']['value']
 #filename = 'modules/' + sol +  '/hosts.ini'
 var_filename = 'hosts.yml'
 filename = 'hosts.ini'
@@ -21,8 +22,8 @@ if sol == 'MSSQL' or 'MSSQLDC':
     print(sol)
     with open(filename,'w') as fh:
         fh.write("[win]\n")
-        for ip in ips:
-            fh.write(ip.rstrip() + '\n')
+        for name in names:
+            fh.write(name.rstrip().split('.')[0]+ '.fslab.local' + '\n')
         fh.write("[win:vars]\n")
         # fh.write("ansible_user=administrator\n")
         # fh.write("ansible_password=VMware1!\n")
