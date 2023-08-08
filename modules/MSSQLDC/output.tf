@@ -3,5 +3,5 @@ output "vm_ip" {
 }
 
 output "vm_name" {
-  value = "${module.vm.name}"
+  value = "${module.vm.vm_name}"
 }
