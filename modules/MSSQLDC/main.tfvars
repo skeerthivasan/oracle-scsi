@@ -16,7 +16,7 @@ vm_gateway = "10.21.210.1"
 
 
 #vm 
-vm_count = "1"
+vm_count = "2"
 vm_name = "mssqltest"
 network = "10.21.210.0"
 netmask = "24"
