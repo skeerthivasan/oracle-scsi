@@ -137,6 +137,7 @@ mssql_browsersvc_mode: Automatic
 # Ansible_Admin must be included so that the playbook can make configuration changes post install
 mssql_sysadmin_accounts:
   - "Administrator"
+  - "FSLAB\\vidm"
 
 # Analysis Services Admins (if installed)
 mssql_asadmin_accounts: "{{ mssql_sysadmin_accounts }}"
