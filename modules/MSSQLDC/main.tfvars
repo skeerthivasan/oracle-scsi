@@ -16,13 +16,13 @@ vm_gateway = "10.21.210.1"
 
 
 #vm 
-vm_count = "2"
+vm_count = "1"
 vm_name = "mssqltest"
 network = "10.21.210.0"
 netmask = "24"
 vm_ip = ["10.21.210.22"]
 vmware_os_template = "windows-server-2022-standard-core-v23.07"
-vm_cpus = 20
+vm_cpus = 32
 vm_memory = 65536
 os_disk_size = "300"
 data_disk_size = "600"

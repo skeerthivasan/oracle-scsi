@@ -29,7 +29,7 @@ mssql_userdblogvol_name: "{{ mssql_userdblogmount }}\\data5"
 # values must be divisible by 512
 
 # Max memory to allocate to this instance
-mssql_max_server_memory: 1024
+mssql_max_server_memory: 51200
 
 # Memory to reserve to the OS
 mssql_os_memory_reservation: 512
