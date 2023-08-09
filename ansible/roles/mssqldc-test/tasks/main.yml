@@ -12,7 +12,7 @@
 
 
 - name: create DB
-  win_command: sqlcmd -U "Administrator" -P "VMware!1" -i "C:\db.sql"
+  win_command: sqlcmd -U "Administrator" -P "VMware1!" -i "C:\db.sql"
   register: sqlcmd_out
 
 - name: print result
