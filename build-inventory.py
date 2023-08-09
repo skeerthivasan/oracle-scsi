@@ -34,6 +34,7 @@ if sol == 'MSSQL' or 'MSSQLDC':
         fh.write("ansible_port=5985\n")
         fh.write("ansible_winrm_scheme=http\n")
         fh.write("ansible_winrm_kerberos_delegation=true\n")
+        fh.write("ansible_winrm_transport=kerberos\n")
         
 else:
     with open(filename,'w') as fh:
