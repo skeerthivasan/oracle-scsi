@@ -42,10 +42,10 @@ mssql_total_system_memory: "{{ mssql_max_server_memory + mssql_os_memory_reserva
 mssql_suppress_reboot: False
 
 ### Service Accounts ###
-domain: soln
+domain: fslab
 domain_suffix: local
 mssql_base_ldap_path: "cn=Users,dc={{ domain }},dc={{ domain_suffix }}"
-domain_controller: SOLN-DC01
+domain_controller: 10.21.210.28
 
 # SQL Service Account
 # regex statements used in some steps expect the format of CONTOSO\
