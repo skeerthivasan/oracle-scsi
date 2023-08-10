@@ -9,7 +9,7 @@ osguest_id = "windows9Server64Guest"
 internal_domain = "puretec.purestorage.com"
 vmSubnet = "2210"
 dns_servers = ["10.21.237.250"]
-vm_cluster = "Management-Cluster"
+vm_cluster = "MetroCluster1"
 dc = "SolutionsLab"
 
 vm_gateway = "10.21.210.1"
