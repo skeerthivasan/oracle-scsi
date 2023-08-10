@@ -66,3 +66,6 @@ variable "ansible_key" {
 variable "infoblox_pass" {
   
 }
+variable "vm_folder" {
+  
+}
