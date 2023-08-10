@@ -25,9 +25,9 @@ vmware_os_template = "windows-server-2022-standard-core-v23.07"
 vm_cpus = 16
 vm_memory = 16384
 os_disk_size = "100"
-data_disk_size = "150"
-datastore_os = "FlashStack-Misc"
-datastore_data = "FlashStack-Misc"
+data_disk_size = "500"
+datastore_os = "vvOLs-Metro"
+datastore_data = "vvOLs-Metro"
 winadminpass = "VMware1!"
 contentlib_name = "SolutionsLab-ContentLib"
 
