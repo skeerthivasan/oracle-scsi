@@ -38,3 +38,6 @@ variable "ansible_key" {}
 variable "contentlib_name" {
   
 }
+variable "vm_folder" {
+  
+}

@@ -85,6 +85,7 @@ resource "vsphere_virtual_machine" "vm" {
   firmware = "efi"
   scsi_controller_count = 4
   #scsi_bus_sharing = "physicalSharing"  
+  folder = vm_folder
  
   network_interface {
     network_id   = data.vsphere_network.network.id

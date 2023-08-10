@@ -30,6 +30,7 @@ datastore_os = "vvOLs-Metro"
 datastore_data = "vvOLs-Metro"
 winadminpass = "VMware1!"
 contentlib_name = "SolutionsLab-ContentLib"
+vm_folder = "Jumpboxes"
 
 
 
