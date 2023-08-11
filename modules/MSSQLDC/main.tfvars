@@ -17,7 +17,7 @@ vm_gateway = "10.21.210.1"
 
 #vm 
 vm_count = "4"
-vm_name = "mssql2022-test"
+vm_name = "sql2022"
 network = "10.21.210.0"
 netmask = "24"
 vm_ip = ["10.21.210.22"]
