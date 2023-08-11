@@ -52,6 +52,7 @@
   win_psmodule:
     name: SQLServerDsc
     state: present
+    accept_license: true
 
 - name: Powershell | Check for SqlServer Powershell module
   win_psmodule:
@@ -228,7 +229,7 @@
     SQLSysAdminAccounts: "{{ mssql_sysadmin_accounts }}"
     # Analysis Services Admins (if installed)
     ASSysAdminAccounts: "{{ mssql_asadmin_accounts }}"
-    AcceptLicense: true
+  
     #ProductKey: ""
     
   tags: install_sql
