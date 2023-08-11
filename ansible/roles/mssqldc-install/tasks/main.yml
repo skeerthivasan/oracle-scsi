@@ -58,26 +58,31 @@
   win_psmodule:
     name: SqlServer
     state: present
+    accept_license: true
 
 - name: Powershell | Check for Storage DSC Powershell module
   win_psmodule:
     name: StorageDsc
     state: present
+    accept_license: true
 
 - name: Powershell | Check for ServerManager Powershell module
   win_psmodule:
     name: ServerManager
     state: present
+    accept_license: true
 
 - name: Powershell | Ensure that DBA Tools module is present
   win_psmodule:
     name: dbatools
     state: present
+    accept_license: true
 
 - name: Powershell | Check for xNetworking Powershell module
   win_psmodule:
     name: xNetworking
     state: present
+    accept_license: true
 
 # - name: Windows | Install .NET Framework Core
 #   win_feature:
