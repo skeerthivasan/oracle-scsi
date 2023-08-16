@@ -75,9 +75,12 @@ pipeline {
             if (solname == 'MSSQLDC') {
                 sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "common-win.yml"
                 sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + solname.toLowerCase() + "-install.yml"
-            } else {
+            } 
+            if  (solname == 'Oracle') {
+            }
+            else {
                 sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "common.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
-                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + solname.toLowerCase() + "-install.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
+                sh script: "ansible-playbook -i ../../ansible/inventory/oracle-asm ../../ansible/playbooks/" + solname.toLowerCase() + "-install.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
             }
                 
            
@@ -85,10 +88,7 @@ pipeline {
         }
         if (params.Test) {
 			println "Executing Performance step"
-            // for MSSQL
-            // sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + solname.toLowerCase() + "-test.yml 
             sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + solname.toLowerCase() + "-test.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
-			// execute ansible playbook
         }
 
         if (params.Destroy) {
