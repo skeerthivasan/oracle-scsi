@@ -26,8 +26,8 @@ vm_cpus = 16
 vm_memory = 16384
 os_disk_size = "100"
 data_disk_size = "500"
-datastore_os = "MetroCluster1"
-datastore_data = "MetroCluster1"
+datastore_os = "Metro_Cluster1_Prod01"
+datastore_data = "Metro_Cluster1_Prod01"
 contentlib_name = "SolutionsLab-ContentLib"
 
 
