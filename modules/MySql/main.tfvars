@@ -9,8 +9,8 @@ osguest_id = "rhel8_64Guest"
 internal_domain = "puretec.purestorage.com"
 vmSubnet = "vlan-2210"
 dns_servers = ["10.21.237.250"]
-vm_cluster = "Databases"
-dc = "DBClus"
+vm_cluster = "DBClus"
+dc = "Databases"
 
 vm_gateway = "10.21.210.1"
 
