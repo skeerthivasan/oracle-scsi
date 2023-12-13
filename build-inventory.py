@@ -15,10 +15,10 @@ names = data['vm_name']['value']
 var_filename = 'hosts.yml'
 filename = 'hosts.ini'
 print(filename)
-
+print(sol)
 # check if  the solution is windows
 # prepare the hosts.ini with more details to login 
-if sol == 'MSSQL' or 'MSSQLDC':
+if sol == 'MSSQL': #or 'MSSQLDC':
     print(sol)
     with open(filename,'w') as fh:
         fh.write("[win]\n")
