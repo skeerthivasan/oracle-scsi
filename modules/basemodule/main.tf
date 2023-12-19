@@ -137,11 +137,11 @@ resource "vsphere_virtual_machine" "vm" {
     }
   }
 
-  provisioner "file" {
-    source = "scripts/resizefs.sh"
-    destination = "/home/ansible/resizefs.sh"
+  # provisioner "file" {
+  #   source = "scripts/resizefs.sh"
+  #   destination = "/home/ansible/resizefs.sh"
     
-  }
+  # }
   connection {
     type     = "ssh"
     user     = "ansible"
