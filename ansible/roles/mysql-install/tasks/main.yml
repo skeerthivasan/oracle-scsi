@@ -50,12 +50,12 @@
     name: 'git'
     state: latest
 
-- name: Install pexpect & mysqlclient
-  pip:
-    name: "{{ item }}"
-  with_items:
-    - pexpect
-    - mysqlclient
+# - name: Install pexpect & mysqlclient
+#   pip:
+#     name: "{{ item }}"
+#   with_items:
+#     - pexpect
+#     - mysqlclient
 
 # - name: mysql secure
 #   become: yes
