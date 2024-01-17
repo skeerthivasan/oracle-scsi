@@ -7,20 +7,20 @@ vsphere_password = ""
 #common
 osguest_id = "rhel8_64Guest"
 internal_domain = "puretec.purestorage.com"
-vmSubnet = "2118"
-dns_servers = ["10.21.237.250"]
+vmSubnet = "2210"
+dns_servers = ["10.21.93.16"]
 vm_cluster = "MetroCluster1"
 dc = "SolutionsLab"
 
-vm_gateway = "10.21.118.1"
+vm_gateway = "10.21.210.1"
 
 
 #vm 
 vm_count = "1"
 vm_name = "demo"
-network = "10.21.118.0"
+network = "10.21.210.0"
 netmask = "24"
-vm_ip = ["10.21.118.22"]
+vm_ip = ["10.21.210.22"]
 vmware_os_template = "linux-rhel-8-v23.07"
 vm_cpus = 32
 vm_memory = 65536
