@@ -76,11 +76,11 @@
     state: started
   with_items:
     - percona-xtrabackup-80.x86_64
-    - qpress
-    - https://rpmfind.net/linux/opensuse/distribution/leap/15.4/repo/oss/x86_64/libopenssl1_0_0-1.0.2p-3.49.1.x86_64.rpm
-    - /packages/purestorage_does-3.3.0-1.x86_64.rpm
-    - /packages/mysql_packages/mysql-commercial-backup-8.0.33-1.1.el8.x86_64.rpm
-    - https://repo.percona.com/yum/percona-release-latest.noarch.rpm
+    # # - qpress
+    # - https://rpmfind.net/linux/opensuse/distribution/leap/15.4/repo/oss/x86_64/libopenssl1_0_0-1.0.2p-3.49.1.x86_64.rpm
+    # - /packages/purestorage_does-3.3.0-1.x86_64.rpm
+    # - /packages/mysql_packages/mysql-commercial-backup-8.0.33-1.1.el8.x86_64.rpm
+    # - https://repo.percona.com/yum/percona-release-latest.noarch.rpm
 
 
 
