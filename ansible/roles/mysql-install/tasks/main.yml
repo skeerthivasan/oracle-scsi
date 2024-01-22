@@ -89,6 +89,7 @@
   pip:
     name: "{{ item }}"
   with_items:
+    - gcc
     - pexpect
     - mysqlclient
 
@@ -113,22 +114,37 @@
 #     timeout: 1
 #   register: sec_mysql
 
-- name: Create a new database
-  community.mysql.mysql_db:
-    name: perfdb
-    state: present
-    login_password: "{{ sqlpass }}"
-    #login_unix_socket: /run/mysqld/mysqld.sock
+# - name: Create a new database
+#   community.mysql.mysql_db:
+#     name: perfdb
+#     state: present
+#     login_password: "{{ sqlpass }}"
+#     #login_unix_socket: /run/mysqld/mysqld.sock
 
-- name: Create user with password and grant priv
-  community.mysql.mysql_user:
-    state: present
-    name: does
-    password: "{{ sqlpass }}"
-    login_password: "{{ sqlpass }}"
-    priv:
-      '*.*': 'ALL,GRANT'
-- name: Download rpm
+# - name: Create user with password and grant priv
+#   community.mysql.mysql_user:
+#     state: present
+#     name: does
+#     password: "{{ sqlpass }}"
+#     login_password: "{{ sqlpass }}"
+#     priv:
+#       '*.*': 'ALL,GRANT'
+
+
+- name: create DB
+  shell: mysql -uroot "create database perfdb"
+
+
+- name: create user
+  shell: mysql -uroot "create user 'does'@'%' identified by 'Osmium76'";
+
+- name: password
+  shell: mysql -uroot "grant all on *.* to 'does'@'%'";
+
+
+
+
+- name: run DOES data ingestion
   shell: /opt/purestorage/does/DOES.Cli --engine data --function add --databasetype MySQL --databasename perfdb --username does --password Osmium76 --amount 1 --unit Gigabytes --numberofthreads 12 --hostname {{ ansible_default_ipv4.address }} --folder /packages/datafiles/data
 
 # - name: Download rpm
