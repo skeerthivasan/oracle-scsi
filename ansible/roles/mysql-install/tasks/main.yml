@@ -47,8 +47,6 @@
     - mysql
  #   - python-mysql
     - mysql-devel
-    - sysstat
-    - nfs-utils
     - /packages/mysql_packages/mysql-commercial-backup-8.0.33-1.1.el8.x86_64.rpm
     - https://repo.percona.com/yum/percona-release-latest.noarch.rpm
     
