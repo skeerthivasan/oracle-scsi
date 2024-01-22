@@ -13,7 +13,7 @@ exporter_group: "prometheus"
 node_exporter_dir_conf: /etc/node_exporter
 mysql_exporter_dir_conf: /etc/mysql_exporter
 postgres_exporter_dir_conf: /etc/postgres_exporter
-sqlpass: ""
+sqlpass: "Osmium76"
 postgrespass: ""
 postgres_db_name: postgresdbapp
 postgresdb_user: dbuser

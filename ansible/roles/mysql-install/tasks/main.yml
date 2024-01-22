@@ -79,7 +79,7 @@
     - percona-xtrabackup-80.x86_64
     - qpress
     - https://rpmfind.net/linux/opensuse/distribution/leap/15.4/repo/oss/x86_64/libopenssl1_0_0-1.0.2p-3.49.1.x86_64.rpm
-    - /packages/purestorage_does-3.3.0-1.x86_64.rpm
+    - /packages/purestorage_does-3.3.4-1.x86_64.rpm
     - /packages/mysql_packages/mysql-commercial-backup-8.0.33-1.1.el8.x86_64.rpm
     - https://repo.percona.com/yum/percona-release-latest.noarch.rpm
 
@@ -113,21 +113,23 @@
 #     timeout: 1
 #   register: sec_mysql
 
-# - name: Create a new database
-#   community.mysql.mysql_db:
-#     name: testing
-#     state: present
-#     login_password: "{{ sqlpass }}"
-#     #login_unix_socket: /run/mysqld/mysqld.sock
+- name: Create a new database
+  community.mysql.mysql_db:
+    name: perfdb
+    state: present
+    login_password: "{{ sqlpass }}"
+    #login_unix_socket: /run/mysqld/mysqld.sock
 
-# - name: Create user with password and grant priv
-#   community.mysql.mysql_user:
-#     state: present
-#     name: dbtest
-#     password: "{{ sqlpass }}"
-#     login_password: "{{ sqlpass }}"
-#     priv:
-#       'testing.*': 'ALL,GRANT'
+- name: Create user with password and grant priv
+  community.mysql.mysql_user:
+    state: present
+    name: does
+    password: "{{ sqlpass }}"
+    login_password: "{{ sqlpass }}"
+    priv:
+      '*.*': 'ALL,GRANT'
+- name: Download rpm
+  shell: /opt/purestorage/does/DOES.Cli --engine data --function add --databasetype MySQL --databasename perfdb --username does --password Osmium76 --amount 1 --unit Gigabytes --numberofthreads 12 --hostname {{ ansible_default_ipv4.address }} --folder /packages/datafiles/data
 
 # - name: Download rpm
 #   shell: curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.rpm.sh | sudo bash ; yum -y install sysbench
