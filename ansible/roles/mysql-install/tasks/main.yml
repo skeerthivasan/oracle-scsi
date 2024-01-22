@@ -132,7 +132,7 @@
 
 
 - name: create DB
-  shell: mysql -uroot "create database perfdb"
+  shell: mysql -uroot "create database perfdb";
 
 
 - name: create user
