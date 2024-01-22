@@ -48,6 +48,7 @@
     - mysql
  #   - python-mysql
     - mysql-devel
+    - git
 
     
 
@@ -60,14 +61,6 @@
   with_items:
     - mysqld
     - sysstat-collect
-
-- name: enable-percona
-  shell: percona-release enable-only tools release
-
-- name: install git
-  dnf:
-    name: 'git'
-    state: latest
 
 
 - name: install percona and does packages
@@ -83,6 +76,9 @@
     - /packages/mysql_packages/mysql-commercial-backup-8.0.33-1.1.el8.x86_64.rpm
     - https://repo.percona.com/yum/percona-release-latest.noarch.rpm
 
+
+- name: enable-percona
+  shell: percona-release enable-only tools release
 
 
 # - name: Install pexpect & mysqlclient
