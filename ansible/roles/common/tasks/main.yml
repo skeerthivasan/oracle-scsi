@@ -30,6 +30,7 @@
     name: 
       - sysstat
       - dstat
+      - nfs-utils
 
 - name: create sysstat config directory
   file:
