@@ -7,7 +7,7 @@
     vars_files:
        - "../vars/common.yml"
     roles:
-      - {role: mysql-install}
+      # - {role: mysql-install}
       - {role: mysql-exporter}
 
 
