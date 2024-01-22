@@ -54,7 +54,10 @@
 
 
 
-
+- name: install PyMySQL using pip
+  pip:
+    name: PyMySQL
+    
 - name: Create user with password and grant priv
   community.mysql.mysql_user:
     state: present
