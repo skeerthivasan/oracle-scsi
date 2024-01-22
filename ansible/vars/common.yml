@@ -1,7 +1,7 @@
 yumrepo_server:         "10.21.152.167"
 ntp_server: ""
 node_exporter_version: "1.5.0"
-mysql_exporter_version: "0.14.0"
+mysql_exporter_version: "0.15.0"
 postgres_exporter_version: "0.12.0"
 win_node_exporter_version: "0.20.0"
 sql_exporter_version: "0.5"
