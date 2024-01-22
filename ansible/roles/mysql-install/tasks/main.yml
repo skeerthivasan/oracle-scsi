@@ -42,6 +42,7 @@
   package:
     name: "{{ item }}"
     state: latest
+    disable_gpg_check: yes
   with_items:
     - mysql-server
     - mysql
