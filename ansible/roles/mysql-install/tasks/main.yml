@@ -3,13 +3,22 @@
     fstype: ext4
     dev: /dev/sdb
 
-- name: create mount directory
+- name: create directory
   file:
-    path: '/var/lib/'
+    path: "{{ item }}"
     state: directory
     mode: '0755'
   with_items:
-    - mysql
+  - /packages
+  - /var/lib/mysql
+
+- name: mount FS
+  mount:
+    path: /packages
+    src: 10.21.126.232:/packages
+    fstype: nfs
+    state: mounted
+
 
 - name: Mount migration volume
   mount:
@@ -38,17 +47,42 @@
     - mysql
  #   - python-mysql
     - mysql-devel
+    - sysstat
+    - nfs-utils
+    - /packages/mysql_packages/mysql-commercial-backup-8.0.33-1.1.el8.x86_64.rpm
+    - https://repo.percona.com/yum/percona-release-latest.noarch.rpm
+    
+
 
 
 - name: start mysql service
   systemd:
-    name: mysqld
+    name: "{{ item }}"
     state: started
+  with_items:
+    - mysqld
+    - sysstat-collect
+
+- name: enable-percona
+  shell: percona-release enable-only tools release
 
 - name: install git
   dnf:
     name: 'git'
     state: latest
+
+
+- name: install percona and does packages
+  systemd:
+    name: "{{ item }}"
+    state: started
+  with_items:
+    - percona-xtrabackup-80.x86_64
+    - qpress
+    - https://rpmfind.net/linux/opensuse/distribution/leap/15.4/repo/oss/x86_64/libopenssl1_0_0-1.0.2p-3.49.1.x86_64.rpm
+    - purestorage_does-3.3.0-1.x86_64.rpm
+
+
 
 # - name: Install pexpect & mysqlclient
 #   pip:
@@ -78,21 +112,21 @@
 #     timeout: 1
 #   register: sec_mysql
 
-- name: Create a new database
-  community.mysql.mysql_db:
-    name: testing
-    state: present
-    login_password: "{{ sqlpass }}"
-    #login_unix_socket: /run/mysqld/mysqld.sock
+# - name: Create a new database
+#   community.mysql.mysql_db:
+#     name: testing
+#     state: present
+#     login_password: "{{ sqlpass }}"
+#     #login_unix_socket: /run/mysqld/mysqld.sock
 
-- name: Create user with password and grant priv
-  community.mysql.mysql_user:
-    state: present
-    name: dbtest
-    password: "{{ sqlpass }}"
-    login_password: "{{ sqlpass }}"
-    priv:
-      'testing.*': 'ALL,GRANT'
+# - name: Create user with password and grant priv
+#   community.mysql.mysql_user:
+#     state: present
+#     name: dbtest
+#     password: "{{ sqlpass }}"
+#     login_password: "{{ sqlpass }}"
+#     priv:
+#       'testing.*': 'ALL,GRANT'
 
 # - name: Download rpm
 #   shell: curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.rpm.sh | sudo bash ; yum -y install sysbench
