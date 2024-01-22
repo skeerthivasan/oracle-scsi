@@ -132,14 +132,14 @@
 
 
 - name: create DB
-  shell: mysql -uroot "create database perfdb";
+  shell: mysql -uroot -e "create database perfdb";
 
 
 - name: create user
-  shell: mysql -uroot "create user 'does'@'%' identified by 'Osmium76'";
+  shell: mysql -uroot -e "create user 'does'@'%' identified by 'Osmium76'";
 
 - name: password
-  shell: mysql -uroot "grant all on *.* to 'does'@'%'";
+  shell: mysql -uroot -e "grant all on *.* to 'does'@'%'";
 
 
 
