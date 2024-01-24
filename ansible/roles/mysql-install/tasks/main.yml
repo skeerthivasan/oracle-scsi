@@ -156,7 +156,7 @@
 
 
 - name: run DOES data ingestion
-  shell: /opt/purestorage/does/DOES.Cli --engine data --function add --databasetype MySQL --databasename perfdb --username does --password Osmium76 --amount 10 --unit Gigabytes --numberofthreads 12 --hostname {{ ansible_default_ipv4.address }} --folder /packages/datafiles/data
+  shell: /opt/purestorage/does/DOES.Cli --engine data --function add --databasetype MySQL --databasename perfdb --username does --password Osmium76 --amount 1 --unit Terabytes --numberofthreads 12 --hostname {{ ansible_default_ipv4.address }} --folder /packages/datafiles/data
 
 # - name: Download rpm
 #   shell: curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.rpm.sh | sudo bash ; yum -y install sysbench
