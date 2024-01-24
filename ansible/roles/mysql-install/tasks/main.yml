@@ -11,6 +11,8 @@
   with_items:
   - /packages
   - /var/lib/mysql
+  - /mysqlbackup
+  - /mysqlbackup_fae
 
 - name: mount FS
   mount:
@@ -19,6 +21,19 @@
     fstype: nfs
     state: mounted
 
+- name: mount FS mysqlbackup
+  mount:
+    path: /mysqlbackup
+    src: 10.21.220.225:/mysqlbackup
+    fstype: nfs
+    state: mounted
+
+- name: mount FS mysqlbackup_fae
+  mount:
+    path: /mysqlbackup_fae
+    src: 10.21.126.36:/mysqlbackup
+    fstype: nfs
+    state: mounted
 
 - name: Mount migration volume
   mount:
