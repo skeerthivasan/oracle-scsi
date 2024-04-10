@@ -9,8 +9,8 @@ osguest_id = "windows9Server64Guest"
 internal_domain = "puretec.purestorage.com"
 vmSubnet = "2210"
 dns_servers = ["10.21.237.250"]
-vm_cluster = "MShared Management Cluster"
-dc = "Shared Cluster"
+vm_cluster = "Shared Cluster"
+dc = "Shared Management Cluster"
 
 vm_gateway = "10.21.210.1"
 
@@ -29,7 +29,7 @@ data_disk_size = "500"
 datastore_os = "sn1-x70-d08-21-vm-infra-vol"
 datastore_data = "sn1-x70-d08-21-vm-infra-vol"
 winadminpass = "VMware1!"
-contentlib_name = "SolutionsLab-ContentLib"
+contentlib_name = "Shared-vCenter-ContentLib"
 vm_folder = "Unni-VMs"
 
 
