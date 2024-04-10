@@ -6,7 +6,7 @@ pipeline {
     parameters {
         choice(choices: ['MySql','MSSQL', 'MSSQLDC', 'Postgres', 'Oracle','winjump','logrhythm','syslog','qradar','demo','util','k8s'], description: 'Select the Solution to build', name: 'solution')
         string(name: 'count', defaultValue: "0", description: 'Number of VMs')
-        choice(choices: ['fsvc', 'vc3'], description: 'Select the VC to use', name: 'vcenter')
+        choice(choices: ['fsvc', 'shared-vc'], description: 'Select the VC to use', name: 'vcenter')
         booleanParam(name: 'Build', defaultValue: false, description: 'Build Intrastructure')
         booleanParam(name: 'Install', defaultValue: false, description: 'Install and configure solution')
 	    booleanParam(name: 'Test', defaultValue: false, description: 'Run the performance test')
