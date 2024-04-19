@@ -8,7 +8,7 @@ vsphere_password = ""
 osguest_id = "windows9Server64Guest"
 internal_domain = "puretec.purestorage.com"
 vmSubnet = "VLAN-2210"
-dns_servers = ["10.21.237.250"]
+dns_servers = ["10.21.93.16"]
 vm_cluster = "Shared Cluster"
 dc = "Shared Management Cluster"
 
@@ -16,7 +16,7 @@ vm_gateway = "10.21.210.1"
 
 
 #vm 
-vm_count = "1"
+vm_count = "2"
 vm_name = "win-jump"
 network = "10.21.210.0"
 netmask = "24"
