@@ -9,8 +9,8 @@ osguest_id = "ubuntu64Guest"
 internal_domain = "puretec.purestorage.com"
 vmSubnet = "2210"
 dns_servers = ["10.21.93.16"]
-vm_cluster = "MetroCluster1"
-dc = "SolutionsLab"
+vm_cluster = "Shared Cluster"
+dc = "Shared Management Cluster"
 
 vm_gateway = "10.21.210.1"
 
@@ -26,9 +26,9 @@ vm_cpus = 32
 vm_memory = 131072
 os_disk_size = "250"
 data_disk_size = "50"
-datastore_os = "Metro_Cluster1_Prod01"
-datastore_data = "Metro_Cluster1_Prod01"
-contentlib_name = "SolutionsLab-ContentLib"
+datastore_os = "sn1-x70-d08-21-vm-infra-vol"
+datastore_data = "sn1-x70-d08-21-vm-infra-vol"
+contentlib_name = "Shared-vCenter-ContentLib"
 
 
 
