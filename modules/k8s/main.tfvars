@@ -1,6 +1,6 @@
 
 
-vsphere_server = "flashstack-vcenter.puretec.purestorage.com"
+vsphere_server = "vcenter-shared.puretec.purestorage.com"
 vsphere_user = "administrator@vsphere.local"
 vsphere_password = ""
 
@@ -16,7 +16,7 @@ vm_gateway = "10.21.210.1"
 
 
 #vm 
-vm_count = "4"
+vm_count = "2"
 vm_name = "kube"
 network = "10.21.210.0"
 netmask = "24"
