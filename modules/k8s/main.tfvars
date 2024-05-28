@@ -7,7 +7,7 @@ vsphere_password = ""
 #common
 osguest_id = "ubuntu64Guest"
 internal_domain = "puretec.purestorage.com"
-vmSubnet = "2210"
+vmSubnet = "VLAN-2210"
 dns_servers = ["10.21.93.16"]
 vm_cluster = "Shared Cluster"
 dc = "Shared Management Cluster"
