@@ -28,6 +28,7 @@ os_disk_size = "300"
 data_disk_size = "600"
 datastore_os = "vvOLs-Metro"
 datastore_data = "vvOLs-Metro"
+datastore_data2 = "vvOLs-Metro"
 winadminpass = "VMware1!"
 contentlib_name = "SolutionsLab-ContentLib"
 

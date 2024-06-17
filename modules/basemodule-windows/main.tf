@@ -28,6 +28,11 @@ data "vsphere_datastore" "datastore_data" {
   datacenter_id = data.vsphere_datacenter.datacenter.id
 }
 
+data "vsphere_datastore" "datastore_data2" {
+  name = var.datastore_data
+  datacenter_id = data.vsphere_datacenter.datacenter.id
+}
+
 data "vsphere_resource_pool" "pool" {
   name          = "${var.cluster}/Resources"
   datacenter_id = data.vsphere_datacenter.datacenter.id
@@ -43,10 +48,10 @@ data "vsphere_network" "network" {
   datacenter_id = data.vsphere_datacenter.datacenter.id
 }
 
-# data "vsphere_virtual_machine" "template" {
-#   name = var.vmware_os_template
-#   datacenter_id = data.vsphere_datacenter.datacenter.id
-# }
+data "vsphere_host" "esx1" {
+  name = "fs-metclus1-esxi01.puretec.purestorage.com"
+  datacenter_id = data.vsphere_datacenter.datacenter.id
+}
 
 # Data source for vCenter Content Library
 data "vsphere_content_library" "my_content_library" {
@@ -78,6 +83,7 @@ resource "vsphere_virtual_machine" "vm" {
   name    = trimsuffix( format("%s-%d.${var.internal_domain}",var.vm_name,count.index +1),"." )
   resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = data.vsphere_datastore.datastore_os.id
+  host_system_id       = data.vsphere_host.esx1.id
   num_cpus = var.vm_cpus
   memory   = var.vm_memory
   num_cores_per_socket = 2
@@ -103,40 +109,18 @@ resource "vsphere_virtual_machine" "vm" {
 
     size        = var.data_disk_size
     datastore_id = data.vsphere_datastore.datastore_data.id
-    unit_number = 14
+    unit_number = 1
   }
 
   disk {
     label = "DATA-DISK2"
 
     size        = var.data_disk_size
-    datastore_id = data.vsphere_datastore.datastore_data.id
-    unit_number = 15
+    datastore_id = data.vsphere_datastore.datastore_data2.id
+    unit_number = 2
   }
 
-  disk {
-    label = "DATA-DISK3"
-
-    size        = var.data_disk_size
-    datastore_id = data.vsphere_datastore.datastore_data.id
-    unit_number = 30
-  }
-
-  disk {
-    label = "DATA-DISK4"
-
-    size        = var.data_disk_size
-    datastore_id = data.vsphere_datastore.datastore_data.id
-    unit_number = 45
-  }
-
-  disk {
-    label = "DATA-DISK5"
-
-    size        = var.data_disk_size
-    datastore_id = data.vsphere_datastore.datastore_data.id
-    unit_number = 46
-  }
+  
 
   clone {
     
