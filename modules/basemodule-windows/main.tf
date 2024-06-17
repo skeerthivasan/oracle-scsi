@@ -83,7 +83,7 @@ resource "vsphere_virtual_machine" "vm" {
   name    = trimsuffix( format("%s-%d.${var.internal_domain}",var.vm_name,count.index +1),"." )
   resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = data.vsphere_datastore.datastore_os.id
-  host_system_id       = data.vsphere_host.esx1.id
+  #host_system_id       = data.vsphere_host.esx1.id
   num_cpus = var.vm_cpus
   memory   = var.vm_memory
   num_cores_per_socket = 2
