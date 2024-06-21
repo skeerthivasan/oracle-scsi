@@ -7,7 +7,7 @@ vsphere_password = ""
 #common
 osguest_id = "rhel8_64Guest"
 internal_domain = "puretec.purestorage.com"
-vmSubnet = "2210"
+vmSubnet = "MGMT_2210"
 dns_servers = ["10.21.93.16"]
 vm_cluster = "Backup-Analytic03"
 dc = "SolutionsLab"
