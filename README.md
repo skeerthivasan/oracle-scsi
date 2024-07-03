@@ -53,3 +53,8 @@ Follow the steps in the specified order to add Ansible playbooks/roles::
 
         
 
+Oracle install 
+
+export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3.6
+
+remount /tmp without noexec
