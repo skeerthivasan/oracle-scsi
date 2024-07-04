@@ -7,18 +7,18 @@ vsphere_password = ""
 #common
 osguest_id = "ubuntu64Guest"
 internal_domain = "puretec.purestorage.com"
-vmSubnet = "2210"
+vmSubnet = "2118"
 dns_servers = ["10.21.210.98"]
 vm_cluster = "MetroCluster1"
 dc = "SolutionsLab"
 
-vm_gateway = "10.21.210.1"
+vm_gateway = "10.21.118.1"
 
 
 #vm 
 vm_count = "1"
 vm_name = "superna-linux"
-network = "10.21.210.0"
+network = "10.21.118.0"
 netmask = "24"
 vm_ip = ["10.21.210.22"]
 vmware_os_template = "linux-ubuntu-22.04lts-v24.02"
