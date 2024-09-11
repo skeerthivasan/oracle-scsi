@@ -16,7 +16,7 @@ vm_gateway = "10.21.118.1"
 
 
 #vm 
-vm_count = "2"
+vm_count = "1"
 vm_name = "superna-win"
 network = "10.21.210.0"
 netmask = "24"
