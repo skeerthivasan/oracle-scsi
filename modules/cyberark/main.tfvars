@@ -12,7 +12,7 @@ dns_servers = ["10.21.210.98"]
 vm_cluster = "MetroCluster1"
 dc = "SolutionsLab"
 
-vm_gateway = "10.21.118.1"
+vm_gateway = "10.21.210.1"
 
 
 #vm 
@@ -20,7 +20,7 @@ vm_count = "1"
 vm_name = "cyberark-win"
 network = "10.21.210.0"
 netmask = "24"
-vm_ip = ["10.21.118.22"]
+vm_ip = ["10.21.210.22"]
 vmware_os_template = "windows-server-2022-standard-core-v23.07"
 vm_cpus = 16
 vm_memory = 16384
