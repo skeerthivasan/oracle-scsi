@@ -28,12 +28,12 @@
 #     fstype: nfs
 #     state: mounted
 
-- name: mount FS mysqlbackup_fae
-  mount:
-    path: /mysqlbackup_fae
-    src: 10.21.126.36:/mysqlbackup
-    fstype: nfs
-    state: mounted
+# - name: mount FS mysqlbackup_fae
+#   mount:
+#     path: /mysqlbackup_fae
+#     src: 10.21.126.36:/mysqlbackup
+#     fstype: nfs
+#     state: mounted
 
 - name: Mount migration volume
   mount:
