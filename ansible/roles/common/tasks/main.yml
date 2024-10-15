@@ -1,22 +1,22 @@
-# - name: 'Remove default repo file'
-#   file:
-#     path: '/etc/yum.repos.d/{{ item }}'
-#     state: absent
-#   with_items:
-#     - redhat.repo
+- name: 'Remove default repo file'
+  file:
+    path: '/etc/yum.repos.d/{{ item }}'
+    state: absent
+  with_items:
+    - redhat.repo
 
-# - name: 'Add yum repo RHEL8'
-#   template:
-#     src: '{{ item.src}}'
-#     dest: '/etc/yum.repos.d/{{ item.dest}}'
-#     owner: root
-#     group: root
-#     mode: 0640
-#   when: 'ansible_distribution == "RedHat" and ansible_distribution_major_version == ''8'''
-#   with_items:
-#     -
-#       src: rhel8-repo.j2
-#       dest: rhel8-local.repo
+- name: 'Add yum repo RHEL8'
+  template:
+    src: '{{ item.src}}'
+    dest: '/etc/yum.repos.d/{{ item.dest}}'
+    owner: root
+    group: root
+    mode: 0640
+  when: 'ansible_distribution == "RedHat" and ansible_distribution_major_version == ''8'''
+  with_items:
+    -
+      src: rhel8-repo.j2
+      dest: rhel8-local.repo
 
 # - name: install epel repo
 #   dnf:
