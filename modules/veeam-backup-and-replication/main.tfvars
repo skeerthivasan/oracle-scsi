@@ -17,13 +17,13 @@ vm_gateway = "10.21.210.1"
 
 #vm 
 vm_count = "1"
-vm_name = "mysql"
+vm_name = "veem_backup_and_replicaiton_setup"
 network = "10.21.210.0"
 netmask = "24"
 vm_ip = ["10.21.210.22"]
 #vmware_os_template = "linux-rocky-8-v24.09"
 #vmware_os_template = "linux-ubuntu-22.04-lts-v23.01"
-vmware_os_template = "linux-rhel-8-v23.07"
+vmware_os_template = "windows-server-2022-standard-core-v23.07"
 #vm_cpus = 32
 vm_cpus = 4
 vm_memory = 65536
