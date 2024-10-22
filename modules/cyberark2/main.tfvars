@@ -17,14 +17,14 @@ vm_gateway = "10.21.210.1"
 
 #vm 
 vm_count = "1"
-vm_name = "cyberark-vault"
+vm_name = "cyberark-bkp"
 network = "10.21.210.0"
 netmask = "24"
 vm_ip = ["10.21.210.22"]
 vmware_os_template = "windows-server-2022-standard-core-v23.07"
 vm_cpus = 16
 vm_memory = 16384
-os_disk_size = "100"
+os_disk_size = "150"
 data_disk_size = "500"
 datastore_os = "Metro_Cluster1_Prod01"
 datastore_data = "Metro_Cluster1_Prod01"
