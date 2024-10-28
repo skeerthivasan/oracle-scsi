@@ -77,6 +77,7 @@ pipeline {
                 sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + solname.toLowerCase() + "-install.yml"
             } 
             if  (solname == 'Oracle') {
+                sh script: "cd /root/Oracle-build/ansible;export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3.6;ansible-playbook -i inventory-asm-demo -e hostgroup=dbfs  playbooks/single-instance-asm.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
             }
             else {
                 sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "common.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
