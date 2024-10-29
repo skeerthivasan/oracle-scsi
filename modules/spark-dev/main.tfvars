@@ -16,16 +16,16 @@ vm_gateway = "10.21.210.1"
 
 
 #vm 
-vm_count = "3"
+vm_count = "2"
 vm_name = "spark-dev"
 network = "10.21.210.0"
 netmask = "24"
 vm_ip = ["10.21.210.22"]
 vmware_os_template = "linux-ubuntu-22.04lts-v24.02"
-vm_cpus = 16
-vm_memory = 16384
+vm_cpus = 96
+vm_memory = 271360
 os_disk_size = "100"
-data_disk_size = "500"
+data_disk_size = "1500"
 datastore_os = "sn1-x70-d08-21-vm-infra-vol"
 datastore_data = "sn1-x70-d08-21-vm-infra-vol"
 contentlib_name = "Shared-vCenter-ContentLib"
