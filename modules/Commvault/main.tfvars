@@ -1,5 +1,3 @@
-
-
 vsphere_server = "flashstack-vcenter.puretec.purestorage.com"
 vsphere_user = "administrator@vsphere.local"
 vsphere_password = ""

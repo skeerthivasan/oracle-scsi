@@ -1,5 +1,5 @@
 module "vm" {
-    source = "../basemodule"
+    source = "../basemodule-windows-1disk"
     vmware_os_template               = var.vmware_os_template
     osguest_id                       = var.osguest_id
     internal_domain                  = var.internal_domain
@@ -19,5 +19,8 @@ module "vm" {
     datastore_os                     = var.datastore_os
     datastore_data                   = var.datastore_data
     dc                               = var.dc
+    winadminpass                     = var.winadminpass
+    contentlib_name                  = var.contentlib_name
     ansible_key                      = var.ansible_key
+    vm_folder                        = var.vm_folder
 }

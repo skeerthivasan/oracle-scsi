@@ -20,7 +20,7 @@ provider "vsphere" {
   vsphere_server = var.vsphere_server
   user           = var.vsphere_user
   password       = var.vsphere_password
-
+  #password = data.vault_generic_secret.vcpass.data["tfuser"]
   allow_unverified_ssl = true
 }
 

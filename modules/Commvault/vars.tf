@@ -53,10 +53,19 @@ variable "datastore_data" {
 variable "dc" {
   
 }
-variable "ansible_key" {
-  
-}
-variable "infoblox_pass" {
+variable "winadminpass" {
   
 }
 
+variable "contentlib_name" {}
+
+variable "ansible_key" {
+  
+}
+
+variable "infoblox_pass" {
+  
+}
+variable "vm_folder" {
+  
+}
