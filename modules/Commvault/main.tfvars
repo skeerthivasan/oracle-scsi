@@ -1,38 +1,36 @@
 
 
-vsphere_server = "10.21.199.130"
+vsphere_server = "flashstack-vcenter.puretec.purestorage.com"
 vsphere_user = "administrator@vsphere.local"
 vsphere_password = ""
 
 #common
-osguest_id = "rhel8_64Guest"
+osguest_id = "windows9Server64Guest"
 internal_domain = "puretec.purestorage.com"
-vmSubnet = "Infra-VLAN2199"
-dns_servers = ["10.21.93.16"]
-vm_cluster = "Infra cluster"
-dc = "DP Test Bed"
+vmSubnet = "2237"
+dns_servers = ["10.21.210.98"]
+vm_cluster = "MetroCluster1"
+dc = "SolutionsLab"
 
-vm_gateway = "10.21.199.1"
+vm_gateway = "10.21.237.1"
 
 
 #vm 
 vm_count = "1"
-vm_name = "cvlt-test-vm"
-network = "10.21.199.0"
+vm_name = "smt-win"
+network = "10.21.237.0"
 netmask = "24"
-vm_ip = ["10.21.199.173"]
-vmware_os_template = "rhel8_packer11082022"
-vm_cpus = 4
-vm_memory = 8192
-
+vm_ip = ["10.21.237.22"]
+vmware_os_template = "windows-server-2022-standard-core-v23.07"
+vm_cpus = 8
+vm_memory = 16384
 os_disk_size = "100"
-data_disk_size = "10"
-datastore_os = "DP-test-bed-infra-DS"
-datastore_data = "DP-test-bed-infra-DS"
-
-
-
-
+data_disk_size = "500"
+datastore_os = "Metro_Cluster1_Prod01"
+datastore_data = "Metro_Cluster1_Prod01"
+winadminpass = "VMware1!"
+contentlib_name = "SolutionsLab-ContentLib"
+vm_folder = "Unni-VMs"
 
 
 
