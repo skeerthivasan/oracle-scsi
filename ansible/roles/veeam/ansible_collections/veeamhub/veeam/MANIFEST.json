@@ -1,0 +1,48 @@
+{
+ "collection_info": {
+  "namespace": "veeamhub",
+  "name": "veeam",
+  "version": "2.2.3",
+  "authors": [
+   "Chris Arceneaux (https://www.arsano.ninja/)",
+   "Markus Kraus (https://mycloudrevolution.com/)"
+  ],
+  "readme": "readme_galaxy.md",
+  "tags": [
+   "application",
+   "veeam",
+   "availability",
+   "suite",
+   "backup",
+   "replication",
+   "enterprise",
+   "manager",
+   "one",
+   "server",
+   "system",
+   "backup",
+   "vbr",
+   "vem",
+   "em"
+  ],
+  "description": "Administer Veeam Software",
+  "license": [],
+  "license_file": "LICENSE",
+  "dependencies": {
+   "ansible.windows": "2.2.0",
+   "community.windows": "2.1.0"
+  },
+  "repository": "https://github.com/VeeamHub/veeam-ansible",
+  "documentation": null,
+  "homepage": null,
+  "issues": "https://github.com/VeeamHub/veeam-ansible/issues"
+ },
+ "file_manifest_file": {
+  "name": "FILES.json",
+  "ftype": "file",
+  "chksum_type": "sha256",
+  "chksum_sha256": "4f14bc412415283d08aac7bcc58b0db8d7db0226f7d7e9748c9705eec396db41",
+  "format": 1
+ },
+ "format": 1
+}
