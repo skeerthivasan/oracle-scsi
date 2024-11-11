@@ -16,8 +16,8 @@ vm_gateway = "10.21.210.1"
 
 
 #vm 
-vm_count = "1"
-vm_name = "veeam-linuxubuntu"
+vm_count = "3"
+vm_name = "veeam-linux-server"
 network = "10.21.210.0"
 netmask = "24"
 vm_ip = ["10.21.210.22"]
