@@ -1,0 +1,22 @@
+- name: Veeam Backup & Replication Install
+  tasks:
+    - name: reboot the node
+      ansible.windows.win_reboot:
+
+    - name: Wait until Windows machine is not reachable
+      ansible.builtin.wait_for:
+        port: 5986  # WinRM default port (change if different)
+        state: drained
+        timeout: 300  # Wait up to 5 minutes
+      delegate_to: localhost
+
+    - name: ping the node
+      win_ping: 
+
+    - include_role:
+        name: veeamhub.veeam.veeam_vas
+        tasks_from: vbr_install
+      vars:
+        version: "12"
+        iso_download: true
+        sql_authentication: 1
