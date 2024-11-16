@@ -52,7 +52,7 @@ pipeline {
 	dir(path) {
 
 	    if (params.Build) {
-              if (solname != 'veeam') {
+              if (solname != 'MSSQL') {
             	println "Updating backend file"
             	sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
 			println "Executing Infrstructure build step" 
