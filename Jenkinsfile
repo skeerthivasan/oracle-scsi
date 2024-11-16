@@ -70,7 +70,7 @@ pipeline {
             	sh script: "cat hosts.ini"
 
 	   } else {
-
+            	println  "Setting Veeam Setup VM"
 		solname = "veeam-setup"
                 path = workspace + "/" + "modules" + "/" + solname
 		println "path ------${path}-----"
@@ -92,6 +92,7 @@ pipeline {
 
 
 
+            	println  "Setting Veeam Windows BackUp Proxy Server"
 		solname = "veeam-windows-backupproxy-server"
                 path = workspace + "/" + "modules" + "/" + solname
 		println "path ------${path}-----"
@@ -111,6 +112,7 @@ pipeline {
             	sh script: "python3 ../../build-inventory.py " + solname
             	sh script: "cat hosts.ini"
 
+            	println  "Setting Veeam Linux BackUp Proxy Server"
 		solname = "veeam-linux-backupproxy-server"
                 path = workspace + "/" + "modules" + "/" + solname
 		println "path ------${path}-----"
