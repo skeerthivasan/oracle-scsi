@@ -64,9 +64,28 @@ pipeline {
             println vm_count
             def total_count = vm_count.toInteger() + count.toInteger()
             println total_count
-            sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
-            sh script: "python3 ../../build-inventory.py " + solname
-            sh script: "cat hosts.ini"
+            if (solname != 'veeam') {
+	        path = workspace + "/" + "modules" + "/" + veeam-setup
+            	sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
+            	sh script: "python3 ../../build-inventory.py " + solname
+            	sh script: "cat hosts.ini"
+	   } else {
+            	sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
+            	sh script: "python3 ../../build-inventory.py " + solname
+            	sh script: "cat hosts.ini"
+
+		# create veaam windows backproxy server
+	        path = workspace + "/" + "modules" + "/" + veeam-windows-backproxy
+            	sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
+            	sh script: "python3 ../../build-inventory.py " + solname
+            	sh script: "cat hosts.ini"
+
+		# create veaam linux backproxy server
+	        path = workspace + "/" + "modules" + "/" + veeam-linux-backproxy
+            	sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
+            	sh script: "python3 ../../build-inventory.py " + solname
+            	sh script: "cat hosts.ini"
+	   }
         }
         if (params.Install) {
 			println "Installing and conifguring the solution"

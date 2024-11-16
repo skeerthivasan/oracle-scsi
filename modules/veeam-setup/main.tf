@@ -24,3 +24,4 @@ module "vm" {
     ansible_key                      = var.ansible_key
     vm_folder                        = var.vm_folder
 }
+
