@@ -52,36 +52,81 @@ pipeline {
 	dir(path) {
 
 	    if (params.Build) {
-            println "Updating backend file"
-            sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
+              if (solname != 'veeam') {
+            	println "Updating backend file"
+            	sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
 			println "Executing Infrstructure build step" 
-            sh script: "/bin/rm -rf .terraform"
+            	sh script: "/bin/rm -rf .terraform"
 	        print  "sh script: ${tf_cmd} init -upgrade"
 	        sh script: "${tf_cmd} init -upgrade"
-            count = sh(script: "grep vm_count main.tfvars | awk  '{print \$3}' |xargs", returnStdout: true)
-            //count = sh(script: "cat hosts.ini|wc -l", returnStdout: true)
-            println count
-            println vm_count
-            def total_count = vm_count.toInteger() + count.toInteger()
-            println total_count
-            if (solname != 'veeam') {
-	        path = workspace + "/" + "modules" + "/" + veeam-setup
-            	sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
+            	count = sh(script: "grep vm_count main.tfvars | awk  '{print \$3}' |xargs", returnStdout: true)
+            	//count = sh(script: "cat hosts.ini|wc -l", returnStdout: true)
+           	 println count
+            	println vm_count
+            	def total_count = vm_count.toInteger() + count.toInteger()
+            	println total_count
+		sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
             	sh script: "python3 ../../build-inventory.py " + solname
             	sh script: "cat hosts.ini"
+
 	   } else {
-	        path = workspace + "/" + "modules" + "/" + veeam-setup
-            	sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
+
+		solname = "veeam-setup"
+                path = workspace + "/" + "modules" + "/" + solname
+		println "path ------${path}-----"
+		println "Updating backend file"
+            	sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
+			println "Executing Infrstructure build step" 
+            	sh script: "/bin/rm -rf .terraform"
+	        print  "sh script: ${tf_cmd} init -upgrade"
+	        sh script: "${tf_cmd} init -upgrade"
+            	count = sh(script: "grep vm_count main.tfvars | awk  '{print \$3}' |xargs", returnStdout: true)
+            	//count = sh(script: "cat hosts.ini|wc -l", returnStdout: true)
+           	 println count
+            	println vm_count
+            	def total_count = vm_count.toInteger() + count.toInteger()
+            	println total_count
+		sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
             	sh script: "python3 ../../build-inventory.py " + solname
             	sh script: "cat hosts.ini"
 
-	        path = workspace + "/" + "modules" + "/" + veeam-windows-backproxy
-            	sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
+
+
+		solname = "veeam-windows-backupproxy-server"
+                path = workspace + "/" + "modules" + "/" + solname
+		println "path ------${path}-----"
+		println "updating backend file"
+            	sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
+			println "executing infrstructure build step" 
+            	sh script: "/bin/rm -rf .terraform"
+	        print  "sh script: ${tf_cmd} init -upgrade"
+	        sh script: "${tf_cmd} init -upgrade"
+            	count = sh(script: "grep vm_count main.tfvars | awk  '{print \$3}' |xargs", returnstdout: true)
+            	//count = sh(script: "cat hosts.ini|wc -l", returnstdout: true)
+           	 println count
+            	println vm_count
+            	def total_count = vm_count.tointeger() + count.tointeger()
+            	println total_count
+		sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${vc_pass}'	 + " -var ansible_key=" + '${ssh_key}'	+	 " -var infoblox_pass=" + '${infoblox_pass}'  +	" -var vm_count=" + total_count
             	sh script: "python3 ../../build-inventory.py " + solname
             	sh script: "cat hosts.ini"
 
-	        path = workspace + "/" + "modules" + "/" + veeam-linux-backproxy
-            	sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
+		solname = "veeam-linux-backupproxy-server"
+                path = workspace + "/" + "modules" + "/" + solname
+		println "path ------${path}-----"
+		println "updating backend file"
+            	sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
+			println "executing infrstructure build step" 
+            	sh script: "/bin/rm -rf .terraform"
+	        print  "sh script: ${tf_cmd} init -upgrade"
+	        sh script: "${tf_cmd} init -upgrade"
+            	count = sh(script: "grep vm_count main.tfvars | awk  '{print \$3}' |xargs", returnstdout: true)
+            	//count = sh(script: "cat hosts.ini|wc -l", returnstdout: true)
+           	 println count
+            	println vm_count
+            	def total_count = vm_count.tointeger() + count.tointeger()
+            	println total_count
+		sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${vc_pass}'	 + " -var ansible_key=" + '${ssh_key}'	+	 " -var infoblox_pass=" + '${infoblox_pass}'  +	" -var vm_count=" + total_count
             	sh script: "python3 ../../build-inventory.py " + solname
             	sh script: "cat hosts.ini"
 	   }
