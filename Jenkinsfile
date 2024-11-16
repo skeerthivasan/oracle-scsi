@@ -84,7 +84,7 @@ pipeline {
             	//count = sh(script: "cat hosts.ini|wc -l", returnStdout: true)
            	 println count
             	println vm_count
-            	def total_count = vm_count.toInteger() + count.toInteger()
+            	total_count = vm_count.toInteger() + count.toInteger()
             	println total_count
 		sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
             	sh script: "python3 ../../build-inventory.py " + solname
@@ -105,7 +105,7 @@ pipeline {
             	//count = sh(script: "cat hosts.ini|wc -l", returnstdout: true)
            	 println count
             	println vm_count
-            	def total_count = vm_count.tointeger() + count.tointeger()
+            	total_count = vm_count.tointeger() + count.tointeger()
             	println total_count
 		sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${vc_pass}'	 + " -var ansible_key=" + '${ssh_key}'	+	 " -var infoblox_pass=" + '${infoblox_pass}'  +	" -var vm_count=" + total_count
             	sh script: "python3 ../../build-inventory.py " + solname
@@ -124,7 +124,7 @@ pipeline {
             	//count = sh(script: "cat hosts.ini|wc -l", returnstdout: true)
            	 println count
             	println vm_count
-            	def total_count = vm_count.tointeger() + count.tointeger()
+            	total_count = vm_count.tointeger() + count.tointeger()
             	println total_count
 		sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${vc_pass}'	 + " -var ansible_key=" + '${ssh_key}'	+	 " -var infoblox_pass=" + '${infoblox_pass}'  +	" -var vm_count=" + total_count
             	sh script: "python3 ../../build-inventory.py " + solname
