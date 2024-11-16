@@ -73,15 +73,15 @@ pipeline {
 
 
             	println  "Setting Veeam Setup VM"
-                path = workspace + "/" + "modules" + "/" + "veeam-setup"
-		println "path ------${path}-----"
-		println "Updating backend file"
+                def vpath = workspace + "/" + "modules" + "/" + "veeam-setup"
+		println "vpath ------${vpath}-----"
 
 		echo "Original Directory: ${pwd()}"
-	        dir('path') {
+	        dir('vpath') {
         	    echo "Inside anotherDir: ${pwd()}"
             	    sh 'pwd' // Check the current directory via shell
                 }
+		println "Updating backend file"
             	sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
 			println "Executing Infrstructure build step" 
             	sh script: "/bin/rm -rf .terraform"
