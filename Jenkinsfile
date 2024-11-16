@@ -77,7 +77,7 @@ pipeline {
 		println "vpath ------${vpath}-----"
 
 		echo "Original Directory: ${pwd()}"
-		dir("${env.WORKSPACE}/veem-setup"){
+		dir("${vpath}"){
  		   sh "pwd"
 		}
         	echo "Inside anotherDir: ${pwd()}"
