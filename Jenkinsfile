@@ -77,7 +77,7 @@ pipeline {
 		println "vpath ------${vpath}-----"
 
 		echo "Original Directory: ${pwd()}"
-	        dir('vpath') {
+	        dir(${vpath}) {
         	    echo "Inside anotherDir: ${pwd()}"
             	    sh 'pwd' // Check the current directory via shell
                 }
