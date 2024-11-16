@@ -70,6 +70,7 @@ pipeline {
             	sh script: "python3 ../../build-inventory.py " + solname
             	sh script: "cat hosts.ini"
 	   } else {
+	        path = workspace + "/" + "modules" + "/" + veeam-setup
             	sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
             	sh script: "python3 ../../build-inventory.py " + solname
             	sh script: "cat hosts.ini"
