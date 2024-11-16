@@ -71,8 +71,7 @@ pipeline {
 
 	   } else {
             	println  "Setting Veeam Setup VM"
-		solname = 'veeam-setup'
-                path = workspace + "/" + "modules" + "/" + solname
+                path = workspace + "/" + "modules" + "/" + "veeam-setup"
 		println "path ------${path}-----"
 		println "Updating backend file"
             	sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
