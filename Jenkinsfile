@@ -77,10 +77,10 @@ pipeline {
 		println "vpath ------${vpath}-----"
 
 		echo "Original Directory: ${pwd()}"
-	        dir(${vpath}) {
-        	    echo "Inside anotherDir: ${pwd()}"
-            	    sh 'pwd' // Check the current directory via shell
-                }
+		dir("${env.WORKSPACE}/veem-setup"){
+ 		   sh "pwd"
+		}
+        	echo "Inside anotherDir: ${pwd()}"
 		println "Updating backend file"
             	sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
 			println "Executing Infrstructure build step" 
