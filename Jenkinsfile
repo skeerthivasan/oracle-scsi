@@ -70,10 +70,18 @@ pipeline {
             	sh script: "cat hosts.ini"
 
 	   } else {
+
+
             	println  "Setting Veeam Setup VM"
                 path = workspace + "/" + "modules" + "/" + "veeam-setup"
 		println "path ------${path}-----"
 		println "Updating backend file"
+
+		echo "Original Directory: ${pwd()}"
+	        dir('path') {
+        	    echo "Inside anotherDir: ${pwd()}"
+            	    sh 'pwd' // Check the current directory via shell
+                }
             	sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
 			println "Executing Infrstructure build step" 
             	sh script: "/bin/rm -rf .terraform"
