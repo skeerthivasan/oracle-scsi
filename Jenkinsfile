@@ -71,10 +71,8 @@ pipeline {
 
 	   } else {
             	println  "Setting Veeam Setup VM"
-		solname = "veeam-setup"
+		solname = 'veeam-setup'
                 path = workspace + "/" + "modules" + "/" + solname
-                dir(path)
-                sh 'pwd'
 		println "path ------${path}-----"
 		println "Updating backend file"
             	sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
@@ -95,7 +93,7 @@ pipeline {
 
 
             	println  "Setting Veeam Windows BackUp Proxy Server"
-		solname = "veeam-windows-backupproxy-server"
+		solname = 'veeam-windows-backupproxy-server'
                 path = workspace + "/" + "modules" + "/" + solname
 		println "path ------${path}-----"
 		println "updating backend file"
