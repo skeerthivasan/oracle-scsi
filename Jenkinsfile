@@ -77,7 +77,7 @@ pipeline {
 		println "vpath ------${vpath}-----"
 
 		echo "Original Directory: ${pwd()}"
-		dir("${vpath}"){
+		dir("/var/lib/jenkins/workspace/Solution-automation/modules/veeam-setup")
  		   sh "pwd"
 		}
         	echo "Inside anotherDir: ${pwd()}"
