@@ -52,27 +52,8 @@ pipeline {
 	dir(path) {
 
 	    if (params.Build) {
-              if (solname != 'veeam') {
-            	println "Updating backend file"
-            	sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
-			println "Executing Infrstructure build step" 
-            	sh script: "/bin/rm -rf .terraform"
-	        print  "sh script: ${tf_cmd} init -upgrade"
-	        sh script: "${tf_cmd} init -upgrade"
-            	count = sh(script: "grep vm_count main.tfvars | awk  '{print \$3}' |xargs", returnStdout: true)
-            	//count = sh(script: "cat hosts.ini|wc -l", returnStdout: true)
-           	 println count
-            	println vm_count
-            	def total_count = vm_count.toInteger() + count.toInteger()
-            	println total_count
-		sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
-            	sh script: "python3 ../../build-inventory.py " + solname
-            	sh script: "cat hosts.ini"
-
-	   } else {
-
-
-            	println  "Setting Veeam Setup VM"
+              if (solname == 'veeam') {
+                println  "Setting Veeam Setup VM"
                 def vpath = workspace + "/" + "modules" + "/" + "veeam-setup".trim()
 		println "vpath ------${vpath}-----"
 
@@ -120,9 +101,9 @@ pipeline {
 		  sh script: "$tf_cmd apply -auto-approve -var-file=$vwpath"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
             	  sh script: "python3 ../../build-inventory.py " + "veeam-windows-backupproxy-server"
             	  sh script: "cat hosts.ini"
-	      }
+	       }
 
-      	      dir("/var/lib/jenkins/workspace/Solution-automation/modules/veeam-linux-backupproxy-server") {
+      	       dir("/var/lib/jenkins/workspace/Solution-automation/modules/veeam-linux-backupproxy-server") {
             	  println  "Creating: Veeam - Linux BackUp Proxy Server"
                   def vlpath = workspace + "/" + "modules" + "/" + "veeam-linux-backupproxy-server".trim()
 		  println "vpath ------${vpath}-----"
@@ -144,9 +125,25 @@ pipeline {
 		  sh script: "$tf_cmd apply -auto-approve -var-file=$vlpath"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
             	  sh script: "python3 ../../build-inventory.py " + "veeam-linux-backupproxy-server"
             	  sh script: "cat hosts.ini"
-	     }
+	      }
 
 
+	    } else {
+            	println "Updating backend file"
+            	sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
+			println "Executing Infrstructure build step" 
+            	sh script: "/bin/rm -rf .terraform"
+	        print  "sh script: ${tf_cmd} init -upgrade"
+	        sh script: "${tf_cmd} init -upgrade"
+            	count = sh(script: "grep vm_count main.tfvars | awk  '{print \$3}' |xargs", returnStdout: true)
+            	//count = sh(script: "cat hosts.ini|wc -l", returnStdout: true)
+           	 println count
+            	println vm_count
+            	def total_count = vm_count.toInteger() + count.toInteger()
+            	println total_count
+		sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
+            	sh script: "python3 ../../build-inventory.py " + solname
+            	sh script: "cat hosts.ini"
 	   }
         }
         if (params.Install) {
@@ -160,6 +157,10 @@ pipeline {
             } 
             if  (solname == 'Oracle') {
                 sh script: "cd /root/Oracle-build/ansible;export ANSIBLE_COLLECTIONS_PATHS=/root/.ansible/collections/ansible_collections/;export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3.6;ansible-playbook -i inventory-asm-demo -e hostgroup=dbfs  playbooks/single-instance-asm.yml --private-key "  + '${SSH_KEY}' + " --user ansible -vvvv"
+            }
+            if  (solname == 'veeam') {
+		sh script" pwd 
+                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "common.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
             }
             else {
                 sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "common.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
