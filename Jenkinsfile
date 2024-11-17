@@ -82,7 +82,7 @@ pipeline {
         	  echo "Inside anotherDir: ${pwd()}"
 	 	  println "Updating backend file"
             	  sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
-			println "Executing Infrstructure build step" 
+		  println "Executing Infrstructure build step" 
             	  sh script: "/bin/rm -rf .terraform"
 	          print  "sh script: ${tf_cmd} init -upgrade"
 	          sh script: "${tf_cmd} init -upgrade"
@@ -92,7 +92,7 @@ pipeline {
             	  println vm_count
             	  total_count = vm_count.toInteger() + count.toInteger()
             	  println total_count
-		  sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
+		  sh script: "$tf_cmd apply -auto-approve -var-file=$vpath"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
             	  sh script: "python3 ../../build-inventory.py " + solname
             	  sh script: "cat hosts.ini"
                }
