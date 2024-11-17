@@ -97,7 +97,7 @@ pipeline {
             	  sh script: "cat hosts.ini"
                }
 
-	       dir("/var/lib/jenkins/workspace/Solution-automation/modules/veeam-win-backupproxy") {
+	       dir("/var/lib/jenkins/workspace/Solution-automation/modules/veeam-windows-backupproxy-server") {
             	  println  "Creating: Veeam - Windows BackUp Proxy Server"
                   def vwpath = workspace + "/" + "modules" + "/" + "veeam-windows-backupproxy-server".trim()
 		  println "vpath ------${vpath}-----"
@@ -120,7 +120,7 @@ pipeline {
             	  sh script: "cat hosts.ini"
 	      }
 
-      	      dir("/var/lib/jenkins/workspace/Solution-automation/modules/veeam-linux-backupproxy") {
+      	      dir("/var/lib/jenkins/workspace/Solution-automation/modules/veeam-linux-backupproxy-server") {
             	  println  "Creating: Veeam - Linux BackUp Proxy Server"
                   def vlpath = workspace + "/" + "modules" + "/" + "veeam-linux-backupproxy-server".trim()
 		  println "vpath ------${vpath}-----"
