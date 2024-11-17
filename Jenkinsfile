@@ -161,7 +161,7 @@ pipeline {
                 def vpath = workspace + "/" + "modules" + "/" + "veeam-setup".trim()
 		println "vpath ------${vpath}-----"
 		sh script: cd workspace 
-                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "veeam-install.yml 
+                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "veeam-install.yml" 
             }
             else {
                 sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "common.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
