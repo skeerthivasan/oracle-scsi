@@ -73,7 +73,7 @@ pipeline {
 
 
             	println  "Setting Veeam Setup VM"
-                def vpath = workspace + "/" + "modules" + "/" + "veeam-setup"
+                def vpath = workspace + "/" + "modules" + "/" + "veeam-setup".trim()
 		println "vpath ------${vpath}-----"
 
 		echo "Original Directory: ${pwd()}"
