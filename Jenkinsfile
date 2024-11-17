@@ -78,24 +78,24 @@ pipeline {
 
 		echo "Original Directory: ${pwd()}"
 		dir("/var/lib/jenkins/workspace/Solution-automation/modules/veeam-setup") {
- 		   sh "pwd"
-		}
-        	echo "Inside anotherDir: ${pwd()}"
-		println "Updating backend file"
-            	sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
+ 		  sh "pwd"
+        	  echo "Inside anotherDir: ${pwd()}"
+	 	  println "Updating backend file"
+            	  sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
 			println "Executing Infrstructure build step" 
-            	sh script: "/bin/rm -rf .terraform"
-	        print  "sh script: ${tf_cmd} init -upgrade"
-	        sh script: "${tf_cmd} init -upgrade"
-            	count = sh(script: "grep vm_count main.tfvars | awk  '{print \$3}' |xargs", returnStdout: true)
-            	//count = sh(script: "cat hosts.ini|wc -l", returnStdout: true)
-           	 println count
-            	println vm_count
-            	total_count = vm_count.toInteger() + count.toInteger()
-            	println total_count
-		sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
-            	sh script: "python3 ../../build-inventory.py " + solname
-            	sh script: "cat hosts.ini"
+            	  sh script: "/bin/rm -rf .terraform"
+	          print  "sh script: ${tf_cmd} init -upgrade"
+	          sh script: "${tf_cmd} init -upgrade"
+            	  count = sh(script: "grep vm_count main.tfvars | awk  '{print \$3}' |xargs", returnStdout: true)
+            	  //count = sh(script: "cat hosts.ini|wc -l", returnStdout: true)
+           	  println count
+            	  println vm_count
+            	  total_count = vm_count.toInteger() + count.toInteger()
+            	  println total_count
+		  sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
+            	  sh script: "python3 ../../build-inventory.py " + solname
+            	  sh script: "cat hosts.ini"
+               }
 
 
 
