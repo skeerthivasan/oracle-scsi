@@ -147,8 +147,7 @@ pipeline {
 	   }
         }
         if (params.Install) {
-			println "Installing and conifguring the solution"
-            
+	    println "Installing and conifguring the solution"
             println solname
             println "------------------"
             if (solname == 'MSSQLDC') {
@@ -159,8 +158,10 @@ pipeline {
                 sh script: "cd /root/Oracle-build/ansible;export ANSIBLE_COLLECTIONS_PATHS=/root/.ansible/collections/ansible_collections/;export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3.6;ansible-playbook -i inventory-asm-demo -e hostgroup=dbfs  playbooks/single-instance-asm.yml --private-key "  + '${SSH_KEY}' + " --user ansible -vvvv"
             }
             if  (solname == 'veeam') {
-		sh script: pwd 
-                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "common.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
+                def vpath = workspace + "/" + "modules" + "/" + "veeam-setup".trim()
+		println "vpath ------${vpath}-----"
+		sh script: cd workspace 
+                sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "veeam-install.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
             }
             else {
                 sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "common.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
