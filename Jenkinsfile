@@ -160,7 +160,6 @@ pipeline {
             if  (solname == 'veeam') {
                 def vpath = workspace + "/" + "modules" + "/" + "veeam-setup".trim()
 		println "vpath ------${vpath}-----"
-		sh script: cd workspace 
                 sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" +  "veeam-install.yml" 
             }
             else {
