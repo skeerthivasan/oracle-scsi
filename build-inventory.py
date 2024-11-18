@@ -53,7 +53,7 @@ else:
 #os.chdir(os.path.join(os.getcwd(), '..', '..', 'ansible')) 
 # These files needs to be checked in so that the hardcoded lines can be removed in future.
 
-direct_asm_path = /root/production_runs/oracle-ansible
+direct_asm_path = '/root/production_runs/oracle-ansible'
 
 def append_ip_to_hosts(ip_addresses, hosts_file= direct_asm_path + 'inventory-asm/hosts.yml'):
     '''
