@@ -1,4 +1,10 @@
----
-  - hosts:         all
-    roles:
-      - {role: veeam-install}
+- name: Veeam Backup & Replication Install
+  hosts: all
+  tasks:
+    - include_role:
+        name: veeamhub.veeam.veeam_vas
+        tasks_from: vbr_install
+      vars:
+        version: "12"
+        iso_download: true
+        sql_authentication: 1
