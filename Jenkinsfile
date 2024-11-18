@@ -168,6 +168,42 @@ pipeline {
         }
 
         if (params.Destroy) {
+	  if (solname == 'veeam') {
+		dir("/var/lib/jenkins/workspace/Solution-automation/modules/veeam-setup") {
+                  println  "Destroying Veeam Setup"
+                  def vpath = workspace + "/" + "modules" + "/" + "veeam-setup".trim()
+		  echo "current working directory: ${pwd()}"
+		  println "vpath ------${vpath}-----"
+	 	  println "Updating backend file"
+            	  sh script: "sed -i -e 's/sol_name/"+"veem-setup"+"/g' backend.tf"
+                  sh script: "${tf_cmd} init -reconfigure"
+	          sh script: "${tf_cmd} destroy -auto-approve -var-file=$vpath"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	+ " -var ansible_key=" + '${SSH_KEY}'	 +	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'	 +	" -var vm_count=" + '${vm_count}'	
+               }
+
+	       dir("/var/lib/jenkins/workspace/Solution-automation/modules/veeam-windows-backupproxy-server") {
+            	  println  "Destroy: Veeam - Windows BackUp Proxy Server"
+                  def vwpath = workspace + "/" + "modules" + "/" + "veeam-windows-backupproxy-server".trim()
+		  echo "current working directory: ${pwd()}"
+		  println "vwpath ------${vwpath}-----"
+	 	  println "Updating backend file"
+            	  sh script: "sed -i -e 's/sol_name/"+"veeam-windows-backupproxy-server"+"/g' backend.tf"
+                  sh script: "${tf_cmd} init -reconfigure"
+	          sh script: "${tf_cmd} destroy -auto-approve -var-file=$vwpath"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	+ " -var ansible_key=" + '${SSH_KEY}'	 +	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'	 +	" -var vm_count=" + '${vm_count}'	
+	       }
+
+      	       dir("/var/lib/jenkins/workspace/Solution-automation/modules/veeam-linux-backupproxy-server") {
+            	  println  "Destroy: Veeam - Linux BackUp Proxy Server"
+                  def vlpath = workspace + "/" + "modules" + "/" + "veeam-linux-backupproxy-server".trim()
+        	  echo "Inside Dir: ${pwd()}"
+		  println "vlpath ------${vlpath}-----"
+	 	  println "Updating backend file"
+            	  sh script: "sed -i -e 's/sol_name/"+"veeam-linux-backupproxy-server"+"/g' backend.tf"
+                  sh script: "${tf_cmd} init -reconfigure"
+	          sh script: "${tf_cmd} destroy -auto-approve -var-file=$vlpath"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	+ " -var ansible_key=" + '${SSH_KEY}'	 +	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'	 +	" -var vm_count=" + '${vm_count}'	
+	      }
+
+
+
             if (params.Build) {
                 println "Build already executed in this pipeline" 
             } else {
