@@ -50,7 +50,9 @@ else:
             fh.write(' - ' + ip.rstrip() + '\n')
 
 
-def append_ip_to_hosts(ip_addresses, hosts_file= os.chdir(os.path.join(os.getcwd(), '..', '..', 'ansible')) + '/inventory/oracle-asm/hosts.yml'):
+os.chdir(os.path.join(os.getcwd(), '..', '..', 'ansible')) 
+
+def append_ip_to_hosts(ip_addresses, hosts_file= os.getcwd() + '/inventory/oracle-asm/hosts.yml'):
     '''
     This method will update the IP addresses and append them to the hosts.yml file location.
     '''
@@ -68,7 +70,7 @@ def append_ip_to_hosts(ip_addresses, hosts_file= os.chdir(os.path.join(os.getcwd
         yaml.dump(hosts_data, file, default_flow_style=False)
 
 def create_and_update_host_vars(ip_addresses, domain_names):
-    base_dir =  os.chdir(os.path.join(os.getcwd(), '..', '..', 'ansible')) + '/inventory/oracle-asm/host_vars'
+    base_dir =  os.getcwd() +  '/inventory/oracle-asm/host_vars'
     for ip_address, domain_name in zip(ip_addresses, domain_names):
         ip_dir = os.path.join(base_dir, ip_address)
         databases_file_path = os.path.join(ip_dir, 'databases.yml')
