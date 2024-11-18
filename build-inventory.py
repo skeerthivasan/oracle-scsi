@@ -135,7 +135,7 @@ def create_and_update_host_vars(ip_addresses, domain_names):
         print(f"Created {tnsnames_file_path} with initial content.")
 
 append_ip_to_hosts(ip_addresses=ips)
-create_and_update_host_vars(ip_addresses=ip_a,domain_names=names)
+create_and_update_host_vars(ip_addresses=ips,domain_names=names)
 
 
 
