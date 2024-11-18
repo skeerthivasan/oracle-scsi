@@ -54,8 +54,8 @@ else:
 # These files needs to be checked in so that the hardcoded lines can be removed in future.
 
 direct_asm_path = '/root/production_runs/oracle-ansible'
-
-def append_ip_to_hosts(ip_addresses, hosts_file= direct_asm_path + 'inventory-asm/hosts.yml'):
+os.chdir(direct_asm_path)
+def append_ip_to_hosts(ip_addresses, hosts_file=  os.getcwd() + '/inventory-asm/hosts.yml'):
     '''
     This method will update the IP addresses and append them to the hosts.yml file location.
     '''
@@ -73,7 +73,7 @@ def append_ip_to_hosts(ip_addresses, hosts_file= direct_asm_path + 'inventory-as
         yaml.dump(hosts_data, file, default_flow_style=False)
 
 def create_and_update_host_vars(ip_addresses, domain_names):
-    base_dir =  direct_asm_path +  '/host_vars'
+    base_dir =  os.getcwd() +  '/inventory-asm/host_vars'
     for ip_address, domain_name in zip(ip_addresses, domain_names):
         ip_dir = os.path.join(base_dir, ip_address)
         databases_file_path = os.path.join(ip_dir, 'databases.yml')
