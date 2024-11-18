@@ -168,7 +168,7 @@ pipeline {
         }
 
         if (params.Destroy) {
-	  if (solname == 'veeam') {
+	      if (solname == 'veeam') {
 		dir("/var/lib/jenkins/workspace/Solution-automation/modules/veeam-setup") {
                   println  "Destroying Veeam Setup"
                   def vpath = workspace + "/" + "modules" + "/" + "veeam-setup".trim()
@@ -202,7 +202,7 @@ pipeline {
 	          sh script: "${tf_cmd} destroy -auto-approve -var-file=$vlpath"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	+ " -var ansible_key=" + '${SSH_KEY}'	 +	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'	 +	" -var vm_count=" + '${vm_count}'	
 	      }
 
-
+            }
 
             if (params.Build) {
                 println "Build already executed in this pipeline" 
