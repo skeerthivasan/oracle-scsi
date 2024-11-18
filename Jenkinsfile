@@ -148,7 +148,7 @@ pipeline {
             } 
             if  (solname == 'Oracle') {
                 #sh script: "cd /root/Oracle-build/ansible;export ANSIBLE_COLLECTIONS_PATHS=/root/.ansible/collections/ansible_collections/;export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3.6;ansible-playbook -i inventory-asm-demo -e hostgroup=dbfs  playbooks/single-instance-asm.yml --private-key "  + '${SSH_KEY}' + " --user ansible -vvvv"
-		 sh script: #sh script: "cd /root/production_runs/oracle-ansible;export ANSIBLE_COLLECTIONS_PATHS=/root/.ansible/collections/ansible_collections/;export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3.6;ansible-playbook -i inventory-asm  -e hostgroup=dbfs  playbooks/single-instance-asm.yml --private-key "  + '${SSH_KEY}' + " --user ansible -vvvv"
+		 sh script: "cd /root/production_runs/oracle-ansible;export ANSIBLE_COLLECTIONS_PATHS=/root/.ansible/collections/ansible_collections/;export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3.6;ansible-playbook -i inventory-asm  -e hostgroup=dbfs  playbooks/single-instance-asm.yml --private-key "  + '${SSH_KEY}' + " --user ansible -vvvv"
             }
             if  (solname == 'veeam') {
                 def vpath = workspace + "/" + "modules" + "/" + "veeam-setup".trim()
