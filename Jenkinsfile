@@ -53,16 +53,13 @@ pipeline {
 
 	    if (params.Build) {
               if (solname == 'veeam') {
-                println  "Setting Veeam Setup VM"
-                def vpath = workspace + "/" + "modules" + "/" + "veeam-setup".trim()
-		println "vpath ------${vpath}-----"
-
-		echo "Original Directory: ${pwd()}"
 		dir("/var/lib/jenkins/workspace/Solution-automation/modules/veeam-setup") {
- 		  sh "pwd"
-        	  echo "Inside anotherDir: ${pwd()}"
+                  println  "Setting Veeam Setup VM"
+                  def vpath = workspace + "/" + "modules" + "/" + "veeam-setup".trim()
+		  echo "current working directory: ${pwd()}"
+		  println "vpath ------${vpath}-----"
 	 	  println "Updating backend file"
-            	  sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
+            	  sh script: "sed -i -e 's/sol_name/"+"veem-setup"+"/g' backend.tf"
 		  println "Executing Infrstructure build step" 
             	  sh script: "/bin/rm -rf .terraform"
 	          print  "sh script: ${tf_cmd} init -upgrade"
@@ -73,7 +70,6 @@ pipeline {
             	  println vm_count
             	  total_count = vm_count.toInteger() + count.toInteger()
             	  println total_count
-	          sh script: "${tf_cmd} destroy -auto-approve -var-file=$vpath"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	+ " -var ansible_key=" + '${SSH_KEY}'	 +	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'	 +	" -var vm_count=" + '${vm_count}'	
 		  sh script: "$tf_cmd apply -auto-approve -var-file=$vpath"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
             	  sh script: "python3 ../../build-inventory.py " + "veeam-setup"
             	  sh script: "cat hosts.ini"
@@ -82,11 +78,10 @@ pipeline {
 	       dir("/var/lib/jenkins/workspace/Solution-automation/modules/veeam-windows-backupproxy-server") {
             	  println  "Creating: Veeam - Windows BackUp Proxy Server"
                   def vwpath = workspace + "/" + "modules" + "/" + "veeam-windows-backupproxy-server".trim()
-		  println "vpath ------${vpath}-----"
-	          sh "pwd"
-        	  echo "Inside anotherDir: ${pwd()}"
+		  echo "current working directory: ${pwd()}"
+		  println "vwpath ------${vwpath}-----"
 	 	  println "Updating backend file"
-            	  sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
+            	  sh script: "sed -i -e 's/sol_name/"+"veeam-windows-backupproxy-server"+"/g' backend.tf"
 		  println "Executing Infrstructure build step" 
             	  sh script: "/bin/rm -rf .terraform"
 	          print  "sh script: ${tf_cmd} init -upgrade"
@@ -97,7 +92,6 @@ pipeline {
             	  println vm_count
             	  total_count = vm_count.toInteger() + count.toInteger()
             	  println total_count
-	          sh script: "${tf_cmd} destroy -auto-approve -var-file=$vwpath"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	+ " -var ansible_key=" + '${SSH_KEY}'	 +	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'	 +	" -var vm_count=" + '${vm_count}'	
 		  sh script: "$tf_cmd apply -auto-approve -var-file=$vwpath"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
             	  sh script: "python3 ../../build-inventory.py " + "veeam-windows-backupproxy-server"
             	  sh script: "cat hosts.ini"
@@ -106,11 +100,10 @@ pipeline {
       	       dir("/var/lib/jenkins/workspace/Solution-automation/modules/veeam-linux-backupproxy-server") {
             	  println  "Creating: Veeam - Linux BackUp Proxy Server"
                   def vlpath = workspace + "/" + "modules" + "/" + "veeam-linux-backupproxy-server".trim()
-		  println "vpath ------${vpath}-----"
-	          sh "pwd"
-        	  echo "Inside anotherDir: ${pwd()}"
+        	  echo "Inside Dir: ${pwd()}"
+		  println "vlpath ------${vlpath}-----"
 	 	  println "Updating backend file"
-            	  sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
+            	  sh script: "sed -i -e 's/sol_name/"+"veeam-linux-backupproxy-server"+"/g' backend.tf"
 		  println "Executing Infrstructure build step" 
             	  sh script: "/bin/rm -rf .terraform"
 	          print  "sh script: ${tf_cmd} init -upgrade"
@@ -121,7 +114,6 @@ pipeline {
             	  println vm_count
             	  total_count = vm_count.toInteger() + count.toInteger()
             	  println total_count
-	          sh script: "${tf_cmd} destroy -auto-approve -var-file=$vlpath"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	+ " -var ansible_key=" + '${SSH_KEY}'	 +	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'	 +	" -var vm_count=" + '${vm_count}'	
 		  sh script: "$tf_cmd apply -auto-approve -var-file=$vlpath"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
             	  sh script: "python3 ../../build-inventory.py " + "veeam-linux-backupproxy-server"
             	  sh script: "cat hosts.ini"
