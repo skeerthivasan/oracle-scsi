@@ -202,10 +202,6 @@ pipeline {
 	          sh script: "${tf_cmd} destroy -auto-approve -var-file=$vlpath"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	+ " -var ansible_key=" + '${SSH_KEY}'	 +	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'	 +	" -var vm_count=" + '${vm_count}'	
 	      }
 
-            }
-
-            if (params.Build) {
-                println "Build already executed in this pipeline" 
             } else {
                 println "Executing Infrstructure destroy step" 
                 sh script: "sed -i -e 's/sol_name/"+solname+"/g' backend.tf"
