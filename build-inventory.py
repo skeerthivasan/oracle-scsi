@@ -11,6 +11,7 @@ ouput = out.decode('utf-8')
 data = json.loads(ouput)
 ips = data['vm_ip']['value']
 names = data['vm_name']['value']
+print(f"The ips are {ips} and the vms domain names are  {names} \n\n\n")
 #filename = 'modules/' + sol +  '/hosts.ini'
 var_filename = 'hosts.yml'
 filename = 'hosts.ini'
