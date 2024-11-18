@@ -55,6 +55,8 @@ else:
 
 direct_asm_path = '/root/production_runs/oracle-ansible'
 os.chdir(direct_asm_path)
+
+'''
 def append_ip_to_hosts(ip_addresses, hosts_file=  os.getcwd() + '/inventory-asm/hosts.yml'):
     '''
     This method will update the IP addresses and append them to the hosts.yml file location.
@@ -71,6 +73,37 @@ def append_ip_to_hosts(ip_addresses, hosts_file=  os.getcwd() + '/inventory-asm/
 
     with open(hosts_file, 'w') as file:
         yaml.dump(hosts_data, file, default_flow_style=False)
+
+'''
+def append_ip_to_hosts(ip_addresses, hosts_file= os.getcwd() + '/inventory-asm/hosts.yml'):
+    '''
+    This method will remove the old hosts.yml file and create a new one with the provided IP addresses.
+    '''
+    # Remove the old hosts.yml file if it exists
+    if os.path.exists(hosts_file):
+        os.remove(hosts_file)
+        print(f"Old file {hosts_file} removed.")
+
+    # Initialize a new structured inventory
+    hosts_data = {
+        'all': {
+            'children': {
+                'dbfs': {
+                    'hosts': {}
+                }
+            }
+        }
+    }
+
+    # Append new IP addresses to the hosts section
+    for ip_address in ip_addresses:
+        hosts_data['all']['children']['dbfs']['hosts'][ip_address] = {'ansible_ssh_user': 'ansible'}
+        print(f"IP address {ip_address} added successfully to {hosts_file}")
+
+    # Write the new data to the hosts file
+    with open(hosts_file, 'w') as file:
+        yaml.dump(hosts_data, file, default_flow_style=False)
+
 
 def create_and_update_host_vars(ip_addresses, domain_names):
     base_dir =  os.getcwd() +  '/inventory-asm/host_vars'
