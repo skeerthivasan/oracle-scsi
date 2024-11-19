@@ -134,7 +134,7 @@ pipeline {
             	def total_count = vm_count.toInteger() + count.toInteger()
             	println total_count
 		sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
-            	sh script: "python3.9 ../../build-inventory.py " + solname
+            	sh script: "python3 ../../build-inventory.py " + solname
             	sh script: "cat hosts.ini"
 	   }
         }
@@ -147,7 +147,7 @@ pipeline {
                 sh script: "ansible-playbook -i hosts.ini ../../ansible/playbooks/" + solname.toLowerCase() + "-install.yml"
             } 
             if  (solname == 'Oracle') {
-                sh script: "cd /root/production_runs/oracle-ansible;export ANSIBLE_COLLECTIONS_PATHS=/root/.ansible/collections/ansible_collections/;export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3.9;ansible-playbook -i inventory-asm  -e hostgroup=dbfs  playbooks/single-instance-asm.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
+                sh script: "cd /root/production_runs/oracle-ansible;export ANSIBLE_COLLECTIONS_PATHS=/root/.ansible/collections/ansible_collections/;export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3.6;ansible-playbook -i inventory-asm  -e hostgroup=dbfs  playbooks/single-instance-asm.yml --private-key "  + '${SSH_KEY}' + " --user ansible"
             }
             if  (solname == 'veeam') {
                 def vpath = workspace + "/" + "modules" + "/" + "veeam-setup".trim()
