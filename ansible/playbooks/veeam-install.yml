@@ -1,6 +1,17 @@
 - name: Veeam Backup & Replication Install
   hosts: all
   tasks:
+    - name: reboot the node
+      ansible.windows.win_reboot:
+        msg: "Reboot initiated by Ansible playbook"
+
+    - name: Wait for the host to come back up (WinRM port)
+      win_ping:
+      register: ping_result
+      until: ping_result.ping == "pong"
+      retries: 100
+      delay: 3
+
     - include_role:
         name: veeamhub.veeam.veeam_vas
         tasks_from: vbr_install
