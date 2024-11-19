@@ -71,7 +71,7 @@ pipeline {
             	  total_count = vm_count.toInteger() + count.toInteger()
             	  println total_count
 		  sh script: "$tf_cmd apply -auto-approve -var-file=$vpath"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
-            	  sh script: "python3 ../../build-inventory.py " + "veeam-setup"
+            	  sh script: "python3.9 ../../build-inventory.py " + "veeam-setup"
             	  sh script: "cat hosts.ini"
                }
 
@@ -134,7 +134,7 @@ pipeline {
             	def total_count = vm_count.toInteger() + count.toInteger()
             	println total_count
 		sh script: "$tf_cmd apply -auto-approve -var-file=$path"  + "/main.tfvars" + " -var vsphere_password=" + '${VC_PASS}'	 + " -var ansible_key=" + '${SSH_KEY}'	+	 " -var infoblox_pass=" + '${INFOBLOX_PASS}'  +	" -var vm_count=" + total_count
-            	sh script: "python3 ../../build-inventory.py " + solname
+            	sh script: "python3.9 ../../build-inventory.py " + solname
             	sh script: "cat hosts.ini"
 	   }
         }
