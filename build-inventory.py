@@ -55,7 +55,8 @@ else:
 
 direct_asm_path = '/root/production_runs/oracle-ansible'
 os.chdir(direct_asm_path)
-
+print(os.getcwd())
+print("This the above line for nowing the absolute path")
 '''
 def append_ip_to_hosts(ip_addresses, hosts_file=  os.getcwd() + '/inventory-asm/hosts.yml'):
     '''
