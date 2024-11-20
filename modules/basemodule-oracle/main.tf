@@ -3,15 +3,15 @@ terraform {
 
     vsphere = {
       source  = "hashicorp/vsphere"
-      version = "2.1.1"
+      version = "2.10.0"
     }
-
     infoblox = {
     source = "infobloxopen/infoblox"
-    version = "2.3.0"
+    version = "2.8.0"
     }
   }
 }
+
 
 
 ## Build VM
@@ -39,6 +39,10 @@ data "vsphere_compute_cluster" "cluster" {
   datacenter_id = data.vsphere_datacenter.datacenter.id
 }
 
+data "external" "get_esx_hosts" {
+  program = ["python3", "${path.module}/scripts/get_esx.py", var.vsphere_server, var.vsphere_user, var.vsphere_password]
+}
+
 data "vsphere_network" "network" {
   name          = var.vmSubnet 
   datacenter_id = data.vsphere_datacenter.datacenter.id
@@ -56,6 +60,27 @@ data "vsphere_content_library_item" "my_ovf_item" {
   name       = var.vmware_os_template
   type       = "ovf"
   library_id = data.vsphere_content_library.my_content_library.id
+}
+
+locals {
+  esxi_hosts = data.external.get_esx_hosts.result
+}
+
+resource "null_resource" "create_shared_disk" {
+  provisioner "remote-exec" {
+    inline = [
+      "vmkfstools -c 10G -d eagerzeroedthick /vmfs/volumes/${data.vsphere_datastore.datastore_data.name}/SharedPure/shared_disk.vmdk"
+    ]
+
+    connection {
+      type     = "ssh"
+      host     = values(local.esxi_hosts)[0]
+      user     = "root"          # SSH username, typically root
+      password = var.vsphere_password  # SSH password for authentication
+    }
+  }
+
+  depends_on = [data.external.get_esx_hosts]
 }
 
 resource "infoblox_ip_allocation" "alloc1" {
@@ -83,6 +108,7 @@ resource "vsphere_virtual_machine" "vm" {
   guest_id = var.osguest_id 
   firmware = "efi"
   scsi_controller_count = 4
+  scsi_type        = "pvscsi"
 
   network_interface {
     network_id   = data.vsphere_network.network.id
@@ -122,11 +148,28 @@ resource "vsphere_virtual_machine" "vm" {
     datastore_id = data.vsphere_datastore.datastore_data.id
     unit_number = 30
   }
+  #disk {
+  #  label = "DATA-DISK4"
+  #  size        = 500
+  #  datastore_id = data.vsphere_datastore.datastore_data.id
+  #  unit_number = 45
+  #}
+  # Attach the shared disk to the VM with multi-writer support
   disk {
-    label = "DATA-DISK4"
-    size        = 500
+    label            = "shared-disk"
     datastore_id = data.vsphere_datastore.datastore_data.id
-    unit_number = 45
+    thin_provisioned = false
+    unit_number      = 50
+    disk_sharing     = "sharingMultiWriter"
+    disk_mode        = "independent_persistent"
+    attach           = true
+    path             = "SharedPure/shared_disk.vmdk"
+    #path             =  "/vmfs/volumes/${data.vsphere_datastore.datastore_data.name}/SharedPure/shared_disk.vmdk"
+    #vmdk_id          = var.shared_disk_id  # Attach the created shared disk here
+    #vmdk_path        = "/vmfs/volumes/${data.vsphere_datastore.datastore_data}/SharedPure/shared_disk.vmdk"
+
+    # Set multi-writer mode for the disk
+    #shared_disk_mode = "multi-writer"  # Allow multi-writer access to the disk
   }
 
 
@@ -152,27 +195,27 @@ resource "vsphere_virtual_machine" "vm" {
     }
   }
 
-  provisioner "file" {
-    source = "scripts/resizefs.sh"
-    destination = "/home/ansible/resizefs.sh"
-    
-  }
-  connection {
-    type     = "ssh"
-    user     = "ansible"
-    #private_key = file("/var/lib/jenkins/ansible.key")
-    private_key = file(var.ansible_key)
-    host     = self.default_ip_address
-    script_path = "/home/ansible/tmp_resizefs.sh"
-  }
+  #provisioner "file" {
+  #  source = "scripts/resizefs.sh"
+  #  destination = "/home/ansible/resizefs.sh"
+  #  
+  #}
+  #connection {
+  #  type     = "ssh"
+  #  user     = "ansible"
+  #  #private_key = file("/var/lib/jenkins/ansible.key")
+  #  private_key = file(var.ansible_key)
+  #  host     = self.default_ip_address
+  #  script_path = "/home/ansible/tmp_resizefs.sh"
+  #}
 
-  provisioner "remote-exec" {
-    inline = [
-      "set -x",
-      "chmod +x /home/ansible/*sh",
-      "sudo sh /home/ansible/resizefs.sh"
-    ]
-  }
+  #provisioner "remote-exec" {
+  #  inline = [
+  #    "set -x",
+  #    "chmod +x /home/ansible/*sh",
+  #    "sudo sh /home/ansible/resizefs.sh"
+  #  ]
+  #}
 
   # provisioner "local-exec" {
   #   command = "ansible-playbook -i ${vsphere_virtual_machine.vm[count.index].default_ip_address}, --private-key ~/ansible.key --user ansible ../../ansible/playbooks/common.yml"
@@ -182,5 +225,14 @@ resource "vsphere_virtual_machine" "vm" {
   #   command = "ansible-playbook -i ${vsphere_virtual_machine.vm[count.index].default_ip_address}, --private-key ~/ansible.key --user ansible ../../ansible/playbooks/mysql.yml"
   # }
 }
+resource "null_resource" "vm_setup" {
+  count = length(vsphere_virtual_machine.vm)  # Loop through the number of VMs created
 
+  provisioner "local-exec" {
+    command = "python3 ${path.module}/scripts/modify_vm.py ${var.vsphere_server} ${var.vsphere_user} '${var.vsphere_password}' ${vsphere_virtual_machine.vm[count.index].name}"
+  }
 
+  triggers = {
+    vm_id = vsphere_virtual_machine.vm[count.index].id
+  }
+}

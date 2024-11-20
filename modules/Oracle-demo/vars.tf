@@ -6,6 +6,7 @@ variable "vsphere_user" {
 variable "vsphere_password" {
   type        = string
   description = "Password for vCenter/vSphere user"
+#  sensitive   = true
 }
 variable "vsphere_server" {
   type        = string

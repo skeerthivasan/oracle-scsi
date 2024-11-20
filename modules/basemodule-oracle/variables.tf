@@ -8,7 +8,9 @@ variable "vm_name" {
   type        = string
   description = "Name of VM"
 }
-
+variable "vsphere_server" {}
+variable "vsphere_user" {}
+variable "vsphere_password" {}
 variable "network" {}
 variable "netmask"  {}
 variable "vmware_os_template" {}

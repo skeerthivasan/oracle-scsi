@@ -1,13 +1,14 @@
+
 terraform {
   required_providers {
 
     vsphere = {
       source  = "hashicorp/vsphere"
-      #version = "2.1.1"
+      version = "2.10.0"
     }
     infoblox = {
     source = "infobloxopen/infoblox"
-    version = "2.3.0"
+    version = "2.8.0"
     }
   }
 }
@@ -26,6 +27,6 @@ provider "vsphere" {
 
 provider "infoblox" {
 username = "svc_fb_infoblox_auto"
-password = var.infoblox_pass
+password = "PASSREMOVED"
 server = "prod-ipam.puretec.purestorage.com"
 }

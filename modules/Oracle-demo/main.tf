@@ -1,6 +1,9 @@
 module "vm" {
     source = "../basemodule-oracle"
     vmware_os_template               = var.vmware_os_template
+    vsphere_server                   = var.vsphere_server
+    vsphere_user                     = var.vsphere_user
+    vsphere_password                 = var.vsphere_password
     osguest_id                       = var.osguest_id
     internal_domain                  = var.internal_domain
     gateway                          = var.vm_gateway
